@@ -4,133 +4,200 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Fdp.UI"
              xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:pi="http://schemas.microsoft.com/prototyping/2010/interactivity"
              x:Class="Fdp.UI.Dashboard"
              mc:Ignorable="d"
-             d:DesignHeight="300"
+             d:DesignHeight="1200"
              d:DesignWidth="1200">
     <UserControl.Resources>
-        <Style x:Key="ButtonFocusVisual">
-            <Setter Property="Control.Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <Rectangle Margin="2"
-                                   SnapsToDevicePixels="False"
-                                   Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
-                                   StrokeThickness="1"
-                                   StrokeDashArray="1 2" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <LinearGradientBrush x:Key="ButtonNormalBackground"
+        <ControlTemplate x:Key="AddMenuItemControlTemplate"
+                         TargetType="{x:Type MenuItem}">
+            <Grid x:Name="grid"
+                  SnapsToDevicePixels="True"
+                  Width="19"
+                  Height="19"
+                  VerticalAlignment="Bottom">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="MouseOverStates">
+                        <VisualStateGroup.Transitions>
+                            <VisualTransition From="MouseOver"
+                                              GeneratedDuration="0:0:0.3"
+                                              To="Normal" />
+                        </VisualStateGroup.Transitions>
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="MouseOver">
+                            <Storyboard>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+                                                              Storyboard.TargetName="border">
+                                    <EasingColorKeyFrame KeyTime="0"
+                                                         Value="#FFDAD4D4" />
+                                </ColorAnimationUsingKeyFrames>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                                                              Storyboard.TargetName="path">
+                                    <EasingColorKeyFrame KeyTime="0"
+                                                         Value="#FFF0EEEE" />
+                                </ColorAnimationUsingKeyFrames>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)"
+                                                              Storyboard.TargetName="path">
+                                    <EasingColorKeyFrame KeyTime="0"
+                                                         Value="#FF949292" />
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="IsClicked">
+                            <Storyboard>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+                                                              Storyboard.TargetName="border">
+                                    <EasingColorKeyFrame KeyTime="0"
+                                                         Value="#FFBCB9B9" />
+                                </ColorAnimationUsingKeyFrames>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)"
+                                                              Storyboard.TargetName="path">
+                                    <EasingColorKeyFrame KeyTime="0"
+                                                         Value="#FFDCD6D6" />
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeave">
+                        <i:Interaction.Behaviors>
+                            <ei:ConditionBehavior>
+                                <ei:ConditionalExpression>
+                                    <ei:ComparisonCondition LeftOperand="{Binding IsOpen, ElementName=PART_Popup}"
+                                                            RightOperand="False" />
+                                </ei:ConditionalExpression>
+                            </ei:ConditionBehavior>
+                        </i:Interaction.Behaviors>
+                        <ei:GoToStateAction StateName="Normal" />
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="MouseEnter">
+                        <ei:GoToStateAction StateName="MouseOver" />
+                    </i:EventTrigger>
+                    <ei:DataTrigger Binding="{Binding IsOpen, ElementName=PART_Popup}"
+                                    Value="False">
+                        <i:Interaction.Behaviors>
+                            <ei:ConditionBehavior>
+                                <ei:ConditionalExpression>
+                                    <ei:ComparisonCondition LeftOperand="{Binding IsMouseOver, ElementName=border}"
+                                                            RightOperand="False" />
+                                </ei:ConditionalExpression>
+                            </ei:ConditionBehavior>
+                        </i:Interaction.Behaviors>
+                        <ei:GoToStateAction StateName="Normal" />
+                    </ei:DataTrigger>
+                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                        <pi:ActivateStateAction />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <Border x:Name="border"
+                        Background="White"
+                        BorderBrush="#FF959595"
+                        BorderThickness="1,1,1,1">
+                    <Path x:Name="path"
+                          Fill="White"
+                          Stroke="Black"
+                          Data="M5.5009999,0.5 L9.5010004,0.5 9.5010004,5.4999999 14.5,5.4999999 14.5,9.5 9.5010004,9.5 9.5010004,14.5 5.5009999,14.5 5.5009999,9.5 0.5,9.5 0.5,5.4999999 5.5009999,5.4999999 z"
+                          Margin="0,2.089,3.22,0"
+                          RenderTransformOrigin="0.5,0.5"
+                          Stretch="Fill"
+                          HorizontalAlignment="Right"
+                          Width="10.166"
+                          Height="12.058"
+                          VerticalAlignment="Top"
+                          StrokeThickness="0.5">
+                        <Path.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform Angle="-90" />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Path.RenderTransform>
+                    </Path>
+                </Border>
+                <Popup x:Name="PART_Popup"
+                       AllowsTransparency="True"
+                       Focusable="False"
+                       IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                       PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
+                       Placement="Bottom">
+                    <Themes:SystemDropShadowChrome x:Name="Shdw"
+                                                   Color="Transparent">
+                        <Border x:Name="SubMenuBorder"
+                                BorderBrush="#FF959595"
+                                BorderThickness="1.5"
+                                Background="White">
+                            <ScrollViewer x:Name="SubMenuScrollViewer"
+                                          Margin="1,0"
+                                          Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
+                                <Grid RenderOptions.ClearTypeHint="Enabled">
+                                    <Rectangle Fill="White"
+                                               HorizontalAlignment="Left"
+                                               Margin="1,2"
+                                               RadiusY="2"
+                                               RadiusX="2"
+                                               Width="28" />
+                                    <Rectangle Fill="#FFE2E3E3"
+                                               HorizontalAlignment="Left"
+                                               Margin="29,2,0,2"
+                                               Width="1" />
+                                    <Rectangle Fill="White"
+                                               HorizontalAlignment="Left"
+                                               Margin="30,2,0,2"
+                                               Width="1" />
+                                    <ItemsPresenter x:Name="ItemsPresenter"
+                                                    KeyboardNavigation.DirectionalNavigation="Cycle"
+                                                    Grid.IsSharedSizeScope="True"
+                                                    Margin="2"
+                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                    KeyboardNavigation.TabNavigation="Cycle" />
+                                </Grid>
+                            </ScrollViewer>
+                        </Border>
+                    </Themes:SystemDropShadowChrome>
+                </Popup>
+            </Grid>
+        </ControlTemplate>
+        <LinearGradientBrush x:Key="MenuBackground"
                              EndPoint="0,1"
                              StartPoint="0,0">
-            <GradientStop Color="#F3F3F3"
-                          Offset="0" />
-            <GradientStop Color="#EBEBEB"
-                          Offset="0.5" />
-            <GradientStop Color="#DDDDDD"
-                          Offset="0.5" />
-            <GradientStop Color="#CDCDCD"
+            <GradientStop Color="#F6F6F6"
+                          Offset="0.25" />
+            <GradientStop Color="#EAE8E8"
+                          Offset="0.25" />
+            <GradientStop Color="#DCD9D9"
+                          Offset="0.8" />
+            <GradientStop Color="White"
                           Offset="1" />
         </LinearGradientBrush>
-        <SolidColorBrush x:Key="ButtonNormalBorder"
-                         Color="#FF707070" />
-        <Style x:Key="AddDashboardItemBtnStyle"
-               TargetType="{x:Type Button}">
-            <Setter Property="FocusVisualStyle"
-                    Value="{StaticResource ButtonFocusVisual}" />
+        <Style x:Key="DashBoardMenuStyle"
+               TargetType="{x:Type Menu}">
             <Setter Property="Background"
-                    Value="{StaticResource ButtonNormalBackground}" />
-            <Setter Property="BorderBrush"
-                    Value="{StaticResource ButtonNormalBorder}" />
-            <Setter Property="BorderThickness"
-                    Value="1" />
+                    Value="{StaticResource MenuBackground}" />
+            <Setter Property="FontFamily"
+                    Value="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" />
+            <Setter Property="FontSize"
+                    Value="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}" />
+            <Setter Property="FontStyle"
+                    Value="{DynamicResource {x:Static SystemFonts.MenuFontStyleKey}}" />
+            <Setter Property="FontWeight"
+                    Value="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" />
             <Setter Property="Foreground"
-                    Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
-            <Setter Property="HorizontalContentAlignment"
-                    Value="Center" />
-            <Setter Property="VerticalContentAlignment"
-                    Value="Center" />
-            <Setter Property="Padding"
-                    Value="1" />
+                    Value="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}" />
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid x:Name="grid"
-                              Background="White">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualStateGroup.Transitions>
-                                        <VisualTransition From="Normal"
-                                                          GeneratedDuration="0"
-                                                          To="MouseOver" />
-                                    </VisualStateGroup.Transitions>
-                                    <VisualState x:Name="Normal" />
-                                    <VisualState x:Name="MouseOver">
-                                        <Storyboard>
-                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
-                                                                          Storyboard.TargetName="grid">
-                                                <EasingColorKeyFrame KeyTime="0"
-                                                                     Value="#FFE2D8D8" />
-                                            </ColorAnimationUsingKeyFrames>
-                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
-                                                                          Storyboard.TargetName="path">
-                                                <EasingColorKeyFrame KeyTime="0"
-                                                                     Value="#FFE2D8D8" />
-                                            </ColorAnimationUsingKeyFrames>
-                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)"
-                                                                          Storyboard.TargetName="path">
-                                                <EasingColorKeyFrame KeyTime="0"
-                                                                     Value="#FF403C3C" />
-                                            </ColorAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Pressed">
-                                        <Storyboard>
-                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
-                                                                          Storyboard.TargetName="grid">
-                                                <EasingColorKeyFrame KeyTime="0"
-                                                                     Value="#FFD9CBCB" />
-                                            </ColorAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Disabled" />
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <Path x:Name="path"
-                                  Fill="White"
-                                  Stroke="Black"
-                                  Data="M5.5009999,0.5 L9.5010004,0.5 9.5010004,5.4999999 14.5,5.4999999 14.5,9.5 9.5010004,9.5 9.5010004,14.5 5.5009999,14.5 5.5009999,9.5 0.5,9.5 0.5,5.4999999 5.5009999,5.4999999 z"
-                                  Margin="0,2.356,3.22,0"
-                                  RenderTransformOrigin="0.5,0.5"
-                                  Stretch="Fill"
-                                  HorizontalAlignment="Right"
-                                  Width="8.833"
-                                  Height="10.191"
-                                  VerticalAlignment="Top"
-                                  StrokeThickness="0.5">
-                                <Path.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Path.RenderTransform>
-                            </Path>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsKeyboardFocused"
-                                     Value="true" />
-                            <Trigger Property="ToggleButton.IsChecked"
-                                     Value="true" />
-                            <Trigger Property="IsEnabled"
-                                     Value="false">
-                                <Setter Property="Foreground"
-                                        Value="#ADADAD" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
+                    <ControlTemplate TargetType="{x:Type Menu}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="true">
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -142,16 +209,26 @@
             <ColumnDefinition Width="17*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*" />
+            <RowDefinition Height="30" />
             <RowDefinition Height="71*" />
         </Grid.RowDefinitions>
-        <Button x:Name="button"
-                Content="Button"
-                Grid.Column="1"
-                Style="{DynamicResource AddDashboardItemBtnStyle}"
-                Width="15"
-                Height="15"
-                Margin="0,0.5,10,0.5"
-                HorizontalAlignment="Right" />
+        <Menu x:Name="menu"
+              Grid.ColumnSpan="2"
+              Background="Transparent"
+              BorderBrush="#FF959595"
+              Style="{DynamicResource DashBoardMenuStyle}"
+              BorderThickness="0,0,0,2">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel HorizontalAlignment="Stretch" />
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem HorizontalAlignment="Right"
+                      Template="{DynamicResource AddMenuItemControlTemplate}"
+                      Margin="0,0,10,0">
+                <MenuItem Header="Well Log" />
+            </MenuItem>
+        </Menu>
+
     </Grid>
 </UserControl>

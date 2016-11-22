@@ -4,8 +4,7 @@
                     xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-                    xmlns:pi="http://schemas.microsoft.com/prototyping/2010/interactivity"
-                    xmlns:local="clr-namespace:Fdp.Controls.ResourceDictionaries">
+                    xmlns:pi="http://schemas.microsoft.com/prototyping/2010/interactivity">
     <ControlTemplate x:Key="AddMenuItemControlTemplate"
                      TargetType="{x:Type MenuItem}">
         <Grid x:Name="grid"

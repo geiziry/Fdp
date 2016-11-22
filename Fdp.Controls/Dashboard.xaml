@@ -1,17 +1,42 @@
-﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<UserControl xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             x:Class="Fdp.Controls.Dashboard"
              xmlns:ctrls="clr-namespace:Fdp.Controls.Ctrlz"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:mvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             x:Class="Fdp.Controls.Dashboard"
              mc:Ignorable="d"
              d:DesignHeight="1200"
              d:DesignWidth="1200">
+    <UserControl.Resources>
+        <ResourceDictionary Source="ResourceDictionaries/DashboardTheme.xaml" />
+    </UserControl.Resources>
     <Grid>
         <DockPanel>
             <ctrls:DashboradMenu Height="30"
                                  DockPanel.Dock="Top" />
-            <ctrls:DashboardWorkArea />
+            <dxlc:LayoutControl x:Name="layoutItems"
+                                Orientation="Vertical"
+                                Background="Transparent"
+                                IsCustomization="True"
+                                ItemCustomizationToolbarStyle="{StaticResource toolbarStyle}"
+                                ItemSelectionIndicatorStyle="{StaticResource SelectionIndicatorStyle}"
+                                ItemInsertionPointIndicatorStyle="{StaticResource InsertionPointIndicatorStyle}"
+                                AllowAvailableItemsDuringCustomization="False">
+                <dxlc:LayoutItem VerticalAlignment="Stretch"
+                                 Label="Item1">
+                    <TextBlock />
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem VerticalAlignment="Stretch"
+                                 Label="Item2">
+                    <TextBlock />
+                </dxlc:LayoutItem>
+
+
+
+            </dxlc:LayoutControl>
         </DockPanel>
     </Grid>
 </UserControl>

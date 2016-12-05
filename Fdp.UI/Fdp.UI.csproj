@@ -151,7 +151,7 @@
       <Name>Fdp.DataModeller</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fdp.Essentials\Fdp.Essentials.csproj">
-      <Project>{2EB1BC63-262B-4805-9BD5-AF32BB103C6B}</Project>
+      <Project>{2eb1bc63-262b-4805-9bd5-af32bb103c6b}</Project>
       <Name>Fdp.Essentials</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fdp.InfraStructure\Fdp.InfraStructure.csproj">

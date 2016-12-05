@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\Fdp.UI\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -94,12 +94,12 @@
     <Compile Include="Behaviors\LayoutControlItemsSourceBehavior.cs" />
     <Compile Include="CommonTypes\DashboardItem.cs" />
     <Compile Include="ViewModels\DashboardMenuViewModel.cs" />
-    <Compile Include="Views\DashboradMenu.xaml.cs">
-      <DependentUpon>DashboradMenu.xaml</DependentUpon>
+    <Compile Include="Views\DashboradMenuView.xaml.cs">
+      <DependentUpon>DashboradMenuView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\DashboardViewModel.cs" />
-    <Compile Include="Views\Dashboard.xaml.cs">
-      <DependentUpon>Dashboard.xaml</DependentUpon>
+    <Compile Include="Views\DashboardView.xaml.cs">
+      <DependentUpon>DashboardView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\LogViewModel.cs" />
     <Compile Include="ViewModels\PlotViewModel.cs" />
@@ -128,11 +128,11 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\DashboradMenu.xaml">
+    <Page Include="Views\DashboradMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Dashboard.xaml">
+    <Page Include="Views\DashboardView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

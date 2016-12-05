@@ -21,17 +21,17 @@ namespace Fdp.Controls.Views
     /// <summary>
     /// Interaction logic for Dashboard.xaml
     /// </summary>
-    public partial class Dashboard : UserControl
+    public partial class DashboardView : UserControl
     {
 
 
-        public Dashboard()
+        public DashboardView()
         {
             InitializeComponent();
-            //Loaded += (s, o) =>
-            //{
-            //    this.DataContext = new DashboardMenuViewModel();
-            //};
+            Loaded += (s, o) =>
+            {
+                this.DataContext = new DashboardViewModel();
+            };
         }
 
     }

@@ -4,7 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
              xmlns:local="clr-namespace:Fdp.Controls.Views"
-             x:Class="Fdp.Controls.Views.DashboradMenu"
+             x:Class="Fdp.Controls.Views.DashboardMenuView"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d"
@@ -23,6 +23,6 @@
             </ItemsPanelTemplate>
         </Menu.ItemsPanel>
         <Button HorizontalAlignment="Right"
-                Command="{Binding Path=DataContext.LoadDataModelCommand,RelativeSource={RelativeSource AncestorType=local:Dashboard}}" />
+                Command="{Binding LoadDataModelCommand}" />
     </Menu>
 </UserControl>

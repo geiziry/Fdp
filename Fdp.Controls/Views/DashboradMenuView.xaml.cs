@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fdp.Controls.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,9 +19,9 @@ namespace Fdp.Controls.Views
     /// <summary>
     /// Interaction logic for DashboradMenu.xaml
     /// </summary>
-    public partial class DashboradMenu : UserControl
+    public partial class DashboardMenuView : UserControl
     {
-        public DashboradMenu()
+        public DashboardMenuView()
         {
             InitializeComponent();
         }

@@ -71,7 +71,7 @@ namespace Fdp.Controls.Behaviors
 
         protected virtual void ArrangeChildren()
         {
-            AssociatedObject.Orientation = System.Windows.Controls.Orientation.Vertical;
+            AssociatedObject .Orientation = Orientation.Vertical;
             if (ItemsSource is IEnumerable)
                 foreach (var item in (ItemsSource as IEnumerable))
                     AddItem(item);

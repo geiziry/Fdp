@@ -19,8 +19,8 @@ namespace Fdp.Essentials
 
         public void Initialize()
         {
-            _regionManager.RegisterViewWithRegion(Strings.MenuRegion, typeof(DashboradMenu));
-            _regionManager.RegisterViewWithRegion(Strings.MainRegion, typeof(Dashboard));
+            _regionManager.RegisterViewWithRegion(Strings.MenuRegion, typeof(DashboardMenuView));
+            _regionManager.RegisterViewWithRegion(Strings.MainRegion, typeof(DashboardView));
         }
     }
 }

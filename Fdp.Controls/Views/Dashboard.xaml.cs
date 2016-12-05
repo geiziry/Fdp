@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Fdp.Controls.CommonTypes;
+using Fdp.Controls.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,16 +16,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Fdp.UI
+namespace Fdp.Controls.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Dashboard.xaml
     /// </summary>
-    public partial class MainWindow 
+    public partial class Dashboard : UserControl
     {
-        public MainWindow()
+
+
+        public Dashboard()
         {
             InitializeComponent();
+            //Loaded += (s, o) =>
+            //{
+            //    this.DataContext = new DashboardMenuViewModel();
+            //};
         }
+
     }
 }

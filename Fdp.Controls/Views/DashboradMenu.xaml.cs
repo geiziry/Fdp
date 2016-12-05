@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Fdp.Controls.Ctrlz
+namespace Fdp.Controls.Views
 {
     /// <summary>
     /// Interaction logic for DashboradMenu.xaml

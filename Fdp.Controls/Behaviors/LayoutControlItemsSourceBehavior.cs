@@ -1,13 +1,9 @@
 ﻿using DevExpress.Mvvm.UI.Interactivity;
 using DevExpress.Xpf.LayoutControl;
 using Fdp.Controls.CommonTypes;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,6 +12,7 @@ namespace Fdp.Controls.Behaviors
 {
     public class LayoutControlItemsSourceBehavior:Behavior<LayoutControl>
     {
+        
         public DataTemplateSelector ItemTemplateSelector
         {
             get { return (DataTemplateSelector)GetValue(ItemTemplateSelectorProperty); }
@@ -46,6 +43,10 @@ namespace Fdp.Controls.Behaviors
                     ((LayoutControlItemsSourceBehavior)d).OnItemsSourceChanged(e.OldValue, e.NewValue);
                 })));
 
+        protected override void OnAttached()
+        {
+            base.OnAttached();
+        }
         protected virtual void OnItemsSourceChanged(object oldValue, object newValue)
         {
             if (newValue is INotifyCollectionChanged)
@@ -77,9 +78,9 @@ namespace Fdp.Controls.Behaviors
         }
         protected virtual void RemoveItem(object current)
         {
-            var lg = AssociatedObject.Children.Cast<object>().Select(x => x).Where(y => (y as FrameworkElement).Name == "RootGroup").First() as LayoutGroup;
-            LayoutItem element = lg.Children.OfType<LayoutItem>().Where(el => (((LayoutItem)el).DataContext).Equals(current)).FirstOrDefault();
-            lg.Children.Remove(element);
+            var lc = AssociatedObject as LayoutControl;
+            LayoutItem element = lc.Children.OfType<LayoutItem>().Where(el => (((LayoutItem)el).DataContext).Equals(current)).FirstOrDefault();
+            lc.Children.Remove(element);
         }
 
         protected virtual void AddItem(object current)
@@ -106,9 +107,10 @@ namespace Fdp.Controls.Behaviors
             b2.Mode = BindingMode.OneWay;
             itemContent.SetBinding(ContentControl.ContentTemplateSelectorProperty, b2);
 
-            var lg = AssociatedObject.Children.Cast<object>().Select(x => x).Where(y => (y as FrameworkElement).Name == "RootGroup").First() as LayoutGroup;
-            if (lg != null)
-                lg.Children.Add(lItem);
+            var lc = AssociatedObject as LayoutControl;
+
+            if (lc != null)
+                lc.Children.Add(lItem);
         }
 
     }

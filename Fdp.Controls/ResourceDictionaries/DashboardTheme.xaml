@@ -9,17 +9,16 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type lc:LayoutItem}">
+        <Setter Property="Label"
+                Value="{Binding Label}" />
         <Setter Property="LabelPosition"
                 Value="Top" />
         <Setter Property="BorderThickness"
                 Value="1" />
         <Setter Property="BorderBrush"
                 Value="Gray" />
-        <!--<Setter Property="Content">
-            <Setter.Value>
-                <Button />
-            </Setter.Value>-->
-        <!--</Setter>-->
+        <Setter Property="VerticalAlignment"
+                Value="Stretch" />
     </Style>
     <lc:Resources x:Key="Resources" />
     <SolidColorBrush x:Key="ToolBackground"

@@ -37,17 +37,18 @@
                             AllowAvailableItemsDuringCustomization="False"
                             StretchContentHorizontally="True"
                             Grid.Row="1"
-                            Padding="2"
-                            >
+                            Padding="7">
             <mvvm:Interaction.Behaviors>
                 <behaviors:LayoutControlItemsSourceBehavior ItemsSource="{Binding Items}">
                     <behaviors:LayoutControlItemsSourceBehavior.ItemTemplateSelector>
                         <behaviors:ItemTemplateSelector>
                             <behaviors:ItemTemplateSelector.DefaultTemplate>
                                 <DataTemplate>
-                                    <Border Background="White"
-                                            BorderThickness="1"
-                                            BorderBrush="Gray" />
+                                    <Grid>
+                                        <Separator VerticalAlignment="Top"
+                                                   BorderThickness="2" />
+                                        <Border Style="{StaticResource BorderDropShadow}" />
+                                    </Grid>
                                 </DataTemplate>
                             </behaviors:ItemTemplateSelector.DefaultTemplate>
                         </behaviors:ItemTemplateSelector>

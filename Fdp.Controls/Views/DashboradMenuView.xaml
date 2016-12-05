@@ -14,15 +14,15 @@
         <ResourceDictionary Source="/Fdp.Controls;component/ResourceDictionaries/OwnControlsStyling.xaml" />
     </UserControl.Resources>
     <Menu x:Name="menu"
-          Background="Transparent"
-          BorderBrush="#FF959595"
-          BorderThickness="0,0,0,2">
+          Background="#42B6ACAC"
+          >
         <Menu.ItemsPanel>
             <ItemsPanelTemplate>
                 <DockPanel HorizontalAlignment="Stretch" />
             </ItemsPanelTemplate>
         </Menu.ItemsPanel>
-        <Button HorizontalAlignment="Right"
+        <Button HorizontalAlignment="Left"
+                Content="Data"
                 Command="{Binding LoadDataModelCommand}" />
     </Menu>
 </UserControl>

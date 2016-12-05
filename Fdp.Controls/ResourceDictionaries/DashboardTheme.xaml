@@ -6,6 +6,20 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/DevExpress.Xpf.LayoutControl.v16.1;component/generic.xaml" />
     </ResourceDictionary.MergedDictionaries>
+    <Style TargetType="Border"
+           x:Key="BorderDropShadow">
+        <Setter Property="Background"
+                Value="White" />
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect Color="Black"
+                                  BlurRadius="3"
+                                  ShadowDepth="2"
+                                  Opacity=".5"
+                                  Direction="320" />
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style TargetType="{x:Type lc:LayoutItem}">
         <Setter Property="Label"
@@ -14,21 +28,23 @@
                 Value="Top" />
         <Setter Property="VerticalAlignment"
                 Value="Stretch" />
-        <Setter Property="Background"
-                Value="White" />
         <Setter Property="LabelTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <Border BorderBrush="Gray"
-                            BorderThickness="1,1,1,0" Margin="0,0,0,-3">
-                        <TextBlock Margin="5,0,0,0"
-                                   Text="{Binding}" />
-                    </Border>
+                    <Grid  Height="30"
+                           Margin="3,3,3,-5">
+                        <Border Style="{StaticResource BorderDropShadow}"/>
+                        <TextBlock Margin="5,5,0,0"
+                                   Text="{Binding}"
+                                   FontWeight="DemiBold" />
+                    </Grid>
                 </DataTemplate>
             </Setter.Value>
         </Setter>
         <Setter Property="LabelHorizontalAlignment"
                 Value="Stretch" />
+        <Setter Property="Padding"
+                Value="3" />
     </Style>
     <lc:Resources x:Key="Resources" />
     <SolidColorBrush x:Key="ToolBackground"

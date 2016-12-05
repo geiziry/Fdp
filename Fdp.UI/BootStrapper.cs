@@ -1,11 +1,7 @@
-﻿using Fdp.Essentials;
-using Fdp.InfraStructure;
+﻿using Fdp.InfraStructure;
 using Prism.Modularity;
-using Prism.Mvvm;
 using Prism.Unity;
 using System;
-using System.Globalization;
-using System.Reflection;
 using System.Windows;
 
 namespace Fdp.UI
@@ -47,21 +43,5 @@ namespace Fdp.UI
 
         }
 
-        protected override void ConfigureViewModelLocator()
-        {
-            base.ConfigureViewModelLocator();
-            //ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver(viewType =>
-            //{
-            //    var viewName = viewType.FullName;
-            //    viewName = viewName.Replace(".Views.", ".ViewModels.");
-            //    var viewAsseblyName = viewType.GetTypeInfo().Assembly.FullName;
-            //    var suffix = viewName.EndsWith("View") ? "Model" : "ViewModel";
-            //    var viewModelName = string.Format(CultureInfo.InvariantCulture, "{0}{1}", viewName, suffix);
-            //    var assembly = viewType.GetTypeInfo().Assembly;
-            //    var type = assembly.GetType(viewModelName, true);
-
-            //    return type;
-            //});
-        }
     }
 }

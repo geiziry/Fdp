@@ -28,6 +28,7 @@ namespace Fdp.Controls.Views
         public DashboardView()
         {
             InitializeComponent();
+            //this is to avoid instantiating the viewmodel before the InitializeComponent is executed
             Loaded += (s, o) =>
             {
                 this.DataContext = new DashboardViewModel();

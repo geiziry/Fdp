@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Blend for Visual Studio 14
+# Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fdp.UI", "Fdp.UI\Fdp.UI.csproj", "{0DD1B29F-3388-4158-A12E-0D02055EC78F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fdp", "Fdp.UI\Fdp.csproj", "{0DD1B29F-3388-4158-A12E-0D02055EC78F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fdp.Controls", "Fdp.Controls\Fdp.Controls.csproj", "{F210DC15-3624-4D4C-AD38-47E753D21AE9}"
 EndProject

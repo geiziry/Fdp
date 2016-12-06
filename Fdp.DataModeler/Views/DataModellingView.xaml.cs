@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Fdp.DataModeller
+namespace Fdp.DataModeler.Views
 {
     /// <summary>
-    /// Interaction logic for DataModelingWindow.xaml
+    /// Interaction logic for DataModellingView.xaml
     /// </summary>
-    public partial class DataModelingWindow : Window
+    public partial class DataModellingView : UserControl
     {
-        public DataModelingWindow()
+        public DataModellingView()
         {
             InitializeComponent();
         }

@@ -4,7 +4,11 @@
                     xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-                    xmlns:pi="http://schemas.microsoft.com/prototyping/2010/interactivity">
+                    xmlns:pi="http://schemas.microsoft.com/prototyping/2010/interactivity"
+                    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="d">
     <ControlTemplate x:Key="AddMenuItemControlTemplate"
                      TargetType="{x:Type MenuItem}">
         <Grid x:Name="grid"
@@ -153,6 +157,217 @@
                 </Themes:SystemDropShadowChrome>
             </Popup>
         </Grid>
+    </ControlTemplate>
+
+
+    <Style x:Key="EditLockChkStyle"
+           TargetType="{x:Type CheckBox}">
+        <Setter Property="FocusVisualStyle"
+                Value="{x:Null}" />
+        <Setter Property="Background"
+                Value="White" />
+        <Setter Property="BorderBrush"
+                Value="#7F2C2C2C" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Left" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="Padding"
+                Value="0,3" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="IsChecked"
+                Value="{Binding IsCustomize}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <Border BorderBrush="Gray"
+                            BorderThickness="1">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+                                                                      Storyboard.TargetName="Root">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                                                 Value="#FFD4C9C9" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                                                                      Storyboard.TargetName="path">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                                                 Value="#FF8C8989" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                                                                      Storyboard.TargetName="path1">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                                                 Value="#FF8C8989" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                                                                      Storyboard.TargetName="path2">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                                                 Value="#FF8C8989" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+                                                                      Storyboard.TargetName="Root">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                                                 Value="#FF736F6F" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                                                                      Storyboard.TargetName="path">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                                                 Value="#FFC5BABA" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                                                                      Storyboard.TargetName="path1">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                                                 Value="#FFC5BABA" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                                                                      Storyboard.TargetName="path2">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                                                 Value="#FFC5BABA" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled" />
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition From="Checked"
+                                                      GeneratedDuration="0:0:0.3"
+                                                      To="Unchecked">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <CubicEase EasingMode="EaseOut" />
+                                        </VisualTransition.GeneratedEasingFunction>
+                                    </VisualTransition>
+                                    <VisualTransition From="Unchecked"
+                                                      GeneratedDuration="0:0:0.3"
+                                                      To="Checked">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <CubicEase EasingMode="EaseOut" />
+                                        </VisualTransition.GeneratedEasingFunction>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Checked" />
+                                <VisualState x:Name="Unchecked">
+                                    <Storyboard>
+                                        <PointAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)"
+                                                                      Storyboard.TargetName="path">
+                                            <EasingPointKeyFrame KeyTime="0"
+                                                                 Value="0.5,0.5" />
+                                        </PointAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                                                       Storyboard.TargetName="path">
+                                            <EasingDoubleKeyFrame KeyTime="0"
+                                                                  Value="-1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
+                                                                       Storyboard.TargetName="path">
+                                            <EasingDoubleKeyFrame KeyTime="0"
+                                                                  Value="-5.6" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"
+                                                                       Storyboard.TargetName="path">
+                                            <EasingDoubleKeyFrame KeyTime="0"
+                                                                  Value="-0.133" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Indeterminate" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid x:Name="Root"
+                              Background="White"
+                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                              dx:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;18;22"
+                              VerticalAlignment="Stretch">
+                            <Path x:Name="path1"
+                                  Grid.ColumnSpan="1"
+                                  Data="M3.2610002,1.6669999 C2.3806581,1.6670001 1.6670001,2.3806581 1.667,3.261 L1.667,9.806 C1.6670001,10.686342 2.3806581,11.4 3.2610002,11.4 L13.673121,11.4 C14.553463,11.4 15.267121,10.686342 15.267121,9.806 L15.267121,3.261 C15.267121,2.3806581 14.553463,1.6670001 13.673121,1.6669999 z M3.228,0 L13.705121,0 C15.487896,0 16.933121,1.4452249 16.933121,3.2279999 L16.933121,9.7719996 C16.933121,11.554775 15.487896,13 13.705121,13 L3.228,13 C1.4452249,13 0,11.554775 0,9.7719996 L0,3.2279999 C0,1.4452249 1.4452249,0 3.228,0 z"
+                                  Fill="#FF605F5F"
+                                  Height="8.623"
+                                  Margin="5,0,5,1.377"
+                                  Grid.Row="0"
+                                  Stretch="Fill"
+                                  VerticalAlignment="Bottom"
+                                  HorizontalAlignment="Right"
+                                  Width="10.386" />
+                            <Path x:Name="path2"
+                                  Grid.ColumnSpan="1"
+                                  Data="M1.9204998,0 C2.8314934,0 3.5699997,0.73134285 3.5699997,1.6335 3.5699997,2.112771 3.3615737,2.5438336 3.0295863,2.8426462 L3.0190788,2.8518795 3.031919,2.8676232 C3.5966432,3.5626965 4.056732,4.1847136 3.8546794,4.3318512 3.4796453,4.6049569 0.10514563,4.5968938 0.0042394976,4.3801146 -0.044897842,4.2745507 0.339789,3.6863 0.81104597,3.0116278 L0.885502,2.9053433 0.87126466,2.893988 C0.50466778,2.59438 0.27099978,2.1409634 0.27099981,1.6335 0.27099978,0.73134285 1.0095061,0 1.9204998,0 z"
+                                  Fill="#FF605F5F"
+                                  Margin="8.25,0,8.25,3.46"
+                                  Grid.Row="0"
+                                  Stretch="Fill"
+                                  HorizontalAlignment="Stretch"
+                                  Width="Auto"
+                                  Height="4.54"
+                                  VerticalAlignment="Bottom"
+                                  d:LayoutOverrides="VerticalAlignment" />
+                            <Path x:Name="path"
+                                  Grid.ColumnSpan="1"
+                                  Data="M23.748622,8.0875 C24.152787,8.5007478 24.06782,8.4625 24.773622,8.4625 25.198622,8.4625 25.623622,8.4625 26.048622,8.4625 26.427412,8.4625 27.143664,8.4188605 27.143498,8.393853 27.117747,4.5179029 27.042747,4.3678662 26.943128,3.8677436 26.712717,2.7110126 25.335858,2.1060798 24.718306,1.8922593 23.418306,1.442149 23.421602,1.658063 23.023622,1.4875 22.825744,1.4026952 18.880163,1.2211918 17.423622,1.5125 16.641503,1.6689237 15.957908,1.848736&#xD;&#xA;15.248622,2.2125 14.117747,2.79248 14.642747,2.5174126 13.648622,3.4625 13.181072,3.9069867 12.466811,5.8011218 12.298622,6.1375 12.122385,6.4899729 11.931041,9.5598566 12.242747,9.5689716 13.956003,9.619071 15.985455,9.6435266 16.517747,9.793815 16.72298,9.8517607 16.536878,8.4126076 16.673622,7.0125 16.765093,6.0759393 17.195809,5.5847321 18.323622,5.2625 18.386213,5.2446168 22.033858,5.2610835 22.036878,5.2618353 22.520171,5.3821454&#xD;&#xA;23.124058,5.1722953 23.593306,5.5681604 23.875143,5.8059225 23.774469,7.8108063 23.873622,8.2625"
+                                  Fill="#FF605F5F"
+                                  Margin="0,0,1,10"
+                                  Stretch="Fill"
+                                  HorizontalAlignment="Right"
+                                  Width="7.204"
+                                  Height="5.523"
+                                  VerticalAlignment="Bottom">
+                                <Path.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform />
+                                        <SkewTransform />
+                                        <RotateTransform />
+                                        <TranslateTransform />
+                                    </TransformGroup>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True" />
+                        <Trigger Property="IsPressed"
+                                 Value="True" />
+                        <Trigger Property="IsFocused"
+                                 Value="True" />
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter Property="Opacity"
+                                    TargetName="Root"
+                                    Value="0.5" />
+                        </Trigger>
+                        <Trigger Property="dx:ThemeManager.IsTouchEnabled"
+                                 Value="True" />
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="dx:ThemeManager.IsTouchEnabled"
+                     Value="True">
+                <Setter Property="Padding"
+                        Value="8,0,0,0" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <ControlTemplate x:Key="EditLockMenuItemStyle"
+                     TargetType="{x:Type MenuItem}">
+        <Grid x:Name="Grid"
+              SnapsToDevicePixels="True">
+            <CheckBox Style="{StaticResource EditLockChkStyle}" />
+
+        </Grid>
+        <ControlTemplate.Triggers>
+        </ControlTemplate.Triggers>
     </ControlTemplate>
 
 

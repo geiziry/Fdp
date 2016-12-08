@@ -1,16 +1,9 @@
-﻿using Fdp.DataModeler;
+﻿using Fdp.DataModeler.DatabaseSchema;
 using Oracle.ManagedDataAccess.Client;
-using Oracle.ManagedDataAccess.EntityFramework;
 using Prism.Modularity;
-using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Core.Metadata.Edm;
-using System.Data.Entity.Core.Objects;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Fdp.DataModeller
 {
@@ -18,31 +11,63 @@ namespace Fdp.DataModeller
     {
         public void Initialize()
         {
-            using (var context=new testDbContext())
+            //using (var context = new testDbContext())
+            //{
+            //    var wells = context.Wells.ToList();
+            //    var metadata = ((IObjectContextAdapter)context).ObjectContext.MetadataWorkspace;
+            //    var tables = metadata.GetItemCollection(DataSpace.SSpace)
+            //        .GetItems<EntityContainer>()//;
+            //        .Where(s => !s.MetadataProperties.Contains("Type")
+            //        || s.MetadataProperties["Type"].ToString() == "Tables");
+
+
+            //    //foreach (var table in tables)
+            //    //{
+            //    //    var tableName = table.MetadataProperties.Contains("Table")
+            //    //        && table.MetadataProperties["Table"].Value != null
+            //    //      ? table.MetadataProperties["Table"].Value.ToString()
+            //    //      : table.Name;
+
+            //    //    var tableSchema = table.MetadataProperties["Schema"].Value.ToString();
+
+            //    //    Console.WriteLine(tableSchema + "." + tableName);
+            //    //}
+            //    //var tables = objectContext.MetadataWorkspace.GetItems(DataSpace.SSpace)
+            //    //    .Select(t => t).ToList();
+
+            //}
+            SqlServerConnection conn2 = new SqlServerConnection();
+            var servers=conn2.GetNetworkServers();
+            var databases = conn2.GetDatabaseList(servers[0]);
+
+            using (var conn = new OracleConnection(string.Format("Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={0})(PORT={1}))(CONNECT_DATA=(SID={2})));User Id={3};Password={4};", "localhost", "1521", "orcl", "NK_Phase2", "seawater")))
             {
-                var wells = context.Wells.ToList();
-                //var metadata= ((IObjectContextAdapter)context).ObjectContext.MetadataWorkspace;
-                //var tables = metadata.GetItemCollection(DataSpace.SSpace)
-                //    .GetItems<EntityContainer>();
-                    //.Where(s => !s.MetadataProperties.Contains("Type")
-                    //|| s.MetadataProperties["Type"].ToString() == "Tables");
+                conn.Open();
 
-                //foreach (var table in tables)
-                //{
-                //    var tableName = table.MetadataProperties.Contains("Table")
-                //        && table.MetadataProperties["Table"].Value != null
-                //      ? table.MetadataProperties["Table"].Value.ToString()
-                //      : table.Name;
 
-                //    var tableSchema = table.MetadataProperties["Schema"].Value.ToString();
+                OracleCommand cmd = new OracleCommand{Connection = conn,CommandType = CommandType.Text};
 
-                //    Console.WriteLine(tableSchema + "." + tableName);
-                //}
-                //var tables = objectContext.MetadataWorkspace.GetItems(DataSpace.SSpace)
-                //    .Select(t => t).ToList();
+                Schema schema = new Schema(cmd);
+            }
+
+            using (var conn1 = new SqlConnection("Data Source=MGEIZIRY;Initial Catalog=NK_Phase2;Integrated Security=True"))
+            {
+                conn1.Open();
+
+                SqlCommand cmd = new SqlCommand { Connection = conn1, CommandType = CommandType.Text };
+                Schema schema = new Schema(cmd);
 
             }
+
+             // var types=  
+                   // Tables.Values.SelectMany(f => f, (p, c) => new { c.ColumnType }).Distinct().ForEach(x=>Debug.WriteLine(x));
+
+               //Debug.WriteLine(types);
+            }
+
+            
         }
     }
 
-}
+
+

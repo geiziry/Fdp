@@ -104,6 +104,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseSchema\Column.cs" />
+    <Compile Include="DatabaseSchema\Connection.cs" />
+    <Compile Include="DatabaseSchema\Schema.cs" />
+    <Compile Include="DatabaseSchema\Table.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -122,7 +126,7 @@
     <Compile Include="Views\DataModellingView.xaml.cs">
       <DependentUpon>DataModellingView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Well.cs" />
+    <Compile Include="DataModel\Well.cs" />
     <EmbeddedResource Include="Properties\Licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -144,6 +148,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fdp.InfraStructure\Fdp.InfraStructure.csproj">
+      <Project>{08154aff-238b-4ff3-bcac-6356b9fbec38}</Project>
+      <Name>Fdp.InfraStructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

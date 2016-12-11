@@ -20,6 +20,7 @@ namespace Fdp.InfraStructure
         public const string DataSourcesRegion = "DataSourcesRegion";
         public const string AddVariablesRegion = "AddVariablesRegion";
         public const string DefineVariablesRegion = "DefineVariablesRegion";
+        public const string DataSourceConnectionRegion = "DataSourceConnectionRegion";
 
 
         //Unknown Database Enumeration queries

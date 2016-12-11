@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Interactivity;
 using System.Windows.Input;
 
-namespace Fdp.Controls.Behaviors
+namespace Fdp.InfraStructure.Behaviors
 {
     [System.Runtime.InteropServices.Guid("7DC276C1-4030-44F5-B3B5-A9F19A79488A")]
     public class ButtonClickBehavior:Behavior<Border>

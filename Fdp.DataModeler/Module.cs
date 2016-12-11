@@ -37,24 +37,24 @@ namespace Fdp.DataModeller
 
             //}
 
-            using (var conn = new Oracle.ManagedDataAccess.Client.OracleConnection(string.Format("Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={0})(PORT={1}))(CONNECT_DATA=(SID={2})));User Id={3};Password={4};", "localhost", "1521", "orcl", "NK_Phase2", "seawater")))
-            {
-                conn.Open();
+            //using (var conn = new Oracle.ManagedDataAccess.Client.OracleConnection(string.Format("Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={0})(PORT={1}))(CONNECT_DATA=(SID={2})));User Id={3};Password={4};", "localhost", "1521", "orcl", "NK_Phase2", "seawater")))
+            //{
+            //    conn.Open();
 
 
-                OracleCommand cmd = new OracleCommand{Connection = conn,CommandType = CommandType.Text};
+            //    OracleCommand cmd = new OracleCommand{Connection = conn,CommandType = CommandType.Text};
 
-                DataSource schema = new DataSource(cmd);
-            }
+            //    DataSource schema = new DataSource(cmd);
+            //}
 
-            using (var conn1 = new SqlConnection("Data Source=MGEIZIRY;Initial Catalog=NK_Phase2;Integrated Security=True"))
-            {
-                conn1.Open();
+            //using (var conn1 = new SqlConnection("Data Source=MGEIZIRY;Initial Catalog=NK_Phase2;Integrated Security=True"))
+            //{
+            //    conn1.Open();
 
-                SqlCommand cmd = new SqlCommand { Connection = conn1, CommandType = CommandType.Text };
-                DataSource schema = new DataSource(cmd);
+            //    SqlCommand cmd = new SqlCommand { Connection = conn1, CommandType = CommandType.Text };
+            //    DataSource schema = new DataSource(cmd);
 
-            }
+            //}
 
              // var types=  
                    // Tables.Values.SelectMany(f => f, (p, c) => new { c.ColumnType }).Distinct().ForEach(x=>Debug.WriteLine(x));

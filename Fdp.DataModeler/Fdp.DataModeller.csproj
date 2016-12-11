@@ -105,9 +105,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseSchema\Column.cs" />
-    <Compile Include="DatabaseSchema\Connection.cs" />
-    <Compile Include="DatabaseSchema\Schema.cs" />
+    <Compile Include="DatabaseSchema\DBConnection\IDbConnection.cs" />
+    <Compile Include="DatabaseSchema\DBConnection\OracleConnection.cs" />
+    <Compile Include="DatabaseSchema\DataSource.cs" />
+    <Compile Include="DatabaseSchema\DBConnection\SqlServerConnection.cs" />
     <Compile Include="DatabaseSchema\Table.cs" />
+    <Compile Include="Enums\DatabaseType.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -123,10 +126,19 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="testDbContext.cs" />
+    <Compile Include="Views\AddVariablesView.xaml.cs">
+      <DependentUpon>AddVariablesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DataModellingView.xaml.cs">
       <DependentUpon>DataModellingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataModel\Well.cs" />
+    <Compile Include="Views\DataSourcesView.xaml.cs">
+      <DependentUpon>DataSourcesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DefineVariablesView.xaml.cs">
+      <DependentUpon>DefineVariablesView.xaml</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -141,7 +153,19 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\AddVariablesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DataModellingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DataSourcesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DefineVariablesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

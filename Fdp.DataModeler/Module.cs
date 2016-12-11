@@ -36,18 +36,15 @@ namespace Fdp.DataModeller
             //    //    .Select(t => t).ToList();
 
             //}
-            SqlServerConnection conn2 = new SqlServerConnection();
-            var servers=conn2.GetNetworkServers();
-            var databases = conn2.GetDatabaseList(servers[0]);
 
-            using (var conn = new OracleConnection(string.Format("Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={0})(PORT={1}))(CONNECT_DATA=(SID={2})));User Id={3};Password={4};", "localhost", "1521", "orcl", "NK_Phase2", "seawater")))
+            using (var conn = new Oracle.ManagedDataAccess.Client.OracleConnection(string.Format("Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={0})(PORT={1}))(CONNECT_DATA=(SID={2})));User Id={3};Password={4};", "localhost", "1521", "orcl", "NK_Phase2", "seawater")))
             {
                 conn.Open();
 
 
                 OracleCommand cmd = new OracleCommand{Connection = conn,CommandType = CommandType.Text};
 
-                Schema schema = new Schema(cmd);
+                DataSource schema = new DataSource(cmd);
             }
 
             using (var conn1 = new SqlConnection("Data Source=MGEIZIRY;Initial Catalog=NK_Phase2;Integrated Security=True"))
@@ -55,7 +52,7 @@ namespace Fdp.DataModeller
                 conn1.Open();
 
                 SqlCommand cmd = new SqlCommand { Connection = conn1, CommandType = CommandType.Text };
-                Schema schema = new Schema(cmd);
+                DataSource schema = new DataSource(cmd);
 
             }
 

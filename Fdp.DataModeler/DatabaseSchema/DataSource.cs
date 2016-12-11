@@ -6,21 +6,21 @@ using System.Data.SqlClient;
 
 namespace Fdp.DataModeler.DatabaseSchema
 {
-    public class Schema
+    public class DataSource
     {
 
-        public Schema()
+        public DataSource()
         {
 
         }
-        public Schema(DbCommand Command)
+        public DataSource(DbCommand Command)
         {
             Tables = new List<Table>();
             SetCommandText(Command);
-            GetTables();
+            GetSchema();
         }
 
-        public static DbCommand Command { get; private set; }
+        public static DbCommand DbEnumerationCommand { get; private set; }
         public List<Table> Tables { get; private set; }
 
         private void SetCommandText(DbCommand command)
@@ -29,14 +29,14 @@ namespace Fdp.DataModeler.DatabaseSchema
                 command.CommandText = Strings.OracleTablesQuery;
             else if (command is SqlCommand)
                 command.CommandText = Strings.SqlServerTablesQuery;
-            Command = command;
+            DbEnumerationCommand = command;
         }
 
 
-        public void GetTables()
+        public void GetSchema()
         {
             List<string> TableNames = new List<string>();
-            using (DbDataReader dataReader = Command.ExecuteReader())
+            using (DbDataReader dataReader = DbEnumerationCommand.ExecuteReader())
             {
                 while (dataReader.Read())
                     TableNames.Add(dataReader.GetString(0));

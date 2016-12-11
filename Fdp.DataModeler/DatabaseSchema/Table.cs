@@ -19,10 +19,10 @@ namespace Fdp.DataModeler.DatabaseSchema
 
         private void SetCommandText()
         {
-            if (Schema.Command is OracleCommand)
-                Schema.Command.CommandText = string.Format(Strings.OracleColumnsQuery, TableName);
-            else if (Schema.Command is SqlCommand)
-                Schema.Command.CommandText = string.Format(Strings.SqlServerColumnsQuery, TableName);
+            if (DataSource.DbEnumerationCommand is OracleCommand)
+                DataSource.DbEnumerationCommand.CommandText = string.Format(Strings.OracleColumnsQuery, TableName);
+            else if (DataSource.DbEnumerationCommand is SqlCommand)
+                DataSource.DbEnumerationCommand.CommandText = string.Format(Strings.SqlServerColumnsQuery, TableName);
         }
 
         public string TableName { get; set; }
@@ -30,7 +30,7 @@ namespace Fdp.DataModeler.DatabaseSchema
 
         private void GetColumns()
         {
-            using (DbDataReader dataReader = Schema.Command.ExecuteReader())
+            using (DbDataReader dataReader = DataSource.DbEnumerationCommand.ExecuteReader())
             {
                 while (dataReader.Read())
                     Columns.Add(new Column { ColumnName = dataReader.GetString(0), ColumnType = dataReader.GetString(1) });

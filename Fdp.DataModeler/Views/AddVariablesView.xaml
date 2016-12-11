@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="Fdp.DataModeler.Views.AddVariablesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Fdp.DataModeler.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style TargetType="ListView">
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.HorizontalContentAlignment"
+                                Value="Stretch" />
+                        <Setter Property="Control.VerticalContentAlignment"
+                                Value="Stretch" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="101*" />
+            <ColumnDefinition Width="173*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="83*" />
+            <RowDefinition Height="168*" />
+        </Grid.RowDefinitions>
+        <ListView x:Name="datasourcesListView"
+                  Grid.ColumnSpan="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Data Source">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Expander />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView x:Name="columnsListView"
+                  Grid.Column="1"
+                  ItemsSource="{Binding}"
+                  Grid.Row="1"
+                  SelectionMode="Single">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn x:Name="columnNameColumn"
+                                    Header="Name"
+                                    Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Margin="6,-1,-6,-1"
+                                         Text="{Binding ColumnName}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="columnTypeColumn"
+                                    Header="Type"
+                                    Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Margin="-6,-1"
+                                         Text="{Binding ColumnType}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView x:Name="tablesListView"
+                  ItemsSource="{Binding}"
+                  Grid.Row="1"
+                  SelectionMode="Single">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn x:Name="tableNameColumn"
+                                    Header="Table Name"
+                                    Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Margin="6,-1,-6,-1"
+                                         Text="{Binding TableName}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>

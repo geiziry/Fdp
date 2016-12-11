@@ -5,100 +5,26 @@
              xmlns:local="clr-namespace:Fdp.DataModeller.Views"
              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
              xmlns:DatabaseSchema="clr-namespace:Fdp.DataModeler.DatabaseSchema"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:Strings="clr-namespace:Fdp.InfraStructure;assembly=Fdp.InfraStructure"
              x:Class="Fdp.DataModeller.Views.DataModellingView"
              mc:Ignorable="d"
              d:DesignHeight="300"
-             d:DesignWidth="300"
+             d:DesignWidth="400"
              Loaded="UserControl_Loaded">
-    <UserControl.Resources>
-        <CollectionViewSource x:Key="schemaViewSource"
-                              d:DesignSource="{d:DesignInstance {x:Type DatabaseSchema:Schema}, CreateList=True}" />
-        <CollectionViewSource x:Key="schemaTablesViewSource"
-                              Source="{Binding Tables, Source={StaticResource schemaViewSource}}" />
-        <CollectionViewSource x:Key="schemaTablesColumnsViewSource"
-                              Source="{Binding Columns, Source={StaticResource schemaTablesViewSource}}" />
-    </UserControl.Resources>
     <Grid>
-
         <dx:DXTabControl>
-            <dx:DXTabItem Header="Data Connections"
-                          Glyph="{dx:DXImage Image=ManageDatasource_16x16.png}">
-                <Grid Background="Transparent"
-                      DataContext="{StaticResource schemaTablesViewSource}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="101*" />
-                        <ColumnDefinition Width="173*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="83*" />
-                        <RowDefinition Height="168*" />
-                    </Grid.RowDefinitions>
-                    <ListView x:Name="columnsListView"
-                              Grid.Column="1"
-                              ItemsSource="{Binding Source={StaticResource schemaTablesColumnsViewSource}}"
-                              Grid.Row="1"
-                              SelectionMode="Single">
-                        <ListView.ItemContainerStyle>
-                            <Style>
-                                <Setter Property="Control.HorizontalContentAlignment"
-                                        Value="Stretch" />
-                                <Setter Property="Control.VerticalContentAlignment"
-                                        Value="Stretch" />
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn x:Name="columnNameColumn"
-                                                Header="Name"
-                                                Width="80">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBox Margin="6,-1,-6,-1"
-                                                     Text="{Binding ColumnName}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn x:Name="columnTypeColumn"
-                                                Header="Type"
-                                                Width="80">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBox Margin="-6,-1"
-                                                     Text="{Binding ColumnType}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                    <ListView x:Name="tablesListView"
-                              ItemsSource="{Binding}"
-                              Grid.Row="1"
-                              SelectionMode="Single">
-                        <ListView.ItemContainerStyle>
-                            <Style>
-                                <Setter Property="Control.HorizontalContentAlignment"
-                                        Value="Stretch" />
-                                <Setter Property="Control.VerticalContentAlignment"
-                                        Value="Stretch" />
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn x:Name="tableNameColumn"
-                                                Header="Table Name"
-                                                Width="80">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBox Margin="6,-1,-6,-1"
-                                                     Text="{Binding TableName}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </Grid>
+            <dx:DXTabItem Header="Data Sources"
+                          Glyph="{dx:DXImage Image=AddNewDataSource_16x16.png}">
+                <ContentControl prism:RegionManager.RegionName="{x:Static Strings:Strings.DataSourcesRegion}" />
+            </dx:DXTabItem>
+                    <dx:DXTabItem Header="Add Variables"
+                                  Glyph="{dx:DXImage Image=ManageDatasource_16x16.png}">
+                <ContentControl prism:RegionManager.RegionName="{x:Static Strings:Strings.AddVariablesRegion}" />
+            </dx:DXTabItem>
+                    <dx:DXTabItem Header="Define Variables"
+                                  Glyph="{dx:DXImage Image=RenameDataSource_16x16.png}">
+                <ContentControl prism:RegionManager.RegionName="{x:Static Strings:Strings.DefineVariablesRegion}" />
             </dx:DXTabItem>
         </dx:DXTabControl>
 

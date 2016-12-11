@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fdp.DataModeler.Enums;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Sql;
@@ -9,29 +10,40 @@ using System.Threading.Tasks;
 
 namespace Fdp.DataModeler.DatabaseSchema
 {
-    public class Connection
+    public class SqlServerConnection : IDbConnection
     {
-        public string ConnectionString { get; set; }
-        public DatabaseType databaseType { get; set; }
-
-        public string Host { get; set; }
-        public string Port { get; set; }
-        public string SID { get; set; }
+        public string DataSource { get; set; }
+        public bool IntegratedSecurity { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
 
-    }
+        public string ConnectionString
+        {
+            get
+            {
+                SqlConnectionStringBuilder connection = new SqlConnectionStringBuilder();
+                connection.DataSource = DataSource;
+                connection.IntegratedSecurity = IntegratedSecurity;
+                if (!IntegratedSecurity)
+                {
+                    connection.UserID = UserName;
+                    connection.Password = Password;
+                }
 
-    public enum DatabaseType
-    {
-        Oracle,
-        SqlServer
-    }
+                return connection.ToString();
+            }
+        }
 
-    public class SqlServerConnection
-    {
+        public DatabaseType databaseType
+        {
+            get
+            {
+                return DatabaseType.SqlServer;
+            }
 
-        public List<string> GetNetworkServers()
+        }
+
+        public List<string> GetLocalNetworkServers()
         {
             List<string> Servers = new List<string>();
             DataTable serversTable = SqlDataSourceEnumerator.Instance.GetDataSources();
@@ -57,10 +69,6 @@ namespace Fdp.DataModeler.DatabaseSchema
         public List<string> GetDatabaseList(string server)
         {
             List<string> Databases = new List<string>();
-            SqlConnectionStringBuilder connection = new SqlConnectionStringBuilder();
-            connection.DataSource = server;
-            connection.IntegratedSecurity = true;
-            string ConnectionString = connection.ToString();
 
             SqlConnection conn = new SqlConnection(ConnectionString);
             conn.Open();

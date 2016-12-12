@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SqlClient;
 
-namespace Fdp.DataModeller.DatabaseSchema
+namespace Fdp.DataAccess.DatabaseSchema
 {
     public class DataSource
     {

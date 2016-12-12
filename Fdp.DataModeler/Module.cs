@@ -1,5 +1,4 @@
 ﻿using DevExpress.Mvvm;
-using Fdp.DataModeller.DatabaseSchema;
 using Fdp.DataModeller.ViewModels;
 using Fdp.DataModeller.Views;
 using Fdp.InfraStructure;

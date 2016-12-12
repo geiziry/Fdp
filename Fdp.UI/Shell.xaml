@@ -11,7 +11,9 @@
         mc:Ignorable="d"
         Title="Fdp"
         Height="350"
-        Width="1200">
+        Width="1200"
+             ResizeMode="CanResizeWithGrip"
+             Style="{DynamicResource ShellWindowStyle}">
     <Grid>
         <DockPanel LastChildFill="True">
             <ContentControl prism:RegionManager.RegionName="{x:Static Strings:Strings.MenuRegion}"

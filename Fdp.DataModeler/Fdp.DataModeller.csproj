@@ -66,7 +66,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Oracle.ManagedDataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
-      <HintPath>..\packages\Oracle.ManagedDataAccess.12.1.2400\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.1.24160719\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
@@ -106,13 +106,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatabaseSchema\Column.cs" />
-    <Compile Include="DatabaseSchema\DBConnection\IDbConnection.cs" />
-    <Compile Include="DatabaseSchema\DBConnection\OracleConnection.cs" />
-    <Compile Include="DatabaseSchema\DataSource.cs" />
-    <Compile Include="DatabaseSchema\DBConnection\SqlServerConnection.cs" />
-    <Compile Include="DatabaseSchema\Table.cs" />
-    <Compile Include="Enums\DatabaseType.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

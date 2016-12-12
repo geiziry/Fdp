@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fdp.DataModeller.Enums
+namespace Fdp.DataAccess.Enums
 {
     public enum DatabaseType
     {

@@ -1,4 +1,4 @@
-﻿using Fdp.DataModeller.Enums;
+﻿using Fdp.DataAccess.Enums;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fdp.DataModeller.DatabaseSchema
+namespace Fdp.DataAccess.DatabaseSchema
 {
     public class SqlServerConnection : IDbConnection
     {

@@ -2,12 +2,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Fdp.UI"
              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxt="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core"
              x:Class="Fdp.UI.App">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Fdp.DataModeller;component/DataModelResourceDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <DataTemplate x:Key="{dxt:FloatingContainerThemeKey ResourceKey=FloatingContainerCaptionTemplate, IsThemeIndependent=True}">
+                <Grid x:Name="Root"
+                      Height="Auto">
+                    <dxc:FloatingContainerHeaderPanel>
+                        <TextBlock x:Name="PART_Text"
+                                   TextTrimming="CharacterEllipsis"
+                                   FontWeight="DemiBold"
+                                   Background="{x:Null}"
+                                   Foreground="Black"
+                                   Margin="6,3,6,3"
+                                   VerticalAlignment="Center"
+                                   IsHitTestVisible="False"
+                                   HorizontalAlignment="Left"
+                                   Text="{Binding Path=(dxc:FloatingContainer.FloatingContainer).Caption, RelativeSource={RelativeSource AncestorType=ContentPresenter}}" />
+                    </dxc:FloatingContainerHeaderPanel>
+                </Grid>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

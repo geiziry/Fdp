@@ -22,14 +22,19 @@
             <dx:DialogService.DialogStyle>
                 <Style TargetType="dx:DXDialogWindow">
                     <Setter Property="WindowStyle"
-                            Value="None" />
+                            Value="ToolWindow" />
+                    <Setter Property="Width"
+                            Value="400" />
+                    <Setter Property="Height"
+                            Value="300" />
+                    <Setter Property="ResizeMode"
+                            Value="NoResize" />
+                    <Setter Property="ShowInTaskbar"
+                            Value="False" />
                 </Style>
             </dx:DialogService.DialogStyle>
         </dx:DialogService>
     </dxmvvm:Interaction.Behaviors>
-            <UserControl.Resources>
-                <ResourceDictionary Source="/Fdp.Controls;component/ResourceDictionaries/OwnControlsStyling.xaml" />
-            </UserControl.Resources>
             <Menu x:Name="menu"
                   Background="#42B6ACAC">
                 <Menu.ItemsPanel>

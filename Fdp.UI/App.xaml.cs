@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.Xpf.Core;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -16,6 +17,8 @@ namespace Fdp.UI
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            ApplicationThemeHelper.ApplicationThemeName =
+                Theme.Office2016ColorfulName;
             base.OnStartup(e);
             BootStrapper bootstrapper = new BootStrapper();
             bootstrapper.Run();

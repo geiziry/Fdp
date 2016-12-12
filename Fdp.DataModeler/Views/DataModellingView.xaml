@@ -4,7 +4,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Fdp.DataModeller.Views"
              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-             xmlns:DatabaseSchema="clr-namespace:Fdp.DataModeller.DatabaseSchema"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:Strings="clr-namespace:Fdp.InfraStructure;assembly=Fdp.InfraStructure"
              x:Class="Fdp.DataModeller.Views.DataModellingView"

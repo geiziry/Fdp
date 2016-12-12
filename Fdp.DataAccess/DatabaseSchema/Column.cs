@@ -1,4 +1,4 @@
-﻿namespace Fdp.DataModeller.DatabaseSchema
+﻿namespace Fdp.DataAccess.DatabaseSchema
 {
     public class Column
     {

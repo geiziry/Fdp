@@ -50,6 +50,13 @@ namespace Fdp.Controls.ViewModels
                             IsDefault=true,
                             Id=MessageBoxResult.OK
 
+                            }, new UICommand {Caption="Cancel",Command=new DelegateCommand(()=> 
+                            {
+
+                            }),
+                            IsDefault=true,
+                            Id=MessageBoxResult.Cancel
+
                             } },
                             title: "Data Sources",
                             documentType: "DataModellingView",

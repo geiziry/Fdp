@@ -7,8 +7,8 @@
     <ProjectGuid>{76ADF8ED-5148-4CAF-B8EA-D2214BD5D7C5}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Fdp.DataModeler</RootNamespace>
-    <AssemblyName>Fdp.DataModeler</AssemblyName>
+    <RootNamespace>Fdp.DataModeller</RootNamespace>
+    <AssemblyName>Fdp.DataModeller</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -128,6 +128,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="testDbContext.cs" />
+    <Compile Include="ViewModels\DataSourcesViewModel.cs" />
     <Compile Include="Views\AddVariablesView.xaml.cs">
       <DependentUpon>AddVariablesView.xaml</DependentUpon>
     </Compile>
@@ -177,9 +178,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Fdp.InfraStructure\Fdp.InfraStructure.csproj">
       <Project>{08154aff-238b-4ff3-bcac-6356b9fbec38}</Project>

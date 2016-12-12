@@ -4,7 +4,7 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using Fdp.InfraStructure;
 
-namespace Fdp.DataModeler.DatabaseSchema
+namespace Fdp.DataModeller.DatabaseSchema
 {
     public class Table
     {

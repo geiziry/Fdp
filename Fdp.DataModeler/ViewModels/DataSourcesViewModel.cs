@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fdp.DataModeller.Enums
+namespace Fdp.DataModeller.ViewModels
 {
-    public enum DatabaseType
+    public class DataSourcesViewModel
     {
-        Oracle,
-        SqlServer
+
     }
 }

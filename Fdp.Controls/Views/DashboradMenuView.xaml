@@ -4,6 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
              xmlns:local="clr-namespace:Fdp.Controls.Views"
+             xmlns:localvm="clr-namespace:Fdp.Controls.ViewModels"
              x:Class="Fdp.Controls.Views.DashboardMenuView"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
@@ -15,6 +16,15 @@
     <dxmvvm:Interaction.Behaviors>
         <dx:DialogService DialogWindowStartupLocation="CenterOwner"
                           Name="DataModellerDialog">
+            <dx:DialogService.ViewLocator>
+                <localvm:MenuViewLocator />
+            </dx:DialogService.ViewLocator>
+            <dx:DialogService.DialogStyle>
+                <Style TargetType="dx:DXDialogWindow">
+                    <Setter Property="WindowStyle"
+                            Value="None" />
+                </Style>
+            </dx:DialogService.DialogStyle>
         </dx:DialogService>
     </dxmvvm:Interaction.Behaviors>
             <UserControl.Resources>

@@ -97,6 +97,7 @@
     <Compile Include="Behaviors\LayoutControlItemsSourceBehavior.cs" />
     <Compile Include="CommonTypes\DashboardItem.cs" />
     <Compile Include="ViewModels\DashboardMenuViewModel.cs" />
+    <Compile Include="ViewModels\MenuViewLocator.cs" />
     <Compile Include="Views\DashboradMenuView.xaml.cs">
       <DependentUpon>DashboradMenuView.xaml</DependentUpon>
     </Compile>

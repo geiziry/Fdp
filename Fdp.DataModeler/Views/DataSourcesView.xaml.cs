@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Fdp.DataModeler.Views
+namespace Fdp.DataModeller.Views
 {
     /// <summary>
     /// Interaction logic for DataSourcesView.xaml

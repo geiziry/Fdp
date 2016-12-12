@@ -1,16 +1,36 @@
-﻿using Fdp.DataModeler.DatabaseSchema;
+﻿using DevExpress.Mvvm;
+using Fdp.DataModeller.DatabaseSchema;
+using Fdp.DataModeller.ViewModels;
+using Fdp.DataModeller.Views;
+using Fdp.InfraStructure;
+using Microsoft.Practices.Unity;
 using Oracle.ManagedDataAccess.Client;
 using Prism.Modularity;
+using Prism.Regions;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows;
 
 namespace Fdp.DataModeller
 {
     public class Module : IModule
     {
+
+        IRegionManager _regionManager;
+
+        public Module(IRegionManager _regionManager)
+        {
+            this._regionManager = _regionManager;
+        }
+
         public void Initialize()
         {
+            _regionManager.RegisterViewWithRegion(Strings.DataSourcesRegion, typeof(DataSourcesView));
+            _regionManager.RegisterViewWithRegion(Strings.DefineVariablesRegion, typeof(DefineVariablesView));
+            _regionManager.RegisterViewWithRegion(Strings.AddVariablesRegion, typeof(AddVariablesView));
+
+
             //using (var context = new testDbContext())
             //{
             //    var wells = context.Wells.ToList();

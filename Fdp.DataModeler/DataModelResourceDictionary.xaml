@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Fdp.DataModeler"
+                    xmlns:local="clr-namespace:Fdp.DataModeller"
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
                     xmlns:pi="http://schemas.microsoft.com/prototyping/2010/interactivity"
@@ -88,11 +88,6 @@
                                 Background="White"
                                 BorderBrush="#FF959595"
                                 BorderThickness="1,1,1,1">
-                            <i:Interaction.Behaviors>
-                                <behaviors:ButtonClickBehavior MouseDownState="IsClicked"
-                                                               MouseUpState="Normal"
-                                                               MouseOverState="MouseOver" />
-                            </i:Interaction.Behaviors>
                             <Path x:Name="path"
                                   Fill="#FF1C9610"
                                   Stroke="Black"

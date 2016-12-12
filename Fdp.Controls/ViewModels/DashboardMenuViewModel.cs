@@ -4,12 +4,24 @@ using Prism.Modularity;
 using System.Windows.Input;
 using System;
 using Microsoft.Practices.Unity;
+using DevExpress.Mvvm.UI;
+using System.Windows;
+using System.Collections.Generic;
 
 namespace Fdp.Controls.ViewModels
 {
     public class DashboardMenuViewModel : ISupportServices
     {
         IModuleManager _moduleManager;
+
+
+        IServiceContainer serviceContainer;
+        public IServiceContainer ServiceContainer
+        {
+            get { return serviceContainer; }
+        }
+
+        private IDialogService DialogService { get { return serviceContainer.GetService<IDialogService>(); } }
 
 
         public DashboardMenuViewModel(IUnityContainer container,
@@ -28,15 +40,26 @@ namespace Fdp.Controls.ViewModels
             {
                 return _LoadDataModelCommand ?? (_LoadDataModelCommand = new DelegateCommand(() =>
                     {
-                        _moduleManager.LoadModule(Strings.DataModellerModule);
+                        UICommand result = DialogService.ShowDialog(
+                            dialogCommands: new List<UICommand>() { new UICommand
+                            {
+                            Caption="Ok",Command=new DelegateCommand(()=>
+                            {
+
+                            }),
+                            IsDefault=true,
+                            Id=MessageBoxResult.OK
+
+                            } },
+                            title: "Data Sources",
+                            documentType: "DataModellingView",
+                            parameter: "Parameter",
+                            parentViewModel: this
+                            );
+                        //_moduleManager.LoadModule(Strings.DataModellerModule);
                     }));
             }
         }
 
-        IServiceContainer serviceContainer;
-        public IServiceContainer ServiceContainer
-        {
-            get { return serviceContainer; }
-        }
     }
 }

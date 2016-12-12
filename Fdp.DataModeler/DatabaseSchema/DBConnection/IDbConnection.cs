@@ -1,4 +1,4 @@
-﻿using Fdp.DataModeler.Enums;
+﻿using Fdp.DataModeller.Enums;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fdp.DataModeler.DatabaseSchema
+namespace Fdp.DataModeller.DatabaseSchema
 {
     public interface IDbConnection
     {

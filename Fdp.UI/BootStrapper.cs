@@ -37,7 +37,7 @@ namespace Fdp.UI
                 {
                     ModuleName = Strings.DataModellerModule,
                     ModuleType = moduleDataModeller.AssemblyQualifiedName,
-                    InitializationMode = InitializationMode.OnDemand
+                    InitializationMode = InitializationMode.WhenAvailable
                 });
 
 

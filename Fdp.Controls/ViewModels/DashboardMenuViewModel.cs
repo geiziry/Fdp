@@ -1,38 +1,15 @@
 ﻿using DevExpress.Mvvm;
-using Fdp.InfraStructure;
-using Prism.Modularity;
 using System.Windows.Input;
-using System;
-using Microsoft.Practices.Unity;
-using DevExpress.Mvvm.UI;
 using System.Windows;
 using System.Collections.Generic;
+using DevExpress.Mvvm.POCO;
+using DevExpress.Mvvm.DataAnnotations;
 
 namespace Fdp.Controls.ViewModels
 {
-    public class DashboardMenuViewModel : ISupportServices
+    [POCOViewModel]
+    public class DashboardMenuViewModel 
     {
-        IModuleManager _moduleManager;
-
-
-        IServiceContainer serviceContainer;
-        public IServiceContainer ServiceContainer
-        {
-            get { return serviceContainer; }
-        }
-
-        private IDialogService DialogService { get { return serviceContainer.GetService<IDialogService>(); } }
-
-
-        public DashboardMenuViewModel(IUnityContainer container,
-            IModuleManager _moduleManager)
-        {
-            this._moduleManager = _moduleManager;
-            serviceContainer = new ServiceContainer(this);
-            container.RegisterInstance<IServiceContainer>(serviceContainer,
-                new ContainerControlledLifetimeManager());
-        }
-
         private DelegateCommand _LoadDataModelCommand;
         public ICommand LoadDataModelCommand
         {
@@ -40,7 +17,8 @@ namespace Fdp.Controls.ViewModels
             {
                 return _LoadDataModelCommand ?? (_LoadDataModelCommand = new DelegateCommand(() =>
                     {
-                        UICommand result = DialogService.ShowDialog(
+                        var dialogService = this.GetService<IDialogService>();
+                        UICommand result = dialogService.ShowDialog(
                             dialogCommands: new List<UICommand>() { new UICommand
                             {
                             Caption="Ok",Command=new DelegateCommand(()=>
@@ -63,7 +41,6 @@ namespace Fdp.Controls.ViewModels
                             parameter: "Parameter",
                             parentViewModel: this
                             );
-                        //_moduleManager.LoadModule(Strings.DataModellerModule);
                     }));
             }
         }

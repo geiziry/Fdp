@@ -5,11 +5,12 @@
              xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
              xmlns:local="clr-namespace:Fdp.Controls.Views"
              xmlns:localvm="clr-namespace:Fdp.Controls.ViewModels"
+             xmlns:behaviors="clr-namespace:Fdp.InfraStructure.Behaviors;assembly=Fdp.InfraStructure"
              x:Class="Fdp.Controls.Views.DashboardMenuView"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-             prism:ViewModelLocator.AutoWireViewModel="True"
+             DataContext="{dxmvvm:ViewModelSource Type=localvm:DashboardMenuViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="30"
              d:DesignWidth="300">
@@ -31,20 +32,29 @@
                             Value="NoResize" />
                     <Setter Property="ShowInTaskbar"
                             Value="False" />
+                    <Setter Property="dxmvvm:Interaction.BehaviorsTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <ContentControl>
+                                    <behaviors:DimmParentWindowBehavior />
+                                </ContentControl>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
                 </Style>
             </dx:DialogService.DialogStyle>
         </dx:DialogService>
     </dxmvvm:Interaction.Behaviors>
-            <Menu x:Name="menu"
-                  Background="#42B6ACAC">
-                <Menu.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <DockPanel HorizontalAlignment="Stretch" />
-                    </ItemsPanelTemplate>
-                </Menu.ItemsPanel>
-                <dx:SimpleButton HorizontalAlignment="Left"
-                        Content="Data"
-                        Command="{Binding LoadDataModelCommand}"
+    <Menu x:Name="menu"
+          Background="#42B6ACAC">
+        <Menu.ItemsPanel>
+            <ItemsPanelTemplate>
+                <DockPanel HorizontalAlignment="Stretch" />
+            </ItemsPanelTemplate>
+        </Menu.ItemsPanel>
+        <dx:SimpleButton HorizontalAlignment="Left"
+                         Content="Data"
+                         Command="{Binding LoadDataModelCommand}"
                          Glyph="{dx:DXImage Image=EditDataSource_16x16.png}" />
-            </Menu>
+    </Menu>
 </UserControl>

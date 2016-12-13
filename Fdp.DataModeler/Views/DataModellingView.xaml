@@ -3,8 +3,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Fdp.DataModeller.Views"
+             xmlns:ViewModels="clr-namespace:Fdp.DataModeller.ViewModels"
              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
              xmlns:prism="http://prismlibrary.com/"
+             DataContext="{dxmvvm:ViewModelSource Type=ViewModels:DataModellingViewModel}"
              xmlns:Strings="clr-namespace:Fdp.InfraStructure;assembly=Fdp.InfraStructure"
              x:Class="Fdp.DataModeller.Views.DataModellingView"
              mc:Ignorable="d"
@@ -17,12 +20,12 @@
                           Glyph="{dx:DXImage Image=AddNewDataSource_16x16.png}">
                 <ContentControl prism:RegionManager.RegionName="{x:Static Strings:Strings.DataSourcesRegion}" />
             </dx:DXTabItem>
-                    <dx:DXTabItem Header="Add Variables"
-                                  Glyph="{dx:DXImage Image=ManageDatasource_16x16.png}">
+            <dx:DXTabItem Header="Add Variables"
+                          Glyph="{dx:DXImage Image=ManageDatasource_16x16.png}">
                 <ContentControl prism:RegionManager.RegionName="{x:Static Strings:Strings.AddVariablesRegion}" />
             </dx:DXTabItem>
-                    <dx:DXTabItem Header="Define Variables"
-                                  Glyph="{dx:DXImage Image=RenameDataSource_16x16.png}">
+            <dx:DXTabItem Header="Define Variables"
+                          Glyph="{dx:DXImage Image=RenameDataSource_16x16.png}">
                 <ContentControl prism:RegionManager.RegionName="{x:Static Strings:Strings.DefineVariablesRegion}" />
             </dx:DXTabItem>
         </dx:DXTabControl>

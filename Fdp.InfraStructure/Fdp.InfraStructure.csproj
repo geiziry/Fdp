@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Xpf.Core.v16.1, Version=16.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -62,7 +63,9 @@
   <ItemGroup>
     <Compile Include="ApplicationCommands.cs" />
     <Compile Include="Behaviors\ButtonClickBehavior.cs" />
+    <Compile Include="Behaviors\DimmParentWindowBehavior.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShellAdorner.cs" />
     <Compile Include="Strings.cs" />
   </ItemGroup>
   <ItemGroup>

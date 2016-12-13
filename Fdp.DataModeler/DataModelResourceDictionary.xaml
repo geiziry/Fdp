@@ -40,30 +40,42 @@
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal" />
-                                <VisualState x:Name="MouseOver">
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
-                                                                      Storyboard.TargetName="border">
-                                            <EasingColorKeyFrame KeyTime="0"
-                                                                 Value="#FFDACFCF" />
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
                                 <VisualState x:Name="Pressed">
                                     <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
-                                                                      Storyboard.TargetName="border">
-                                            <EasingColorKeyFrame KeyTime="0"
-                                                                 Value="#FFC3BCBC" />
-                                        </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
                                                                       Storyboard.TargetName="path">
                                             <EasingColorKeyFrame KeyTime="0"
                                                                  Value="#FF30F31D" />
                                         </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                                                                      Storyboard.TargetName="rectangle">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                                                 Value="#FFE77474" />
+                                        </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Disabled" />
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)"
+                                                                      Storyboard.TargetName="path">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                                                 Value="#FF2F3A20" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                                                                      Storyboard.TargetName="path">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                                                 Value="#FF6A7F3D" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
+                                                                      Storyboard.TargetName="rectangle">
+                                            <EasingColorKeyFrame KeyTime="0"
+                                                                 Value="#FF880808" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+
+
                             </VisualStateGroup>
                             <VisualStateGroup x:Name="CheckStates">
                                 <VisualState x:Name="Checked">
@@ -73,43 +85,87 @@
                                             <EasingColorKeyFrame KeyTime="0"
                                                                  Value="#FF29DD16" />
                                         </ColorAnimationUsingKeyFrames>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
-                                                                      Storyboard.TargetName="border">
-                                            <EasingColorKeyFrame KeyTime="0"
-                                                                 Value="#FFC7BBBB" />
-                                        </ColorAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                                                       Storyboard.TargetName="rectangle">
+                                            <EasingDoubleKeyFrame KeyTime="0"
+                                                                  Value="0.929" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"
+                                                                       Storyboard.TargetName="rectangle">
+                                            <EasingDoubleKeyFrame KeyTime="0"
+                                                                  Value="1.05" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
+                                                                       Storyboard.TargetName="rectangle">
+                                            <EasingDoubleKeyFrame KeyTime="0"
+                                                                  Value="-0.7" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                       Storyboard.TargetName="path">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{x:Static Visibility.Hidden}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.HorizontalAlignment)"
+                                                                       Storyboard.TargetName="rectangle">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{x:Static HorizontalAlignment.Center}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.VerticalAlignment)"
+                                                                       Storyboard.TargetName="rectangle">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{x:Static VerticalAlignment.Center}" />
+                                        </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
-                                <VisualState x:Name="Unchecked" />
+                                <VisualState x:Name="Unchecked">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                       Storyboard.TargetName="rectangle">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{x:Static Visibility.Hidden}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
                                 <VisualState x:Name="Indeterminate" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Border x:Name="border"
-                                Background="White"
-                                BorderBrush="#FF959595"
-                                BorderThickness="1,1,1,1">
-                            <Path x:Name="path"
-                                  Fill="#FF1C9610"
-                                  Stroke="Black"
-                                  Data="M5.5009999,0.5 L9.5010004,0.5 9.5010004,5.4999999 14.5,5.4999999 14.5,9.5 9.5010004,9.5 9.5010004,14.5 5.5009999,14.5 5.5009999,9.5 0.5,9.5 0.5,5.4999999 5.5009999,5.4999999 z"
-                                  RenderTransformOrigin="0.5,0.5"
-                                  Stretch="Fill"
-                                  HorizontalAlignment="Left"
-                                  Width="12.298"
-                                  Height="11.866"
-                                  VerticalAlignment="Bottom"
-                                  StrokeThickness="0.5"
-                                  Margin="2.434,0,0,2.401">
-                                <Path.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform Angle="-90" />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Path.RenderTransform>
-                            </Path>
-                        </Border>
+                        <Path x:Name="path"
+                              Fill="#FFB8DF62"
+                              Stroke="#FF5E753C"
+                              Data="M5.5009999,0.5 L9.5010004,0.5 9.5010004,5.4999999 14.5,5.4999999 14.5,9.5 9.5010004,9.5 9.5010004,14.5 5.5009999,14.5 5.5009999,9.5 0.5,9.5 0.5,5.4999999 5.5009999,5.4999999 z"
+                              RenderTransformOrigin="0.5,0.5"
+                              Stretch="Fill"
+                              HorizontalAlignment="Center"
+                              Width="12.298"
+                              Height="11.866"
+                              VerticalAlignment="Center"
+                              StrokeThickness="0.5"
+                              Visibility="Visible">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform />
+                                    <SkewTransform />
+                                    <RotateTransform Angle="-90" />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                        <Rectangle x:Name="rectangle"
+                                   Fill="#FFE41313"
+                                   Stroke="#FF430606"
+                                   StrokeThickness="0.5"
+                                   Width="12"
+                                   RenderTransformOrigin="0.5,0.5"
+                                   Height="4">
+                            <Rectangle.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform />
+                                    <SkewTransform />
+                                    <RotateTransform />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
 
                     </Grid>
                     <ControlTemplate.Triggers>

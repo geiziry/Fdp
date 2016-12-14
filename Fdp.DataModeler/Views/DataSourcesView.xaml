@@ -5,6 +5,7 @@
              xmlns:local="clr-namespace:Fdp.DataModeller.Views"
              xmlns:Strings="clr-namespace:Fdp.InfraStructure;assembly=Fdp.InfraStructure"
              xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
@@ -187,7 +188,8 @@
                 <StackPanel Orientation="Horizontal">
                     <CheckBox x:Name="IsOracleConn"
                               Content="Oracle"
-                              Style="{DynamicResource ConnChkStyle}" />
+                              Style="{DynamicResource ConnChkStyle}"
+                              IsChecked="{Binding IsOracle}" />
                     <CheckBox Margin="20,0,0,0"
                               Content="SqlServer"
                               Style="{DynamicResource ConnChkStyle}"

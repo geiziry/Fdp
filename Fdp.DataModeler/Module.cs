@@ -17,14 +17,18 @@ namespace Fdp.DataModeller
     {
 
         IRegionManager _regionManager;
+        IUnityContainer container;
 
-        public Module(IRegionManager _regionManager)
+        public Module(IRegionManager _regionManager, IUnityContainer container)
         {
             this._regionManager = _regionManager;
+            this.container = container;
         }
 
         public void Initialize()
         {
+            container.RegisterType<object, OracleConnectionView>(typeof(OracleConnectionView).FullName);
+            container.RegisterType<object, SqlServerConnectionView>(typeof(SqlServerConnectionView).FullName);
             _regionManager.RegisterViewWithRegion(Strings.DataSourcesRegion, typeof(DataSourcesView));
             _regionManager.RegisterViewWithRegion(Strings.DefineVariablesRegion, typeof(DefineVariablesView));
             _regionManager.RegisterViewWithRegion(Strings.AddVariablesRegion, typeof(AddVariablesView));

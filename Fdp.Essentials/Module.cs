@@ -1,5 +1,5 @@
 ﻿using Fdp.Controls.Views;
-using Fdp.Essentials.Services;
+using Fdp.Essentials.ViewModels;
 using Fdp.InfraStructure;
 using Fdp.InfraStructure.Interfaces;
 using Microsoft.Practices.Unity;
@@ -21,7 +21,7 @@ namespace Fdp.Essentials
 
         public void Initialize()
         {
-            container.RegisterType<IFdpDialogService, FdpDialogService>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IFdpDialogService, FdpDialogViewModel>(new ContainerControlledLifetimeManager());
             _regionManager.RegisterViewWithRegion(Strings.MenuRegion, typeof(DashboardMenuView));
             _regionManager.RegisterViewWithRegion(Strings.MainRegion, typeof(DashboardView));
         }

@@ -14,14 +14,14 @@ namespace Fdp.InfraStructure.Prism
         {
             var rmAware = item as IRegionManagerAware;
             if (rmAware!=null)
-                rmAware.RegionManager = regionManager;
+                rmAware._RegionManager = regionManager;
 
             var rmAwareFrameworkElement = item as FrameworkElement;
             if (rmAwareFrameworkElement!=null)
             {
                 var rmAwareDataContext = rmAwareFrameworkElement.DataContext as IRegionManagerAware;
                 if (rmAwareDataContext != null)
-                    rmAwareDataContext.RegionManager = regionManager;
+                    rmAwareDataContext._RegionManager = regionManager;
             }
 
         }

@@ -17,7 +17,6 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -28,11 +27,11 @@
                    Margin="3"
                    HorizontalAlignment="Left"
                    Grid.Column="0"
-                   Content="Connection String:" />
-            <TextBox x:Name="connectionStringTextBox"
+                   Content="database Type:" />
+            <TextBox x:Name="databaseTypeTextBox"
                      Width="120"
                      VerticalAlignment="Center"
-                     Text="{Binding ConnectionString, Mode=OneWay}"
+                     Text="{Binding databaseType, Mode=OneWay}"
                      Grid.Row="0"
                      Margin="3"
                      Height="23"
@@ -43,11 +42,11 @@
                    Margin="3"
                    HorizontalAlignment="Left"
                    Grid.Column="0"
-                   Content="database Type:" />
-            <TextBox x:Name="databaseTypeTextBox"
+                   Content="Host ID:" />
+            <TextBox x:Name="hostIDTextBox"
                      Width="120"
                      VerticalAlignment="Center"
-                     Text="{Binding databaseType, Mode=OneWay}"
+                     Text="{Binding HostID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                      Grid.Row="1"
                      Margin="3"
                      Height="23"
@@ -58,11 +57,11 @@
                    Margin="3"
                    HorizontalAlignment="Left"
                    Grid.Column="0"
-                   Content="Host ID:" />
-            <TextBox x:Name="hostIDTextBox"
+                   Content="Password:" />
+            <TextBox x:Name="passwordTextBox"
                      Width="120"
                      VerticalAlignment="Center"
-                     Text="{Binding HostID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                     Text="{Binding Password, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                      Grid.Row="2"
                      Margin="3"
                      Height="23"
@@ -73,11 +72,11 @@
                    Margin="3"
                    HorizontalAlignment="Left"
                    Grid.Column="0"
-                   Content="Password:" />
-            <TextBox x:Name="passwordTextBox"
+                   Content="Port:" />
+            <TextBox x:Name="portTextBox"
                      Width="120"
                      VerticalAlignment="Center"
-                     Text="{Binding Password, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                     Text="{Binding Port, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                      Grid.Row="3"
                      Margin="3"
                      Height="23"
@@ -88,11 +87,11 @@
                    Margin="3"
                    HorizontalAlignment="Left"
                    Grid.Column="0"
-                   Content="Port:" />
-            <TextBox x:Name="portTextBox"
+                   Content="SID:" />
+            <TextBox x:Name="sIDTextBox"
                      Width="120"
                      VerticalAlignment="Center"
-                     Text="{Binding Port, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                     Text="{Binding SID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                      Grid.Row="4"
                      Margin="3"
                      Height="23"
@@ -103,27 +102,12 @@
                    Margin="3"
                    HorizontalAlignment="Left"
                    Grid.Column="0"
-                   Content="SID:" />
-            <TextBox x:Name="sIDTextBox"
-                     Width="120"
-                     VerticalAlignment="Center"
-                     Text="{Binding SID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                     Grid.Row="5"
-                     Margin="3"
-                     Height="23"
-                     HorizontalAlignment="Left"
-                     Grid.Column="1" />
-            <Label VerticalAlignment="Center"
-                   Grid.Row="6"
-                   Margin="3"
-                   HorizontalAlignment="Left"
-                   Grid.Column="0"
                    Content="User Name:" />
             <TextBox x:Name="userNameTextBox"
                      Width="120"
                      VerticalAlignment="Center"
                      Text="{Binding UserName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                     Grid.Row="6"
+                     Grid.Row="5"
                      Margin="3"
                      Height="23"
                      HorizontalAlignment="Left"

@@ -18,6 +18,7 @@ namespace Fdp.InfraStructure
         public const string MainRegion = "MainRegion";
 
         //DataModeller Regions
+        public const string DataModellingRegion = "DataModellingRegion";
         public const string DataSourcesRegion = "DataSourcesRegion";
         public const string AddVariablesRegion = "AddVariablesRegion";
         public const string DefineVariablesRegion = "DefineVariablesRegion";

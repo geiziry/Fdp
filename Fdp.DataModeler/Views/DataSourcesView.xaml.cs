@@ -1,6 +1,8 @@
-﻿using Prism.Regions;
+﻿using Fdp.InfraStructure.Prism;
+using Prism.Regions;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using System;
 
 namespace Fdp.DataModeller.Views
 {
@@ -11,7 +13,6 @@ namespace Fdp.DataModeller.Views
     {
         public DataSourcesView()
         {
-            //RegionManager.SetRegionManager(this, _regionManager);
             InitializeComponent();
             Loaded += (s, o) =>
             {

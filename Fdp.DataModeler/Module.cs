@@ -28,12 +28,13 @@ namespace Fdp.DataModeller
 
         public void Initialize()
         {
+            container.RegisterType<object, DataModellingView>("DataModelling");
             container.RegisterType<object, OracleConnectionView>("Oracle");
             container.RegisterType<object, SqlServerConnectionView>("Sql");
             container.RegisterType<object, DataSourcesView>("DataSources");
             container.RegisterType<object, DefineVariablesView>("DefineVariables");
             container.RegisterType<object, AddVariablesView>("AddVariables");
-
+            #region
             //_regionManager.RegisterViewWithRegion(Strings.DataSourcesRegion, typeof(DataSourcesView));
             //_regionManager.RegisterViewWithRegion(Strings.DefineVariablesRegion, typeof(DefineVariablesView));
             //_regionManager.RegisterViewWithRegion(Strings.AddVariablesRegion, typeof(AddVariablesView));
@@ -87,6 +88,7 @@ namespace Fdp.DataModeller
             // Tables.Values.SelectMany(f => f, (p, c) => new { c.ColumnType }).Distinct().ForEach(x=>Debug.WriteLine(x));
 
             //Debug.WriteLine(types);
+            #endregion
         }
 
 

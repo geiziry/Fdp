@@ -1,17 +1,12 @@
 ﻿using DevExpress.Mvvm;
-using Fdp.DataModeller.Views;
 using Fdp.InfraStructure;
 using Fdp.InfraStructure.Prism;
 using Prism.Regions;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fdp.DataModeller.ViewModels
 {
-    public class DataSourcesViewModel:BindableBase,IRegionManagerAware
+    public class DataSourcesViewModel : BindableBase, IRegionManagerAware
     {
 
 
@@ -19,27 +14,39 @@ namespace Fdp.DataModeller.ViewModels
         {
         }
 
-        private bool _IsOracle=true;
-        public bool IsOracle
+        private bool _IsAddDataSource;
+        public bool IsAddDataSource
         {
-            get { 
-                if (_IsOracle)
-                {
-                    //IRegion DataSourceConnectionRegion = RegionManager.Regions[Strings.DataSourceConnectionRegion];
-                    //var uri = new Uri("OracleConnectionView", UriKind.Relative);
-                    //DataSourceConnectionRegion.RequestNavigate(uri);
+            get { return _IsAddDataSource; }
+            set { _IsAddDataSource = value;
+                if(_IsAddDataSource &&!_RegionManager.Regions[Strings.DataSourceConnectionRegion].ActiveViews.Any())
+                    _RegionManager.RequestNavigate(Strings.DataSourceConnectionRegion, "Oracle");
 
-                }
-                else { }
-                    //RegionManager.RequestNavigate(Strings.DataSourceConnectionRegion,
-                    //    typeof(SqlServerConnectionView).FullName);
-                return _IsOracle;
-            }
-            set { _IsOracle = value;
                 RaisePropertyChanged();
             }
         }
 
-        public IRegionManager RegionManager { get; set ; }
+
+        private bool _IsOracle = true;
+        public bool IsOracle
+        {
+            get
+            {
+                return _IsOracle;
+            }
+            set
+            {
+                _IsOracle = value;
+                if (!_IsOracle)
+                    _RegionManager.RequestNavigate(Strings.DataSourceConnectionRegion, "Sql");
+                else
+                    _RegionManager.RequestNavigate(Strings.DataSourceConnectionRegion, "Oracle");
+
+                RaisePropertyChanged();
+            }
+        }
+
+        public IRegionManager _RegionManager { get; set; }
+
     }
 }

@@ -14,38 +14,6 @@
              mc:Ignorable="d"
              d:DesignHeight="30"
              d:DesignWidth="300">
-             <!--DataContext="{dxmvvm:ViewModelSource Type=localvm:DashboardMenuViewModel}"-->
-    <dxmvvm:Interaction.Behaviors>
-        <dx:DialogService DialogWindowStartupLocation="CenterOwner"
-                          Name="DataModellerDialog">
-            <!--<dx:DialogService.ViewLocator>
-                <localvm:MenuViewLocator />
-            </dx:DialogService.ViewLocator>-->
-            <dx:DialogService.DialogStyle>
-                <Style TargetType="dx:DXDialogWindow">
-                    <Setter Property="WindowStyle"
-                            Value="ToolWindow" />
-                    <Setter Property="Width"
-                            Value="400" />
-                    <Setter Property="Height"
-                            Value="300" />
-                    <Setter Property="ResizeMode"
-                            Value="NoResize" />
-                    <Setter Property="ShowInTaskbar"
-                            Value="False" />
-                    <Setter Property="dxmvvm:Interaction.BehaviorsTemplate">
-                        <Setter.Value>
-                            <DataTemplate>
-                                <ContentControl>
-                                    <behaviors:DimmParentWindowBehavior />
-                                </ContentControl>
-                            </DataTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </dx:DialogService.DialogStyle>
-        </dx:DialogService>
-    </dxmvvm:Interaction.Behaviors>
     <Menu x:Name="menu"
           Background="#42B6ACAC">
         <Menu.ItemsPanel>

@@ -15,7 +15,6 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -26,11 +25,11 @@
                    Margin="3"
                    HorizontalAlignment="Left"
                    Grid.Column="0"
-                   Content="Connection String:" />
-            <TextBox x:Name="connectionStringTextBox"
+                   Content="database Type:" />
+            <TextBox x:Name="databaseTypeTextBox"
                      Width="120"
                      VerticalAlignment="Center"
-                     Text="{Binding ConnectionString, Mode=OneWay}"
+                     Text="{Binding databaseType, Mode=OneWay}"
                      Grid.Row="0"
                      Margin="3"
                      Height="23"
@@ -41,11 +40,11 @@
                    Margin="3"
                    HorizontalAlignment="Left"
                    Grid.Column="0"
-                   Content="database Type:" />
-            <TextBox x:Name="databaseTypeTextBox"
+                   Content="Data Source:" />
+            <TextBox x:Name="dataSourceTextBox"
                      Width="120"
                      VerticalAlignment="Center"
-                     Text="{Binding databaseType, Mode=OneWay}"
+                     Text="{Binding DataSource, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                      Grid.Row="1"
                      Margin="3"
                      Height="23"
@@ -56,32 +55,17 @@
                    Margin="3"
                    HorizontalAlignment="Left"
                    Grid.Column="0"
-                   Content="Data Source:" />
-            <TextBox x:Name="dataSourceTextBox"
-                     Width="120"
-                     VerticalAlignment="Center"
-                     Text="{Binding DataSource, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                     Grid.Row="2"
-                     Margin="3"
-                     Height="23"
-                     HorizontalAlignment="Left"
-                     Grid.Column="1" />
-            <Label VerticalAlignment="Center"
-                   Grid.Row="3"
-                   Margin="3"
-                   HorizontalAlignment="Left"
-                   Grid.Column="0"
                    Content="Integrated Security:" />
             <CheckBox x:Name="integratedSecurityCheckBox"
                       VerticalAlignment="Center"
-                      Grid.Row="3"
+                      Grid.Row="2"
                       Margin="3"
                       IsChecked="{Binding IntegratedSecurity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                       HorizontalAlignment="Left"
                       Grid.Column="1"
                       Content="" />
             <Label VerticalAlignment="Center"
-                   Grid.Row="4"
+                   Grid.Row="3"
                    Margin="3"
                    HorizontalAlignment="Left"
                    Grid.Column="0"
@@ -90,13 +74,13 @@
                      Width="120"
                      VerticalAlignment="Center"
                      Text="{Binding Password, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                     Grid.Row="4"
+                     Grid.Row="3"
                      Margin="3"
                      Height="23"
                      HorizontalAlignment="Left"
                      Grid.Column="1" />
             <Label VerticalAlignment="Center"
-                   Grid.Row="5"
+                   Grid.Row="4"
                    Margin="3"
                    HorizontalAlignment="Left"
                    Grid.Column="0"
@@ -105,7 +89,7 @@
                      Width="120"
                      VerticalAlignment="Center"
                      Text="{Binding UserName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                     Grid.Row="5"
+                     Grid.Row="4"
                      Margin="3"
                      Height="23"
                      HorizontalAlignment="Left"

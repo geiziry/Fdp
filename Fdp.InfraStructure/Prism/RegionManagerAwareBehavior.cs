@@ -38,14 +38,14 @@ namespace Fdp.InfraStructure.Prism
                         }
                     }
 
-                    InvokeRegionManagerAwareElement(item, x => x.RegionManager = regionManager);
+                    InvokeRegionManagerAwareElement(item, x => x._RegionManager = regionManager);
                 }
             }
             else if (e.Action == NotifyCollectionChangedAction.Remove)
             {
                 foreach (var item in e.OldItems)
                 {
-                    InvokeRegionManagerAwareElement(item, x => x.RegionManager = null);
+                    InvokeRegionManagerAwareElement(item, x => x._RegionManager = null);
                 }
             }
         }

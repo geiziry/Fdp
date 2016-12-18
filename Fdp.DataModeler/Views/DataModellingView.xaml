@@ -15,7 +15,7 @@
              d:DesignWidth="400">
     <Grid>
         <dx:DXTabControl>
-            <dx:DXTabItem Header="Data Sources"
+            <dx:DXTabItem Header="Data Sources" 
                           Glyph="{dx:DXImage Image=AddNewDataSource_16x16.png}">
                 <ContentControl prism:RegionManager.RegionName="{x:Static Strings:Strings.DataSourcesRegion}" />
             </dx:DXTabItem>

@@ -16,19 +16,14 @@ using Prism.Regions;
 namespace Fdp.Controls.ViewModels
 {
     [POCOViewModel]
-    public class DashboardMenuViewModel:IRegionManagerAware //:ISupportServices
+    public class DashboardMenuViewModel:IRegionManagerAware 
     {
-        private IUnityContainer container;
         private readonly IFdpDialogService dialogService;
         private DelegateCommand _LoadDataModelCommand;
 
-        public DashboardMenuViewModel(IUnityContainer container,IFdpDialogService dialogService)
+        public DashboardMenuViewModel(IFdpDialogService dialogService)
         {
-            this.container = container;
             this.dialogService = dialogService;
-            //serviceContainer = new ServiceContainer(this);
-            //container.RegisterInstance<IServiceContainer>(serviceContainer,
-            //    new ContainerControlledLifetimeManager());
         }
 
         public ICommand LoadDataModelCommand
@@ -38,9 +33,6 @@ namespace Fdp.Controls.ViewModels
                 return _LoadDataModelCommand ?? (_LoadDataModelCommand = new DelegateCommand(() =>
                     {
 
-                        //DialogService dialogService = serviceContainer.GetService<IDialogService>() as DialogService;
-                        //this.GetService<IDialogService>() as DialogService;
-                        //dialogService.ViewLocator = container.Resolve<IViewLocator>();
 
                         var Commandslist = new List<UICommand>() { new UICommand
                             {
@@ -69,15 +61,7 @@ namespace Fdp.Controls.ViewModels
             }
         }
 
-        public IRegionManager RegionManager { get; set; }
+        public IRegionManager _RegionManager { get; set; }
 
-        //private IServiceContainer serviceContainer;
-        //public IServiceContainer ServiceContainer
-        //{
-        //    get
-        //    {
-        //        return serviceContainer;
-        //    }
-        //}
     }
 }

@@ -167,6 +167,7 @@
         </Grid.RowDefinitions>
         <CheckBox x:Name="AddDataSource"
                   HorizontalAlignment="Right"
+                  IsChecked="{Binding IsAddDataSource}"
                   Style="{DynamicResource AddDataSourseChkStyle}">
             <i:Interaction.Behaviors>
                 <ei:DataStateBehavior Binding="{Binding IsChecked, ElementName=AddDataSource}"

@@ -7,23 +7,38 @@ using System.Threading.Tasks;
 using Prism.Regions;
 using Fdp.InfraStructure;
 using Fdp.DataModeller.Views;
+using Microsoft.Practices.Unity;
 
 namespace Fdp.DataModeller.ViewModels
 {
-    public class DataModellingViewModel : IRegionManagerAware
+    public class DataModellingViewModel : IRegionManagerAware, INavigationAware
     {
-        private IRegionManager _RegionManager;
-        public IRegionManager RegionManager { get { return _RegionManager; } set { _RegionManager=value;
-                //RegionManager.RegisterViewWithRegion(Strings.DataSourcesRegion, typeof(DataSourcesView));
-                //RegionManager.RegisterViewWithRegion(Strings.DefineVariablesRegion, typeof(DefineVariablesView));
-                //RegionManager.RegisterViewWithRegion(Strings.AddVariablesRegion, typeof(AddVariablesView));
-            }
-        }
-
-        public DataModellingViewModel()
+        public IRegionManager _RegionManager
         {
-            
+            get; set;
+        }
+        private readonly IUnityContainer container;
+
+        public DataModellingViewModel(IUnityContainer container)
+        {
+            this.container = container;
         }
 
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            _RegionManager.RegisterViewWithRegion(Strings.AddVariablesRegion, typeof(AddVariablesView));
+            _RegionManager.RegisterViewWithRegion(Strings.DefineVariablesRegion, typeof(DefineVariablesView));
+            var dataSourcesView = container.Resolve<DataSourcesView>();
+            _RegionManager.Regions[Strings.DataSourcesRegion].Add(dataSourcesView, "DataSources", true);
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return false;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+        }
     }
 }

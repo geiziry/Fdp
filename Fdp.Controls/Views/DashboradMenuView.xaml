@@ -8,18 +8,19 @@
              xmlns:behaviors="clr-namespace:Fdp.InfraStructure.Behaviors;assembly=Fdp.InfraStructure"
              x:Class="Fdp.Controls.Views.DashboardMenuView"
              xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-             DataContext="{dxmvvm:ViewModelSource Type=localvm:DashboardMenuViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="30"
              d:DesignWidth="300">
+             <!--DataContext="{dxmvvm:ViewModelSource Type=localvm:DashboardMenuViewModel}"-->
     <dxmvvm:Interaction.Behaviors>
         <dx:DialogService DialogWindowStartupLocation="CenterOwner"
                           Name="DataModellerDialog">
-            <dx:DialogService.ViewLocator>
+            <!--<dx:DialogService.ViewLocator>
                 <localvm:MenuViewLocator />
-            </dx:DialogService.ViewLocator>
+            </dx:DialogService.ViewLocator>-->
             <dx:DialogService.DialogStyle>
                 <Style TargetType="dx:DXDialogWindow">
                     <Setter Property="WindowStyle"

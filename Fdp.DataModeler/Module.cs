@@ -6,6 +6,7 @@ using Microsoft.Practices.Unity;
 using Oracle.ManagedDataAccess.Client;
 using Prism.Modularity;
 using Prism.Regions;
+using Prism.Unity;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -27,12 +28,15 @@ namespace Fdp.DataModeller
 
         public void Initialize()
         {
-            container.RegisterType<object, OracleConnectionView>(typeof(OracleConnectionView).FullName);
-            container.RegisterType<object, SqlServerConnectionView>(typeof(SqlServerConnectionView).FullName);
-            _regionManager.RegisterViewWithRegion(Strings.DataSourcesRegion, typeof(DataSourcesView));
-            _regionManager.RegisterViewWithRegion(Strings.DefineVariablesRegion, typeof(DefineVariablesView));
-            _regionManager.RegisterViewWithRegion(Strings.AddVariablesRegion, typeof(AddVariablesView));
+            container.RegisterType<object, OracleConnectionView>("Oracle");
+            container.RegisterType<object, SqlServerConnectionView>("Sql");
+            container.RegisterType<object, DataSourcesView>("DataSources");
+            container.RegisterType<object, DefineVariablesView>("DefineVariables");
+            container.RegisterType<object, AddVariablesView>("AddVariables");
 
+            //_regionManager.RegisterViewWithRegion(Strings.DataSourcesRegion, typeof(DataSourcesView));
+            //_regionManager.RegisterViewWithRegion(Strings.DefineVariablesRegion, typeof(DefineVariablesView));
+            //_regionManager.RegisterViewWithRegion(Strings.AddVariablesRegion, typeof(AddVariablesView));
 
             //using (var context = new testDbContext())
             //{
@@ -79,14 +83,14 @@ namespace Fdp.DataModeller
 
             //}
 
-             // var types=  
-                   // Tables.Values.SelectMany(f => f, (p, c) => new { c.ColumnType }).Distinct().ForEach(x=>Debug.WriteLine(x));
+            // var types=  
+            // Tables.Values.SelectMany(f => f, (p, c) => new { c.ColumnType }).Distinct().ForEach(x=>Debug.WriteLine(x));
 
-               //Debug.WriteLine(types);
-            }
-
-            
+            //Debug.WriteLine(types);
         }
+
+
+    }
     }
 
 

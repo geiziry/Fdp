@@ -9,6 +9,7 @@ namespace Fdp.InfraStructure
     public static class Strings
     {
         //Modules
+        public static string ControlsModule = "ControlsModule";
         public const string EssentialsModule = "EssentialsModule";
         public const string DataModellerModule = "DataModellerModule";
 
@@ -28,6 +29,5 @@ namespace Fdp.InfraStructure
         public const string SqlServerColumnsQuery = "select COLUMN_NAME,DATA_TYPE from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='{0}'";
         public const string OracleTablesQuery = "SELECT table_name from user_tables";
         public const string OracleColumnsQuery = "select COLUMN_NAME,DATA_TYPE from ALL_TAB_COLUMNS where TABLE_NAME = '{0}'";
-
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DevExpress.Mvvm;
 using Fdp.DataModeller.Views;
 using Fdp.InfraStructure;
+using Fdp.InfraStructure.Prism;
 using Prism.Regions;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,12 @@ using System.Threading.Tasks;
 
 namespace Fdp.DataModeller.ViewModels
 {
-    public class DataSourcesViewModel:BindableBase
+    public class DataSourcesViewModel:BindableBase,IRegionManagerAware
     {
-        IRegionManager _regionManager;
 
 
-        public DataSourcesViewModel(IRegionManager _regionManager)
+        public DataSourcesViewModel()
         {
-            this._regionManager = _regionManager;
         }
 
         private bool _IsOracle=true;
@@ -25,9 +24,15 @@ namespace Fdp.DataModeller.ViewModels
         {
             get { 
                 if (_IsOracle)
-                    _regionManager.RequestNavigate(Strings.DataSourceConnectionRegion,typeof(OracleConnectionView).FullName);
-                else
-                    _regionManager.RequestNavigate(Strings.DataSourceConnectionRegion,typeof(SqlServerConnectionView).FullName);
+                {
+                    //IRegion DataSourceConnectionRegion = RegionManager.Regions[Strings.DataSourceConnectionRegion];
+                    //var uri = new Uri("OracleConnectionView", UriKind.Relative);
+                    //DataSourceConnectionRegion.RequestNavigate(uri);
+
+                }
+                else { }
+                    //RegionManager.RequestNavigate(Strings.DataSourceConnectionRegion,
+                    //    typeof(SqlServerConnectionView).FullName);
                 return _IsOracle;
             }
             set { _IsOracle = value;
@@ -35,5 +40,6 @@ namespace Fdp.DataModeller.ViewModels
             }
         }
 
+        public IRegionManager RegionManager { get; set ; }
     }
 }

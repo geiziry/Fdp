@@ -7,13 +7,12 @@
              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
              xmlns:prism="http://prismlibrary.com/"
-             DataContext="{dxmvvm:ViewModelSource Type=ViewModels:DataModellingViewModel}"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:Strings="clr-namespace:Fdp.InfraStructure;assembly=Fdp.InfraStructure"
              x:Class="Fdp.DataModeller.Views.DataModellingView"
              mc:Ignorable="d"
              d:DesignHeight="300"
-             d:DesignWidth="400"
-             Loaded="UserControl_Loaded">
+             d:DesignWidth="400">
     <Grid>
         <dx:DXTabControl>
             <dx:DXTabItem Header="Data Sources"

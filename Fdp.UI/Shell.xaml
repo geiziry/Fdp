@@ -5,15 +5,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fdp.UI"
-        xmlns:controls="http:www.fdp.com"
         xmlns:Strings="clr-namespace:Fdp.InfraStructure;assembly=Fdp.InfraStructure"
         xmlns:prism="http://prismlibrary.com/"
         mc:Ignorable="d"
         Title="Fdp"
         Height="350"
         Width="1200"
-             ResizeMode="CanResizeWithGrip"
-             Style="{DynamicResource ShellWindowStyle}">
+             ResizeMode="CanResizeWithGrip">
     <Grid>
         <DockPanel LastChildFill="True">
             <ContentControl prism:RegionManager.RegionName="{x:Static Strings:Strings.MenuRegion}"

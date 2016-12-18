@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Fdp.InfraStructure.Prism;
+using Microsoft.Practices.Unity;
+using Prism.Regions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,23 +21,21 @@ namespace Fdp.DataModeller.Views
     /// <summary>
     /// Interaction logic for DataModellingView.xaml
     /// </summary>
-    public partial class DataModellingView : UserControl
+    public partial class DataModellingView : UserControl,ICreateRegionManagerScope
     {
+
         public DataModellingView()
         {
             InitializeComponent();
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        public bool CreateRegionManagerScope
         {
-
-            // Do not load your data at design time.
-            // if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
-            // {
-            // 	//Load your data here and assign the result to the CollectionViewSource.
-            // 	System.Windows.Data.CollectionViewSource myCollectionViewSource = (System.Windows.Data.CollectionViewSource)this.Resources["Resource Key for CollectionViewSource"];
-            // 	myCollectionViewSource.Source = your data
-            // }
+            get
+            {
+               return true;
+            }
         }
+
     }
 }

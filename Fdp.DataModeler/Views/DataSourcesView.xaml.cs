@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using Prism.Regions;
+using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
 namespace Fdp.DataModeller.Views
@@ -10,11 +11,13 @@ namespace Fdp.DataModeller.Views
     {
         public DataSourcesView()
         {
+            //RegionManager.SetRegionManager(this, _regionManager);
             InitializeComponent();
             Loaded += (s, o) =>
             {
                 ExpandedHeight.SetValue(DoubleKeyFrame.ValueProperty, dockPanel.ActualHeight);
             };
         }
+
     }
 }

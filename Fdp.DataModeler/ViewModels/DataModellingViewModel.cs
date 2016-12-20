@@ -27,7 +27,7 @@ namespace Fdp.DataModeller.ViewModels
             _RegionManager.RegisterViewWithRegion(Strings.AddVariablesRegion, typeof(AddVariablesView));
             _RegionManager.RegisterViewWithRegion(Strings.DefineVariablesRegion, typeof(DefineVariablesView));
             DataSourcesView dataSourcesView = container.Resolve<DataSourcesView>();
-            _RegionManager.Regions[Strings.DataSourcesRegion].Add(dataSourcesView, "DataSources");
+            _RegionManager.Regions[Strings.DataSourcesRegion].Add(dataSourcesView, "DataSources",true);
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext) => true;

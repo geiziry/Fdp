@@ -1,10 +1,5 @@
 ﻿using Fdp.DataAccess.Enums;
 using Oracle.ManagedDataAccess.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fdp.DataAccess.DatabaseSchema
 {
@@ -20,20 +15,14 @@ namespace Fdp.DataAccess.DatabaseSchema
         {
             get
             {
-                OracleConnectionStringBuilder connection = new OracleConnectionStringBuilder();
-                connection.DataSource = string.Format("(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={0})(PORT={1}))(CONNECT_DATA=(SID={2})))", HostID, Port, SID);
+                var connection = new OracleConnectionStringBuilder();
+                connection.DataSource = $"(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={HostID})(PORT={Port}))(CONNECT_DATA=(SID={SID})))";
                 connection.UserID = UserName;
                 connection.Password = Password;
                 return connection.ToString();
             }
         }
 
-        public DatabaseType databaseType
-        {
-            get
-            {
-                return DatabaseType.Oracle;
-            }
-        }
+        public DatabaseType databaseType => DatabaseType.Oracle;
     }
 }

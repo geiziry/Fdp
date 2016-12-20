@@ -69,7 +69,6 @@ namespace Fdp.InfraStructure.Prism
                         return navigationAware == null || navigationAware.IsNavigationTarget(navigationContext);
                     });
 
-
             var view = acceptingCandidates.FirstOrDefault();
 
             if (view != null)
@@ -142,8 +141,8 @@ namespace Fdp.InfraStructure.Prism
                 throw new ArgumentNullException(nameof(region));
 
             return region.Views.Where(v =>
-                string.Equals(v.GetType().Name, candidateNavigationContract, StringComparison.Ordinal) ||
-                string.Equals(v.GetType().FullName, candidateNavigationContract, StringComparison.Ordinal));
+                string.Equals(v.GetType().Name, candidateNavigationContract, StringComparison.Ordinal)
+                || string.Equals(v.GetType().FullName, candidateNavigationContract, StringComparison.Ordinal));
         }
     }
 }

@@ -24,6 +24,5 @@ namespace Fdp.DataModeller.Views
         {
             InitializeComponent();
         }
-
     }
 }

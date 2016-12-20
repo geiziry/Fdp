@@ -1,24 +1,14 @@
-﻿using DevExpress.Mvvm;
-using Fdp.DataModeller.ViewModels;
-using Fdp.DataModeller.Views;
-using Fdp.InfraStructure;
+﻿using Fdp.DataModeller.Views;
 using Microsoft.Practices.Unity;
-using Oracle.ManagedDataAccess.Client;
 using Prism.Modularity;
 using Prism.Regions;
-using Prism.Unity;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Windows;
 
 namespace Fdp.DataModeller
 {
     public class Module : IModule
     {
-
-        IRegionManager _regionManager;
-        IUnityContainer container;
+        private IRegionManager _regionManager;
+        private IUnityContainer container;
 
         public Module(IRegionManager _regionManager, IUnityContainer container)
         {
@@ -28,9 +18,9 @@ namespace Fdp.DataModeller
 
         public void Initialize()
         {
-            container.RegisterType<object, DataModellingView>("DataModelling");
-            container.RegisterType<object, OracleConnectionView>("Oracle");
-            container.RegisterType<object, SqlServerConnectionView>("Sql");
+            container.RegisterType<object, DataModellingView>("DataModellingView");
+            container.RegisterType<object, OracleConnectionView>("OracleConnectionView");
+            container.RegisterType<object, SqlServerConnectionView>("SqlServerConnectionView");
             container.RegisterType<object, DataSourcesView>("DataSources");
             container.RegisterType<object, DefineVariablesView>("DefineVariables");
             container.RegisterType<object, AddVariablesView>("AddVariables");
@@ -47,7 +37,6 @@ namespace Fdp.DataModeller
             //        .GetItems<EntityContainer>()//;
             //        .Where(s => !s.MetadataProperties.Contains("Type")
             //        || s.MetadataProperties["Type"].ToString() == "Tables");
-
 
             //    //foreach (var table in tables)
             //    //{
@@ -69,7 +58,6 @@ namespace Fdp.DataModeller
             //{
             //    conn.Open();
 
-
             //    OracleCommand cmd = new OracleCommand{Connection = conn,CommandType = CommandType.Text};
 
             //    DataSource schema = new DataSource(cmd);
@@ -90,10 +78,8 @@ namespace Fdp.DataModeller
             //Debug.WriteLine(types);
             #endregion
         }
-
-
     }
-    }
+}
 
 
 

@@ -7,9 +7,6 @@
              x:Class="Fdp.UI.App">
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Fdp.DataModeller;component/DataModelResourceDictionary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
             <DataTemplate x:Key="{dxt:FloatingContainerThemeKey ResourceKey=FloatingContainerCaptionTemplate, IsThemeIndependent=True}">
                 <Grid x:Name="Root"
                       Height="Auto">

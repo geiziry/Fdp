@@ -99,6 +99,9 @@
     <Compile Include="Module.cs" />
     <Compile Include="ViewModels\DashboardMenuViewModel.cs" />
     <Compile Include="ViewModels\MenuViewLocator.cs" />
+    <Compile Include="Views\ButtonEditProgress.xaml.cs">
+      <DependentUpon>ButtonEditProgress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DashboradMenuView.xaml.cs">
       <DependentUpon>DashboradMenuView.xaml</DependentUpon>
     </Compile>
@@ -133,6 +136,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\ButtonEditProgress.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DashboradMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

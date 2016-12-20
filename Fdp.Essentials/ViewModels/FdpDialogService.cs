@@ -36,9 +36,8 @@ namespace Fdp.Essentials.ViewModels
             var scopedRegion = _regionManager.CreateRegionManager();
             RegionManager.SetRegionManager(dxDialogWindow, scopedRegion);
 
-            scopedRegion.RequestNavigate(Strings.DataModellingRegion, "DataModelling");
+            scopedRegion.RequestNavigate(Strings.DataModellingRegion, "DataModellingView");
             return dxDialogWindow.ShowDialogWindow();
         }
-
     }
 }

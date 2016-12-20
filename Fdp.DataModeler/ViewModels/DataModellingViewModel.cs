@@ -13,10 +13,8 @@ namespace Fdp.DataModeller.ViewModels
 {
     public class DataModellingViewModel : IRegionManagerAware, INavigationAware
     {
-        public IRegionManager _RegionManager
-        {
-            get; set;
-        }
+        public IRegionManager _RegionManager { get; set; }
+
         private readonly IUnityContainer container;
 
         public DataModellingViewModel(IUnityContainer container)
@@ -28,14 +26,11 @@ namespace Fdp.DataModeller.ViewModels
         {
             _RegionManager.RegisterViewWithRegion(Strings.AddVariablesRegion, typeof(AddVariablesView));
             _RegionManager.RegisterViewWithRegion(Strings.DefineVariablesRegion, typeof(DefineVariablesView));
-            var dataSourcesView = container.Resolve<DataSourcesView>();
-            _RegionManager.Regions[Strings.DataSourcesRegion].Add(dataSourcesView, "DataSources", true);
+            DataSourcesView dataSourcesView = container.Resolve<DataSourcesView>();
+            _RegionManager.Regions[Strings.DataSourcesRegion].Add(dataSourcesView, "DataSources");
         }
 
-        public bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return false;
-        }
+        public bool IsNavigationTarget(NavigationContext navigationContext) => true;
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {

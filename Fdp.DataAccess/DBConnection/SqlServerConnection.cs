@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Fdp.DataAccess.DatabaseSchema
@@ -14,6 +12,7 @@ namespace Fdp.DataAccess.DatabaseSchema
     {
         public string DataSource { get; set; }
         public bool IntegratedSecurity { get; set; }
+        public string InitialCatalog { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
 
@@ -21,9 +20,11 @@ namespace Fdp.DataAccess.DatabaseSchema
         {
             get
             {
-                SqlConnectionStringBuilder connection = new SqlConnectionStringBuilder();
+                var connection = new SqlConnectionStringBuilder();
                 connection.DataSource = DataSource;
                 connection.IntegratedSecurity = IntegratedSecurity;
+                if (!string.IsNullOrWhiteSpace(InitialCatalog))
+                    connection.InitialCatalog = InitialCatalog;
                 if (!IntegratedSecurity)
                 {
                     connection.UserID = UserName;
@@ -34,19 +35,15 @@ namespace Fdp.DataAccess.DatabaseSchema
             }
         }
 
-        public DatabaseType databaseType
-        {
-            get
-            {
-                return DatabaseType.SqlServer;
-            }
+        public event EventHandler<string> ExceptionRaised;
+        public string Exception { get; set; }
+        public DatabaseType databaseType => DatabaseType.SqlServer;
 
-        }
 
-        public List<string> GetLocalNetworkServers()
+        public async Task<List<string>> GetLocalNetworkServersAsync()
         {
-            List<string> Servers = new List<string>();
-            DataTable serversTable = SqlDataSourceEnumerator.Instance.GetDataSources();
+            var Servers = new List<string>();
+            DataTable serversTable = await Task.Run(() => SqlDataSourceEnumerator.Instance.GetDataSources()).ConfigureAwait(false);
 
             foreach (DataRow row in serversTable.Rows)
             {
@@ -66,23 +63,33 @@ namespace Fdp.DataAccess.DatabaseSchema
             return Servers;
         }
 
-        public List<string> GetDatabaseList(string server)
+        public async Task<List<string>> GetDatabaseListAsync()
         {
-            List<string> Databases = new List<string>();
-
-            SqlConnection conn = new SqlConnection(ConnectionString);
-            conn.Open();
-            DataTable DatabasesTable = conn.GetSchema("Databases");
-            conn.Close();
-
-            foreach (DataRow row in DatabasesTable.Rows)
+            var Databases = new List<string>();
+            using (var conn = new SqlConnection(ConnectionString))
             {
-                string DatabaseName = row["database_name"].ToString();
-                Databases.Add(DatabaseName);
+                try
+                {
+                    await conn.OpenAsync().ConfigureAwait(false);
+                    DataTable DatabasesTable = await Task.Run(() => conn.GetSchema("Databases")).ConfigureAwait(false);
+
+                    foreach (DataRow row in DatabasesTable.Rows)
+                    {
+                        string DatabaseName = row["database_name"].ToString();
+                        Databases.Add(DatabaseName);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    OnExceptionRaised(ex.Message);
+                }
             }
             return Databases;
-
         }
 
+        protected virtual void OnExceptionRaised(string message)
+        {
+            (ExceptionRaised as EventHandler<string>)?.Invoke(this, message);
+        }
     }
 }

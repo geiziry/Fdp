@@ -15,113 +15,118 @@
              d:DesignHeight="300"
              d:DesignWidth="300">
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-        <dxmvvm:BooleanNegationConverter x:Key="ConnectionToggle" />
-        <Style x:Key="ConnChkStyle"
-               TargetType="{x:Type CheckBox}">
-            <Setter Property="FocusVisualStyle"
-                    Value="{x:Null}" />
-            <Setter Property="Background"
-                    Value="White" />
-            <Setter Property="BorderBrush"
-                    Value="#7F2C2C2C" />
-            <Setter Property="VerticalContentAlignment"
-                    Value="Center" />
-            <Setter Property="HorizontalContentAlignment"
-                    Value="Left" />
-            <Setter Property="BorderThickness"
-                    Value="1" />
-            <Setter Property="Padding"
-                    Value="0,3" />
-            <Setter Property="SnapsToDevicePixels"
-                    Value="True" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type CheckBox}">
-                        <ControlTemplate.Resources>
-                            <Storyboard x:Key="MouseOver_Start">
-                                <ColorAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
-                                                Storyboard.TargetName="grid"
-                                                To="#4C0C7371"
-                                                Duration="0:0:0.3" />
-                            </Storyboard>
-                            <Storyboard x:Key="MouseOver_End">
-                                <ColorAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
-                                                Storyboard.TargetName="grid"
-                                                FillBehavior="Stop"
-                                                Duration="0:0:0.3">
-                                </ColorAnimation>
-                            </Storyboard>
-                        </ControlTemplate.Resources>
-                        <Grid x:Name="Root"
-                              Background="#00000000"
-                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                              dx:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;18;22">
-                            <Grid x:Name="grid"
-                                  Margin="{TemplateBinding Padding}"
-                                  dx:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;44;26"
-                                  Background="#00000000">
-                                <ContentPresenter x:Name="contentPresenter"
-                                                  Grid.ColumnSpan="1"
-                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
-                                                  Content="{TemplateBinding Content}"
-                                                  Grid.Column="1"
-                                                  ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  Margin="4,0"
-                                                  RecognizesAccessKey="True"
-                                                  dx:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;57;30"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Fdp.DataModeller;component/DataModelResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+            <dxmvvm:BooleanNegationConverter x:Key="ConnectionToggle" />
+            <Style x:Key="ConnChkStyle"
+                   TargetType="{x:Type CheckBox}">
+                <Setter Property="FocusVisualStyle"
+                        Value="{x:Null}" />
+                <Setter Property="Background"
+                        Value="White" />
+                <Setter Property="BorderBrush"
+                        Value="#7F2C2C2C" />
+                <Setter Property="VerticalContentAlignment"
+                        Value="Center" />
+                <Setter Property="HorizontalContentAlignment"
+                        Value="Left" />
+                <Setter Property="BorderThickness"
+                        Value="1" />
+                <Setter Property="Padding"
+                        Value="0,3" />
+                <Setter Property="SnapsToDevicePixels"
+                        Value="True" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type CheckBox}">
+                            <ControlTemplate.Resources>
+                                <Storyboard x:Key="MouseOver_Start">
+                                    <ColorAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+                                                    Storyboard.TargetName="grid"
+                                                    To="#4C0C7371"
+                                                    Duration="0:0:0.3" />
+                                </Storyboard>
+                                <Storyboard x:Key="MouseOver_End">
+                                    <ColorAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+                                                    Storyboard.TargetName="grid"
+                                                    FillBehavior="Stop"
+                                                    Duration="0:0:0.3">
+                                    </ColorAnimation>
+                                </Storyboard>
+                            </ControlTemplate.Resources>
+                            <Grid x:Name="Root"
+                                  Background="#00000000"
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                  dx:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;18;22">
+                                <Grid x:Name="grid"
+                                      Margin="{TemplateBinding Padding}"
+                                      dx:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;44;26"
+                                      Background="#00000000">
+                                    <ContentPresenter x:Name="contentPresenter"
+                                                      Grid.ColumnSpan="1"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                      Content="{TemplateBinding Content}"
+                                                      Grid.Column="1"
+                                                      ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                      Margin="4,0"
+                                                      RecognizesAccessKey="True"
+                                                      dx:BlendHelper2.ThemeInfo="DevExpress.Xpf.Core\DevExpress.Xpf.Core\Themes\StandardControls\CheckBox.xaml;57;30"
+                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                </Grid>
                             </Grid>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <EventTrigger RoutedEvent="FrameworkElement.Loaded" />
-                            <Trigger Property="IsMouseOver"
-                                     Value="True">
-                                <Trigger.ExitActions>
-                                    <StopStoryboard BeginStoryboardName="MouseOver_Start_BeginStoryboard" />
-                                    <BeginStoryboard x:Name="MouseOver_End_BeginStoryboard"
-                                                     Storyboard="{StaticResource MouseOver_End}" />
-                                </Trigger.ExitActions>
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard x:Name="MouseOver_Start_BeginStoryboard"
-                                                     Storyboard="{StaticResource MouseOver_Start}" />
-                                </Trigger.EnterActions>
-                                <Setter Property="Background"
-                                        TargetName="grid"
-                                        Value="#33F7D811" />
-                            </Trigger>
-                            <Trigger Property="IsChecked"
-                                     Value="True">
-                                <Setter Property="Background"
-                                        TargetName="grid"
-                                        Value="#664D9A0C" />
+                            <ControlTemplate.Triggers>
+                                <EventTrigger RoutedEvent="FrameworkElement.Loaded" />
+                                <Trigger Property="IsMouseOver"
+                                         Value="True">
+                                    <Trigger.ExitActions>
+                                        <StopStoryboard BeginStoryboardName="MouseOver_Start_BeginStoryboard" />
+                                        <BeginStoryboard x:Name="MouseOver_End_BeginStoryboard"
+                                                         Storyboard="{StaticResource MouseOver_End}" />
+                                    </Trigger.ExitActions>
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard x:Name="MouseOver_Start_BeginStoryboard"
+                                                         Storyboard="{StaticResource MouseOver_Start}" />
+                                    </Trigger.EnterActions>
+                                    <Setter Property="Background"
+                                            TargetName="grid"
+                                            Value="#33F7D811" />
+                                </Trigger>
+                                <Trigger Property="IsChecked"
+                                         Value="True">
+                                    <Setter Property="Background"
+                                            TargetName="grid"
+                                            Value="#664D9A0C" />
 
-                            </Trigger>
-                            <Trigger Property="IsPressed"
-                                     Value="True" />
-                            <Trigger Property="IsFocused"
-                                     Value="True" />
-                            <Trigger Property="IsEnabled"
-                                     Value="False">
-                                <Setter Property="Opacity"
-                                        TargetName="Root"
-                                        Value="0.5" />
-                            </Trigger>
-                            <Trigger Property="dx:ThemeManager.IsTouchEnabled"
-                                     Value="True" />
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="dx:ThemeManager.IsTouchEnabled"
-                         Value="True">
-                    <Setter Property="Padding"
-                            Value="8,0,0,0" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+                                </Trigger>
+                                <Trigger Property="IsPressed"
+                                         Value="True" />
+                                <Trigger Property="IsFocused"
+                                         Value="True" />
+                                <Trigger Property="IsEnabled"
+                                         Value="False">
+                                    <Setter Property="Opacity"
+                                            TargetName="Root"
+                                            Value="0.5" />
+                                </Trigger>
+                                <Trigger Property="dx:ThemeManager.IsTouchEnabled"
+                                         Value="True" />
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="dx:ThemeManager.IsTouchEnabled"
+                             Value="True">
+                        <Setter Property="Padding"
+                                Value="8,0,0,0" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <VisualStateManager.VisualStateGroups>
@@ -197,8 +202,10 @@
                               IsChecked="{Binding IsChecked, Converter={StaticResource ConnectionToggle}, ElementName=IsOracleConn, Mode=TwoWay}" />
                 </StackPanel>
                 <ContentControl prism:RegionManager.RegionName="{x:Static Strings:Strings.DataSourceConnectionRegion}"
+                                prism:RegionManager.RegionContext="{Binding}"
                                 Grid.Row="1"
                                 VerticalContentAlignment="Stretch" />
+                <TextBlock Grid.Row="2" Text="{Binding ConnectionException}"/>
             </Grid>
             <ListBox VerticalAlignment="Stretch" />
         </DockPanel>

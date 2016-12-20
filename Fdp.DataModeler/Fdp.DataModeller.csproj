@@ -123,6 +123,7 @@
     <Compile Include="testDbContext.cs" />
     <Compile Include="ViewModels\DataModellingViewModel.cs" />
     <Compile Include="ViewModels\DataSourcesViewModel.cs" />
+    <Compile Include="ViewModels\SqlServerConnectionViewModel.cs" />
     <Compile Include="Views\AddVariablesView.xaml.cs">
       <DependentUpon>AddVariablesView.xaml</DependentUpon>
     </Compile>
@@ -188,6 +189,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\Fdp.Controls\Fdp.Controls.csproj">
+      <Project>{f210dc15-3624-4d4c-ad38-47e753d21ae9}</Project>
+      <Name>Fdp.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fdp.DataAccess\Fdp.DataAccess.csproj">
       <Project>{89986b37-6e7b-400a-aa8a-e21a32af75da}</Project>
       <Name>Fdp.DataAccess</Name>

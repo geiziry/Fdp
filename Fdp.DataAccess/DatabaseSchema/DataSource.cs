@@ -8,11 +8,10 @@ namespace Fdp.DataAccess.DatabaseSchema
 {
     public class DataSource
     {
-
         public DataSource()
         {
-
         }
+
         public DataSource(DbCommand Command)
         {
             Tables = new List<Table>();
@@ -21,7 +20,7 @@ namespace Fdp.DataAccess.DatabaseSchema
         }
 
         public static DbCommand DbEnumerationCommand { get; private set; }
-        public List<Table> Tables { get; private set; }
+        public List<Table> Tables { get; }
 
         private void SetCommandText(DbCommand command)
         {
@@ -32,10 +31,9 @@ namespace Fdp.DataAccess.DatabaseSchema
             DbEnumerationCommand = command;
         }
 
-
         public void GetSchema()
         {
-            List<string> TableNames = new List<string>();
+            var TableNames = new List<string>();
             using (DbDataReader dataReader = DbEnumerationCommand.ExecuteReader())
             {
                 while (dataReader.Read())
@@ -44,9 +42,5 @@ namespace Fdp.DataAccess.DatabaseSchema
 
             TableNames.ForEach(x => Tables.Add(new Table(x)));
         }
-
     }
-
-
-
 }

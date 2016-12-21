@@ -35,10 +35,8 @@ namespace Fdp.DataAccess.DatabaseSchema
             }
         }
 
-        public event EventHandler<string> ExceptionRaised;
         public string Exception { get; set; }
         public DatabaseType databaseType => DatabaseType.SqlServer;
-
 
         public async Task<List<string>> GetLocalNetworkServersAsync()
         {
@@ -71,13 +69,13 @@ namespace Fdp.DataAccess.DatabaseSchema
                 try
                 {
                     await conn.OpenAsync().ConfigureAwait(false);
-                    await GetListOfDataBasesAsync(Databases, conn);
+                    await GetListOfDataBasesAsync(Databases, conn).ConfigureAwait(false);
                 }
                 catch (Exception exception)
                 {
-                    var message = exception.InnerException == null ?exception.Message 
+                    var message = exception.InnerException == null ?exception.Message
                                    : exception.InnerException.Message;
-                    OnExceptionRaised(message);
+                    throw new ArgumentException(message);
                 }
             }
             return Databases;
@@ -92,11 +90,6 @@ namespace Fdp.DataAccess.DatabaseSchema
                 string DatabaseName = row["database_name"].ToString();
                 Databases.Add(DatabaseName);
             }
-        }
-
-        protected virtual void OnExceptionRaised(string message)
-        {
-            (ExceptionRaised as EventHandler<string>)?.Invoke(this, message);
         }
     }
 }

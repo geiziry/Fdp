@@ -6,7 +6,6 @@
              xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core"
              x:Class="Fdp.UI.App">
     <Application.Resources>
-        <ResourceDictionary>
             <DataTemplate x:Key="{dxt:FloatingContainerThemeKey ResourceKey=FloatingContainerCaptionTemplate, IsThemeIndependent=True}">
                 <Grid x:Name="Root"
                       Height="Auto">
@@ -24,6 +23,5 @@
                     </dxc:FloatingContainerHeaderPanel>
                 </Grid>
             </DataTemplate>
-        </ResourceDictionary>
     </Application.Resources>
 </Application>

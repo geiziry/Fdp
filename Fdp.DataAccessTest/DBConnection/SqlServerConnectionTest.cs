@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Threading.Tasks;
 
 namespace Fdp.DataAccess.DatabaseSchema.Tests
@@ -26,6 +27,7 @@ namespace Fdp.DataAccess.DatabaseSchema.Tests
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(ArgumentException))]
         public async Task GetDatabaseListAsyncTestInValidDataSource()
         {
             //Arrange
@@ -35,16 +37,20 @@ namespace Fdp.DataAccess.DatabaseSchema.Tests
                 UserName = "geiziry",
                 Password = "geiziry3"
             };
-            var expected = 9;
-            //Act
-            var dbList = await SqlServerConnection.GetDatabaseListAsync();
-            var actual = dbList.Count;
-            //Assert
-
-            Assert.AreEqual(expected, actual);
+            try
+            {
+                var dbList = await SqlServerConnection.GetDatabaseListAsync();
+            }
+            catch (Exception ex)
+            {
+                string message = "The network path was not found";
+                Assert.AreEqual(message, GetMessage(ex));
+                throw;
+            }
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(ArgumentException))]
         public async Task GetDatabaseListAsyncTestInValidUserName()
         {
             //Arrange
@@ -54,16 +60,20 @@ namespace Fdp.DataAccess.DatabaseSchema.Tests
                 UserName = "geiziry1",
                 Password = "geiziry3"
             };
-            var expected = 9;
-            //Act
-            var dbList = await SqlServerConnection.GetDatabaseListAsync();
-            var actual = dbList.Count;
-            //Assert
-
-            Assert.AreEqual(expected, actual);
+            try
+            {
+                var dbList = await SqlServerConnection.GetDatabaseListAsync();
+            }
+            catch (Exception ex)
+            {
+                string message = "Login failed for user 'geiziry1'.";
+                Assert.AreEqual(message, GetMessage(ex));
+                throw;
+            }
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(ArgumentException))]
         public async Task GetDatabaseListAsyncTestInValidPassword()
         {
             //Arrange
@@ -73,14 +83,27 @@ namespace Fdp.DataAccess.DatabaseSchema.Tests
                 UserName = "geiziry",
                 Password = "geiziry"
             };
-            var expected = 9;
             //Act
-            var dbList = await SqlServerConnection.GetDatabaseListAsync();
-            var actual = dbList.Count;
+            try
+            {
+                var dbList = await SqlServerConnection.GetDatabaseListAsync();
+            }
+            catch (Exception ex)
+            {
+                string message = "Login failed for user 'geiziry'.";
+                Assert.AreEqual(message, GetMessage(ex));
+                throw;
+            }
             //Assert
-
-            Assert.AreEqual(expected, actual);
         }
 
+        [Ignore]
+        private string GetMessage(Exception exception)
+        {
+            var message = exception.InnerException == null ? exception.Message
+               : exception.InnerException.Message;
+
+            return message;
+        }
     }
 }

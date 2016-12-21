@@ -16,47 +16,42 @@ namespace Fdp.DataModeller.ViewModels
     {
         public SqlServerConnectionViewModel()
         {
-            GetNetworkServersCommand = new DelegateCommand(() =>
-            {
-                ManageProgress(async (o) => DataSources = new ObservableCollection<string>(await Connection.GetLocalNetworkServersAsync().ConfigureAwait(false)), nameof(IsGettingSqlServers));
-            });
+            GetNetworkServersCommand = new DelegateCommand(() => ManageProgress(async (o) => DataSources =
+                                            new ObservableCollection<string>(await Connection.GetLocalNetworkServersAsync()
+                                            .ConfigureAwait(false)), nameof(IsGettingSqlServers)));
 
-            GetCatalogsCommand = new DelegateCommand(() =>
-            {
-                ManageProgress(async (o) => Catalogs = new ObservableCollection<string>(await Connection.GetDatabaseListAsync().ConfigureAwait(false)), nameof(IsGettingCatalogs));
-            });
+            GetCatalogsCommand = new DelegateCommand(() => ManageProgress(async (o) => Catalogs=
+                                          new ObservableCollection<string>(await Connection.GetDatabaseListAsync()
+                                        .ConfigureAwait(false)), nameof(IsGettingCatalogs)));
         }
 
         private async void ManageProgress(Func<object, Task> action, string progressVisibility)
         {
-            ParentViewModel.ConnectionException = string.Empty;
             var visibility = this.GetType().GetProperty(progressVisibility);
-            visibility.SetValue(this, Visibility.Visible);
-            await action(null);
-            visibility.SetValue(this, Visibility.Collapsed);
-
+            try
+            {
+                ParentViewModel.ConnectionException = string.Empty;
+                visibility.SetValue(this, Visibility.Visible);
+                await action(null).ConfigureAwait(false);
+                visibility.SetValue(this, Visibility.Collapsed);
+            }
+            catch (Exception ex)
+            {
+                ParentViewModel.ConnectionException = ex.Message;
+                visibility.SetValue(this, Visibility.Collapsed);
+            }
         }
-
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             var navigationService = navigationContext.NavigationService;
             ParentViewModel = navigationService.Region.Context as IDataSourceConnectionException;
-            Connection.ExceptionRaised += Connection_ExceptionRaised;
-        }
-
-        private void Connection_ExceptionRaised(object sender, string e)
-        {
-            if (ParentViewModel != null)
-                ParentViewModel.ConnectionException = e;
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext) => true;
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-            Connection.ExceptionRaised -= Connection_ExceptionRaised;
-
         }
 
         private SqlServerConnection _Connection = new SqlServerConnection();
@@ -99,7 +94,6 @@ namespace Fdp.DataModeller.ViewModels
             }
         }
 
-
         private Visibility _IsGettingSqlServers = Visibility.Collapsed;
 
         public Visibility IsGettingSqlServers
@@ -135,7 +129,5 @@ namespace Fdp.DataModeller.ViewModels
                 RaisePropertyChanged();
             }
         }
-
-
     }
 }

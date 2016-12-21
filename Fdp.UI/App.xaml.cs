@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace Fdp.UI
 {
@@ -17,11 +18,24 @@ namespace Fdp.UI
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            this.DispatcherUnhandledException += App_DispatcherUnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             ApplicationThemeHelper.ApplicationThemeName =
                 Theme.Office2016ColorfulName;
             base.OnStartup(e);
-            BootStrapper bootstrapper = new BootStrapper();
+            var bootstrapper = new BootStrapper();
             bootstrapper.Run();
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            MessageBox.Show((e.ExceptionObject as Exception).Message);
+        }
+
+        private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            MessageBox.Show(e.Exception.Message);
+            e.Handled = true;
         }
     }
 

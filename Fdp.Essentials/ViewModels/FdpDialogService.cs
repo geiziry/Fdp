@@ -27,13 +27,13 @@ namespace Fdp.Essentials.ViewModels
         public UICommand ShowDialog(string Title,Type ViewType,
             IEnumerable<UICommand>dialogCommands)
         {
-            FdpDialogView dxDialogWindow = new FdpDialogView
+            var dxDialogWindow = new FdpDialogView
             {
                 Title=Title,
                 CommandsSource=dialogCommands,
             };
             dxDialogWindow.Owner = Application.Current.MainWindow;
-            var scopedRegion = _regionManager.CreateRegionManager();
+            IRegionManager scopedRegion = _regionManager.CreateRegionManager();
             RegionManager.SetRegionManager(dxDialogWindow, scopedRegion);
 
             scopedRegion.RequestNavigate(Strings.DataModellingRegion, "DataModellingView");

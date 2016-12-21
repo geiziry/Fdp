@@ -71,20 +71,27 @@ namespace Fdp.DataAccess.DatabaseSchema
                 try
                 {
                     await conn.OpenAsync().ConfigureAwait(false);
-                    DataTable DatabasesTable = await Task.Run(() => conn.GetSchema("Databases")).ConfigureAwait(false);
-
-                    foreach (DataRow row in DatabasesTable.Rows)
-                    {
-                        string DatabaseName = row["database_name"].ToString();
-                        Databases.Add(DatabaseName);
-                    }
+                    await GetListOfDataBasesAsync(Databases, conn);
                 }
-                catch (Exception ex)
+                catch (Exception exception)
                 {
-                    OnExceptionRaised(ex.Message);
+                    var message = exception.InnerException == null ?exception.Message 
+                                   : exception.InnerException.Message;
+                    OnExceptionRaised(message);
                 }
             }
             return Databases;
+        }
+
+        private static async Task GetListOfDataBasesAsync(List<string> Databases, SqlConnection conn)
+        {
+            DataTable DatabasesTable = await Task.Run(() => conn.GetSchema("Databases")).ConfigureAwait(false);
+
+            foreach (DataRow row in DatabasesTable.Rows)
+            {
+                string DatabaseName = row["database_name"].ToString();
+                Databases.Add(DatabaseName);
+            }
         }
 
         protected virtual void OnExceptionRaised(string message)

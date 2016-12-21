@@ -40,7 +40,7 @@ namespace Fdp.DataModeller.ViewModels
         {
             var navigationService = navigationContext.NavigationService;
             ParentViewModel = navigationService.Region.Context;
-            Connection.ExceptionRaised += Connection_ExceptionRaised;
+            //Connection.ExceptionRaised += Connection_ExceptionRaised;
         }
 
         private void Connection_ExceptionRaised(object sender, string e)
@@ -50,7 +50,7 @@ namespace Fdp.DataModeller.ViewModels
                 parent.ConnectionException = e;
         }
 
-        public bool IsNavigationTarget(NavigationContext navigationContext) => false;
+        public bool IsNavigationTarget(NavigationContext navigationContext) => true;
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {

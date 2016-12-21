@@ -1,5 +1,6 @@
 ﻿using DevExpress.Mvvm;
 using Fdp.DataAccess.DatabaseSchema;
+using Fdp.InfraStructure.Interfaces;
 using Prism.Common;
 using Prism.Regions;
 using System;
@@ -28,6 +29,7 @@ namespace Fdp.DataModeller.ViewModels
 
         private async void ManageProgress(Func<object, Task> action, string progressVisibility)
         {
+            ParentViewModel.ConnectionException = string.Empty;
             var visibility = this.GetType().GetProperty(progressVisibility);
             visibility.SetValue(this, Visibility.Visible);
             await action(null);
@@ -39,15 +41,14 @@ namespace Fdp.DataModeller.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             var navigationService = navigationContext.NavigationService;
-            ParentViewModel = navigationService.Region.Context;
-            //Connection.ExceptionRaised += Connection_ExceptionRaised;
+            ParentViewModel = navigationService.Region.Context as IDataSourceConnectionException;
+            Connection.ExceptionRaised += Connection_ExceptionRaised;
         }
 
         private void Connection_ExceptionRaised(object sender, string e)
         {
-           var parent= ParentViewModel as DataSourcesViewModel;
-            if (parent != null)
-                parent.ConnectionException = e;
+            if (ParentViewModel != null)
+                ParentViewModel.ConnectionException = e;
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext) => true;
@@ -123,9 +124,9 @@ namespace Fdp.DataModeller.ViewModels
             }
         }
 
-        private object _ParentViewModel;
+        private IDataSourceConnectionException _ParentViewModel;
 
-        public object ParentViewModel
+        public IDataSourceConnectionException ParentViewModel
         {
             get { return _ParentViewModel; }
             set

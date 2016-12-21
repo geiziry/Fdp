@@ -1,12 +1,13 @@
 ﻿using DevExpress.Mvvm;
 using Fdp.InfraStructure;
+using Fdp.InfraStructure.Interfaces;
 using Fdp.InfraStructure.Prism;
 using Prism.Regions;
 using System.Linq;
 
 namespace Fdp.DataModeller.ViewModels
 {
-    public class DataSourcesViewModel : BindableBase, IRegionManagerAware
+    public class DataSourcesViewModel : BindableBase, IRegionManagerAware, IDataSourceConnectionException
     {
         private bool _IsAddDataSource;
         public bool IsAddDataSource

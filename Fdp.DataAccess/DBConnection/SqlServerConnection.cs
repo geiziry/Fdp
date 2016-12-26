@@ -10,12 +10,6 @@ namespace Fdp.DataAccess.DatabaseSchema
 {
     public class SqlServerConnection : IDbConnection
     {
-        public string DataSource { get; set; }
-        public bool IntegratedSecurity { get; set; }
-        public string InitialCatalog { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-
         public string ConnectionString
         {
             get
@@ -35,8 +29,32 @@ namespace Fdp.DataAccess.DatabaseSchema
             }
         }
 
-        public string Exception { get; set; }
         public DatabaseType databaseType => DatabaseType.SqlServer;
+        public string DataSource { get; set; }
+        public string Exception { get; set; }
+        public string InitialCatalog { get; set; }
+        public bool IntegratedSecurity { get; set; }
+        public string Password { get; set; }
+        public string UserName { get; set; }
+        public async Task<List<string>> GetDatabaseListAsync()
+        {
+            var Databases = new List<string>();
+            using (var conn = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    await conn.OpenAsync().ConfigureAwait(false);
+                    await GetListOfDataBasesAsync(Databases, conn).ConfigureAwait(false);
+                }
+                catch (Exception exception)
+                {
+                    var message = exception.InnerException == null ? exception.Message
+                                   : exception.InnerException.Message;
+                    throw new ArgumentException(message);
+                }
+            }
+            return Databases;
+        }
 
         public async Task<List<string>> GetLocalNetworkServersAsync()
         {
@@ -60,27 +78,6 @@ namespace Fdp.DataAccess.DatabaseSchema
 
             return Servers;
         }
-
-        public async Task<List<string>> GetDatabaseListAsync()
-        {
-            var Databases = new List<string>();
-            using (var conn = new SqlConnection(ConnectionString))
-            {
-                try
-                {
-                    await conn.OpenAsync().ConfigureAwait(false);
-                    await GetListOfDataBasesAsync(Databases, conn).ConfigureAwait(false);
-                }
-                catch (Exception exception)
-                {
-                    var message = exception.InnerException == null ?exception.Message
-                                   : exception.InnerException.Message;
-                    throw new ArgumentException(message);
-                }
-            }
-            return Databases;
-        }
-
         private static async Task GetListOfDataBasesAsync(List<string> Databases, SqlConnection conn)
         {
             DataTable DatabasesTable = await Task.Run(() => conn.GetSchema("Databases")).ConfigureAwait(false);

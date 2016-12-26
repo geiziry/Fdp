@@ -1,18 +1,11 @@
 ﻿using DevExpress.Mvvm;
 using Fdp.DataAccess.DatabaseSchema;
-using Fdp.InfraStructure.Interfaces;
-using Prism.Common;
-using Prism.Regions;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
 
 namespace Fdp.DataModeller.ViewModels
 {
-    public class SqlServerConnectionViewModel : BindableBase, INavigationAware
+    public class SqlServerConnectionViewModel : ConnectionBaseViewModel
     {
         public SqlServerConnectionViewModel()
         {
@@ -23,35 +16,6 @@ namespace Fdp.DataModeller.ViewModels
             GetCatalogsCommand = new DelegateCommand(() => ManageProgress(async (o) => Catalogs=
                                           new ObservableCollection<string>(await Connection.GetDatabaseListAsync()
                                         .ConfigureAwait(false)), nameof(IsGettingCatalogs)));
-        }
-
-        private async void ManageProgress(Func<object, Task> action, string progressVisibility)
-        {
-            var visibility = this.GetType().GetProperty(progressVisibility);
-            try
-            {
-                ParentViewModel.ConnectionException = string.Empty;
-                visibility.SetValue(this, Visibility.Visible);
-                await action(null).ConfigureAwait(false);
-                visibility.SetValue(this, Visibility.Collapsed);
-            }
-            catch (Exception ex)
-            {
-                ParentViewModel.ConnectionException = ex.Message;
-                visibility.SetValue(this, Visibility.Collapsed);
-            }
-        }
-
-        public void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            var navigationService = navigationContext.NavigationService;
-            ParentViewModel = navigationService.Region.Context as IDataSourceConnectionException;
-        }
-
-        public bool IsNavigationTarget(NavigationContext navigationContext) => true;
-
-        public void OnNavigatedFrom(NavigationContext navigationContext)
-        {
         }
 
         private SqlServerConnection _Connection = new SqlServerConnection();
@@ -114,18 +78,6 @@ namespace Fdp.DataModeller.ViewModels
             set
             {
                 _IsGettingCatalogs = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private IDataSourceConnectionException _ParentViewModel;
-
-        public IDataSourceConnectionException ParentViewModel
-        {
-            get { return _ParentViewModel; }
-            set
-            {
-                _ParentViewModel = value;
                 RaisePropertyChanged();
             }
         }

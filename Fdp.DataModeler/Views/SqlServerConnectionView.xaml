@@ -36,14 +36,14 @@
                Grid.Column="0"
                Content="Data Source:" />
         <ctrls:ButtonEditProgress x:Name="dataSourceTextBox"
+                                  NullText="select datasource"
                                   Width="180"
                                   Grid.Column="1"
                                   Margin="2.8,3,0,4.4"
                                   VerticalAlignment="Center"
-                                  AllowDefaultButton="False"
                                   HorizontalAlignment="Left"
                                   ComboBoxItemsSource="{Binding DataSources}"
-                                  ComboBoxEditValue="{Binding Connection.DataSource}"
+                                  ComboBoxSelectedItem="{Binding Connection.DataSource}"
                                   ProgressBarVisibility="{Binding IsGettingSqlServers}"
                                   RefereshButtonCommand="{Binding GetNetworkServersCommand}">
         </ctrls:ButtonEditProgress>
@@ -109,7 +109,8 @@
                Grid.Column="0"
                Grid.Row="3"
                Content="InitialCatalog:" />
-        <ctrls:ButtonEditProgress Width="180"
+        <ctrls:ButtonEditProgress NullText="database"
+                                  Width="180"
                                   Grid.Column="1"
                                   Grid.Row="3"
                                   Margin="2.8,3,0,4.4"
@@ -117,7 +118,7 @@
                                   AllowDefaultButton="False"
                                   HorizontalAlignment="Left"
                                   ComboBoxItemsSource="{Binding Catalogs}"
-                                  ComboBoxEditValue="{Binding Connection.InitialCatalog}"
+                                  ComboBoxSelectedItem="{Binding Connection.InitialCatalog}"
                                   ProgressBarVisibility="{Binding IsGettingCatalogs}"
                                   RefereshButtonCommand="{Binding GetCatalogsCommand}">
         </ctrls:ButtonEditProgress>

@@ -121,8 +121,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="testDbContext.cs" />
+    <Compile Include="ViewModels\ConnectionBaseViewModel.cs" />
     <Compile Include="ViewModels\DataModellingViewModel.cs" />
     <Compile Include="ViewModels\DataSourcesViewModel.cs" />
+    <Compile Include="ViewModels\OracleConnectionViewModel.cs" />
     <Compile Include="ViewModels\SqlServerConnectionViewModel.cs" />
     <Compile Include="Views\AddVariablesView.xaml.cs">
       <DependentUpon>AddVariablesView.xaml</DependentUpon>

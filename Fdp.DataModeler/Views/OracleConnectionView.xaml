@@ -4,14 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Fdp.DataModeller.Views"
-             xmlns:DatabaseSchema="clr-namespace:Fdp.DataAccess.DatabaseSchema;assembly=Fdp.DataAccess"
+             xmlns:ctrls="clr-namespace:Fdp.Controls.Views;assembly=Fdp.Controls"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              x:Class="Fdp.DataModeller.Views.OracleConnectionView"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="300">
 
     <Grid x:Name="grid">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -26,18 +30,20 @@
                Margin="3"
                HorizontalAlignment="Left"
                Grid.Column="0"
-               Content="Host ID:" />
+               Content="Host ID:"
+               Grid.Row="1" />
         <dxe:TextEdit  x:Name="hostIDTextBox"
                        NullText="server id"
                        Width="180"
                        VerticalAlignment="Center"
-                       Text="{Binding HostID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                       Text="{Binding Connection.HostID}"
                        Margin="3"
                        Height="23"
                        HorizontalAlignment="Left"
-                       Grid.Column="1" />
+                       Grid.Column="1"
+                       Grid.Row="1" />
         <Label VerticalAlignment="Center"
-               Grid.Row="4"
+               Grid.Row="5"
                Margin="3"
                HorizontalAlignment="Left"
                Grid.Column="0"
@@ -46,14 +52,14 @@
                              NullText="password"
                              Width="180"
                              VerticalAlignment="Center"
-                             Text="{Binding Password, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                             Grid.Row="4"
+                             Text="{Binding Connection.Password}"
+                             Grid.Row="5"
                              Margin="3"
                              Height="23"
                              HorizontalAlignment="Left"
                              Grid.Column="1" />
         <Label VerticalAlignment="Center"
-               Grid.Row="2"
+               Grid.Row="3"
                Margin="3"
                HorizontalAlignment="Left"
                Grid.Column="0"
@@ -62,49 +68,59 @@
                        NullText="port number"
                        Width="180"
                        VerticalAlignment="Center"
-                       Text="{Binding Port, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                       Grid.Row="2"
+                       Text="{Binding Connection.Port}"
+                       Grid.Row="3"
                        Margin="3"
                        Height="23"
                        HorizontalAlignment="Left"
                        Grid.Column="1" />
         <Label VerticalAlignment="Center"
-               Grid.Row="1"
+               Grid.Row="2"
                Margin="3"
                HorizontalAlignment="Left"
                Grid.Column="0"
                Content="SID:" />
         <dxe:TextEdit  x:Name="sIDTextBox"
                        NullText="sid"
+                       Grid.Row="2"
+                       Grid.Column="1"
                        Width="180"
-                       VerticalAlignment="Center"
-                       Text="{Binding SID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                       Grid.Row="1"
-                       Margin="3"
                        Height="23"
+                       Margin="3"
+                       VerticalAlignment="Center"
                        HorizontalAlignment="Left"
-                       Grid.Column="1" />
+                       Text="{Binding Connection.SID}" />
         <Label VerticalAlignment="Center"
-               Grid.Row="3"
+               Grid.Row="4"
                Margin="3"
                HorizontalAlignment="Left"
                Grid.Column="0"
                Content="User Name:" />
-        <dxe:ButtonEdit  x:Name="userNameTextBox"
-                         Width="180"
-                         VerticalAlignment="Center"
-                         Text="{Binding UserName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                         Grid.Row="3"
-                         Margin="3"
-                         Height="23"
-                         HorizontalAlignment="Left"
-                         Grid.Column="1">
-            <dxe:ButtonEdit.EditTemplate>
-                <ControlTemplate>
-                    <dxe:ComboBoxEdit NullText="user name" />
-                </ControlTemplate>
-            </dxe:ButtonEdit.EditTemplate>
-        </dxe:ButtonEdit>
+        <ctrls:ButtonEditProgress  x:Name="userNameTextBox"
+                                   NullText="user name"
+                                   Width="180"
+                                   VerticalAlignment="Center"
+                                   EditValue="{Binding Connection.UserName}"
+                                   Grid.Row="4"
+                                   Margin="3"
+                                   Height="23"
+                                   HorizontalAlignment="Left"
+                                   Grid.Column="1">
+        </ctrls:ButtonEditProgress>
+        <Label Grid.Column="0"
+               Content="TNS:" />
+        <ctrls:ButtonEditProgress Grid.Column="1"
+                                  NullText="tns"
+                                  Width="180"
+                                  Margin="3"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Center"
+                                  RefereshButtonCommand="{Binding GetTnsNamesCommand}"
+                                  ComboBoxItemsSource="{Binding TnsNames}"
+                                  ComboBoxSelectedItem="{Binding Tns}"
+                                  IsTextEditable="False"
+                                  />
+
     </Grid>
 
 </UserControl>

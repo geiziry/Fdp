@@ -6,7 +6,7 @@
              xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core"
              x:Class="Fdp.UI.App">
     <Application.Resources>
-            <DataTemplate x:Key="{dxt:FloatingContainerThemeKey ResourceKey=FloatingContainerCaptionTemplate, IsThemeIndependent=True}">
+            <DataTemplate x:Key="{dxt:FloatingContainerThemeKey ResourceKey=FloatingContainerCaptionTemplate, IsThemeIndependent=true}">
                 <Grid x:Name="Root"
                       Height="Auto">
                     <dxc:FloatingContainerHeaderPanel>

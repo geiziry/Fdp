@@ -186,12 +186,17 @@
             <Grid x:Name="grid"
                   DockPanel.Dock="Top"
                   Height="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal"
+                            Grid.ColumnSpan="2">
                     <CheckBox x:Name="IsOracleConn"
                               Content="Oracle"
                               Style="{DynamicResource ConnChkStyle}"
@@ -204,8 +209,13 @@
                 <ContentControl prism:RegionManager.RegionName="{x:Static Strings:Strings.DataSourceConnectionRegion}"
                                 prism:RegionManager.RegionContext="{Binding}"
                                 Grid.Row="1"
-                                VerticalContentAlignment="Stretch" />
-                <TextBlock Grid.Row="2" Text="{Binding ConnectionException}"/>
+                                VerticalContentAlignment="Stretch"
+                                Grid.ColumnSpan="2"
+                                Margin="0,0,0,30"
+                                Grid.RowSpan="2" />
+                <TextBlock Grid.Row="1" Grid.Column="1"
+                           Text="{Binding ConnectionException}"
+                           Grid.ColumnSpan="2" TextWrapping="Wrap"/>
             </Grid>
             <ListBox VerticalAlignment="Stretch" />
         </DockPanel>

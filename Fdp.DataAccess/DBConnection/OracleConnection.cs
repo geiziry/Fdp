@@ -11,12 +11,17 @@ namespace Fdp.DataAccess.DatabaseSchema
         public string UserName { get; set; }
         public string Password { get; set; }
 
+        public string DataSource { get; set; }
+
         public string ConnectionString
         {
             get
             {
                 var connection = new OracleConnectionStringBuilder();
-                connection.DataSource = $"(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={HostID})(PORT={Port}))(CONNECT_DATA=(SID={SID})))";
+                if (string.IsNullOrWhiteSpace(DataSource))
+                    connection.DataSource = $"(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={HostID})(PORT={Port}))(CONNECT_DATA=(SID={SID})))";
+                else
+                    connection.DataSource = DataSource;
                 connection.UserID = UserName;
                 connection.Password = Password;
                 return connection.ToString();
@@ -24,5 +29,7 @@ namespace Fdp.DataAccess.DatabaseSchema
         }
 
         public DatabaseType databaseType => DatabaseType.Oracle;
+
+
     }
 }

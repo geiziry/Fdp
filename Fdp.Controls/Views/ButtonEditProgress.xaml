@@ -14,9 +14,10 @@
             <StackPanel>
                 <dxe:ComboBoxEdit NullText="{Binding NullText}"
                                   ItemsSource="{Binding ComboBoxItemsSource, RelativeSource={RelativeSource AncestorType={x:Type dxe:ButtonEdit}}}"
-                                  SelectedItem="{Binding ComboBoxSelectedItem, RelativeSource={RelativeSource AncestorType={x:Type dxe:ButtonEdit}}}" 
+                                  SelectedItem="{Binding ComboBoxSelectedItem, RelativeSource={RelativeSource AncestorType={x:Type dxe:ButtonEdit}}}"
+                                  EditValue="{Binding ComboBoxEditValue, RelativeSource={RelativeSource AncestorType={x:Type dxe:ButtonEdit}}}"
                                   EditValuePostMode="Immediate"
-                                  IsTextEditable="{Binding IsTextEditable}"/>
+                                  IsTextEditable="{Binding IsTextEditable}" />
                 <dxe:ProgressBarEdit Margin="0,-2.5,0,0"
                                      Height="5"
                                      Visibility="{Binding ProgressBarVisibility, RelativeSource={RelativeSource AncestorType={x:Type dxe:ButtonEdit}}}">

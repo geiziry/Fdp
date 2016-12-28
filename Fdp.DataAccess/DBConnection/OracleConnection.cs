@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace Fdp.DataAccess.DatabaseSchema
 {
-    public class OracleConnection : BindableBase, IDbConnection
+    public class FdpOracleConnection : BindableBase, IDbConnection
     {
         private string _dataSource;
         private string _hostID;
@@ -21,8 +21,8 @@ namespace Fdp.DataAccess.DatabaseSchema
                     connection.DataSource = $"(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={HostID})(PORT={Port}))(CONNECT_DATA=(SID={SID})))";
                 else
                     connection.DataSource = DataSource;
-                connection.UserID = UserName;
-                connection.Password = Password;
+                    connection.UserID = UserName;
+                    connection.Password = Password;
                 return connection.ToString();
             }
         }
@@ -78,6 +78,7 @@ namespace Fdp.DataAccess.DatabaseSchema
 
         public string UserName { get; set; }
 
+        public OracleConnection Conn => new OracleConnection(ConnectionString);
         private string GetDataSourceDetail(string parameter)
         {
             string pattern = $@"(?<=\b{parameter}\s?=\s+?)(?i)[0-9aA-Z_\.]*(?=\)?)";

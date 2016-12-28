@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Fdp.DataAccess.DatabaseSchema
 {
-    public class SqlServerConnection : IDbConnection
+    public class FdpSqlConnection : IDbConnection
     {
         public string ConnectionString
         {
@@ -36,6 +36,8 @@ namespace Fdp.DataAccess.DatabaseSchema
         public bool IntegratedSecurity { get; set; }
         public string Password { get; set; }
         public string UserName { get; set; }
+        public SqlConnection Conn => new SqlConnection(ConnectionString);
+
         public async Task<List<string>> GetDatabaseListAsync()
         {
             var Databases = new List<string>();

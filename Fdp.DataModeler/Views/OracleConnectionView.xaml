@@ -101,15 +101,18 @@
                Content="User Name:" />
         <ctrls:ButtonEditProgress  x:Name="userNameTextBox"
                                    NullText="user name"
-                                   Width="180"
-                                   VerticalAlignment="Center"
-                                   EditValue="{Binding Connection.UserName}"
                                    Grid.Row="4"
+                                   Grid.Column="1"
+                                   Width="180"
                                    Margin="3"
-                                   Height="23"
+                                   VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
-                                   Grid.Column="1">
-        </ctrls:ButtonEditProgress>
+                                   ComboBoxItemsSource="{Binding UsersList}"
+                                   ComboBoxEditValue="{Binding Connection.UserName}"
+                                   ProgressBarVisibility="{Binding IsGettingUsers}"
+                                   RefereshButtonCommand="{Binding GetOracleUsersCommand}"
+                                   />
+
         <Label Grid.Column="0"
                Content="TNS:" />
         <StackPanel Grid.Column="1"

@@ -7,20 +7,38 @@ namespace Fdp.DataModeller.ViewModels
 {
     public class SqlServerConnectionViewModel : ConnectionBaseViewModel
     {
+        private ObservableCollection<string> _Catalogs;
+
+        private FdpSqlConnection _Connection = new FdpSqlConnection();
+
+        private ObservableCollection<string> _DataSources;
+
+        private Visibility _IsGettingCatalogs = Visibility.Collapsed;
+
+        private Visibility _IsGettingSqlServers = Visibility.Collapsed;
+
         public SqlServerConnectionViewModel()
         {
-            GetNetworkServersCommand = new DelegateCommand(() => ManageProgress(async (o) => DataSources =
+            GetNetworkServersCommand = new DelegateCommand(() => ManageProgress(async o => DataSources =
                                             new ObservableCollection<string>(await Connection.GetLocalNetworkServersAsync()
                                             .ConfigureAwait(false)), nameof(IsGettingSqlServers)));
 
-            GetCatalogsCommand = new DelegateCommand(() => ManageProgress(async (o) => Catalogs=
+            GetCatalogsCommand = new DelegateCommand(() => ManageProgress(async o => Catalogs =
                                           new ObservableCollection<string>(await Connection.GetDatabaseListAsync()
                                         .ConfigureAwait(false)), nameof(IsGettingCatalogs)));
         }
 
-        private SqlServerConnection _Connection = new SqlServerConnection();
+        public ObservableCollection<string> Catalogs
+        {
+            get { return _Catalogs; }
+            set
+            {
+                _Catalogs = value;
+                RaisePropertyChanged();
+            }
+        }
 
-        public SqlServerConnection Connection
+        public FdpSqlConnection Connection
         {
             get { return _Connection; }
             set
@@ -29,11 +47,6 @@ namespace Fdp.DataModeller.ViewModels
                 RaisePropertiesChanged();
             }
         }
-
-        public DelegateCommand GetNetworkServersCommand { get; }
-        public DelegateCommand GetCatalogsCommand { get; }
-
-        private ObservableCollection<string> _DataSources;
 
         public ObservableCollection<string> DataSources
         {
@@ -46,31 +59,8 @@ namespace Fdp.DataModeller.ViewModels
             }
         }
 
-        private ObservableCollection<string> _Catalogs;
-
-        public ObservableCollection<string> Catalogs
-        {
-            get { return _Catalogs; }
-            set
-            {
-                _Catalogs = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private Visibility _IsGettingSqlServers = Visibility.Collapsed;
-
-        public Visibility IsGettingSqlServers
-        {
-            get { return _IsGettingSqlServers; }
-            set
-            {
-                _IsGettingSqlServers = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private Visibility _IsGettingCatalogs = Visibility.Collapsed;
+        public DelegateCommand GetCatalogsCommand { get; }
+        public DelegateCommand GetNetworkServersCommand { get; }
 
         public Visibility IsGettingCatalogs
         {
@@ -78,6 +68,16 @@ namespace Fdp.DataModeller.ViewModels
             set
             {
                 _IsGettingCatalogs = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public Visibility IsGettingSqlServers
+        {
+            get { return _IsGettingSqlServers; }
+            set
+            {
+                _IsGettingSqlServers = value;
                 RaisePropertyChanged();
             }
         }

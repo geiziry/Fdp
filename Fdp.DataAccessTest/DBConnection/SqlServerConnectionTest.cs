@@ -11,7 +11,7 @@ namespace Fdp.DataAccess.DatabaseSchema.Tests
         public async Task GetDatabaseListAsyncTestValid()
         {
             //Arrange
-            var SqlServerConnection = new SqlServerConnection
+            var SqlServerConnection = new FdpSqlConnection
             {
                 DataSource = "MELGEIZIRY",
                 UserName = "geiziry",
@@ -31,7 +31,7 @@ namespace Fdp.DataAccess.DatabaseSchema.Tests
         public async Task GetDatabaseListAsyncTestInValidDataSource()
         {
             //Arrange
-            var SqlServerConnection = new SqlServerConnection
+            var SqlServerConnection = new FdpSqlConnection
             {
                 DataSource = "MELGEIZIRY1",
                 UserName = "geiziry",
@@ -54,7 +54,7 @@ namespace Fdp.DataAccess.DatabaseSchema.Tests
         public async Task GetDatabaseListAsyncTestInValidUserName()
         {
             //Arrange
-            var SqlServerConnection = new SqlServerConnection
+            var SqlServerConnection = new FdpSqlConnection
             {
                 DataSource = "MELGEIZIRY",
                 UserName = "geiziry1",
@@ -77,7 +77,7 @@ namespace Fdp.DataAccess.DatabaseSchema.Tests
         public async Task GetDatabaseListAsyncTestInValidPassword()
         {
             //Arrange
-            var SqlServerConnection = new SqlServerConnection
+            var SqlServerConnection = new FdpSqlConnection
             {
                 DataSource = "MELGEIZIRY",
                 UserName = "geiziry",

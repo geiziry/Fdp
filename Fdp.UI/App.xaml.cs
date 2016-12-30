@@ -19,7 +19,7 @@ namespace Fdp.UI
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            AppDomain currentDomain = AppDomain.CurrentDomain;
+            //AppDomain currentDomain = AppDomain.CurrentDomain;
             //currentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
 
             this.DispatcherUnhandledException += App_DispatcherUnhandledException;

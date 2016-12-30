@@ -109,9 +109,11 @@ namespace Fdp.DataModeller.ViewModels
         {
             UsersList = new ObservableCollection<string>();
             using (var conn = Connection.Conn)
-            {
-                await conn.OpenAsync().ConfigureAwait(false);
-                await Task.Run(() => System.Threading.Thread.Sleep(5000));
+            { await Task.Run(() =>
+             {
+                conn.OpenAsync().ConfigureAwait(false);
+                 System.Threading.Thread.Sleep(5000);
+             });
                 var Cmd = new OracleCommand { Connection = conn, CommandType = CommandType.Text,
                     CommandText = "select Username from all_users" };
                 using (var dataReader = await Cmd.ExecuteReaderAsync().ConfigureAwait(false))

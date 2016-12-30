@@ -29,89 +29,6 @@
             <ColumnDefinition  Width="110" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Label VerticalAlignment="Center"
-               Margin="3"
-               HorizontalAlignment="Left"
-               Grid.Column="0"
-               Content="Host ID:"
-               Grid.Row="1" />
-        <Grid Margin="2.6,3.2,7.8,3.6"
-              Grid.Column="1"
-              Grid.Row="1"
-              Grid.RowSpan="3"
-              IsEnabled="{Binding ElementName=hasTns,Path=IsChecked,Converter={StaticResource ChkNegateConverter}}">
-            <dxe:TextEdit  x:Name="hostIDTextBox"
-                           NullText="server id"
-                           Width="180"
-                           VerticalAlignment="Center"
-                           Text="{Binding Connection.HostID}"
-                           Margin="0,0,0,59"
-                           Height="23"
-                           HorizontalAlignment="Left" />
-            <dxe:TextEdit  x:Name="portTextBox"
-                           NullText="port number"
-                           Width="180"
-                           VerticalAlignment="Center"
-                           Text="{Binding Connection.Port}"
-                           Margin="0,59,0,0"
-                           Height="23"
-                           HorizontalAlignment="Left" />
-            <dxe:TextEdit  x:Name="sIDTextBox"
-                           NullText="sid"
-                           Width="180"
-                           Height="23"
-                           Margin="0,30,0,29"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Left"
-                           Text="{Binding Connection.SID}" />
-        </Grid>
-        <Label VerticalAlignment="Center"
-               Grid.Row="5"
-               Margin="3"
-               HorizontalAlignment="Left"
-               Grid.Column="0"
-               Content="Password:" />
-        <dxe:PasswordBoxEdit x:Name="passwordTextBox"
-                             NullText="password"
-                             Width="180"
-                             VerticalAlignment="Center"
-                             Text="{Binding Connection.Password}"
-                             Grid.Row="5"
-                             Margin="3"
-                             Height="23"
-                             HorizontalAlignment="Left"
-                             Grid.Column="1" />
-        <Label VerticalAlignment="Center"
-               Grid.Row="3"
-               Margin="3"
-               HorizontalAlignment="Left"
-               Grid.Column="0"
-               Content="Port:" />
-        <Label VerticalAlignment="Center"
-               Grid.Row="2"
-               Margin="3"
-               HorizontalAlignment="Left"
-               Grid.Column="0"
-               Content="Instance:" />
-        <Label VerticalAlignment="Center"
-               Grid.Row="4"
-               Margin="3"
-               HorizontalAlignment="Left"
-               Grid.Column="0"
-               Content="User Name:" />
-        <ctrls:ButtonEditProgress  x:Name="userNameTextBox"
-                                   NullText="user name"
-                                   Grid.Row="4"
-                                   Grid.Column="1"
-                                   Width="180"
-                                   Margin="3"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   ComboBoxItemsSource="{Binding UsersList}"
-                                   ComboBoxEditValue="{Binding Connection.UserName}"
-                                   ProgressBarVisibility="{Binding IsGettingUsers}"
-                                   RefereshButtonCommand="{Binding GetOracleUsersCommand}"
-                                   />
 
         <Label Grid.Column="0"
                Content="TNS:" />
@@ -138,6 +55,105 @@
                       Content="TNS"
                       VerticalAlignment="Center" />
         </StackPanel>
-    </Grid>
 
+        <Grid Margin="3,0"
+              Grid.ColumnSpan="2"
+              Grid.RowSpan="3"
+              Grid.Row="1"
+              IsEnabled="{Binding ElementName=hasTns,Path=IsChecked,Converter={StaticResource ChkNegateConverter}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label Content="Host ID:"
+                   Grid.Column="0"
+                   Grid.Row="0"
+                   Margin="3"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center" />
+            <dxe:TextEdit  x:Name="hostIDTextBox"
+                           NullText="server id"
+                           Width="180"
+                           VerticalAlignment="Center"
+                           Text="{Binding Connection.HostID}"
+                           Height="23"
+                           HorizontalAlignment="Left"
+                           Grid.Row="0"
+                           Grid.Column="1" />
+
+            <Label Content="Instance:"
+                   Grid.Column="0"
+                   Grid.Row="1"
+                   Margin="3"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center" />
+            <dxe:TextEdit  x:Name="sIDTextBox"
+                           NullText="sid"
+                           Width="180"
+                           Height="23"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Text="{Binding Connection.SID}"
+                           Grid.Row="1"
+                           Grid.Column="1" />
+
+            <Label Content="Port:"
+                   Grid.Column="0"
+                   Grid.Row="2"
+                   Margin="3"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Left" />
+            <dxe:TextEdit  x:Name="portTextBox"
+                           NullText="port number"
+                           Grid.Column="1"
+                           Grid.Row="2"
+                           Width="180"
+                           Height="23"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Text="{Binding Connection.Port}" />
+        </Grid>
+
+        <Label Content="User Name:"
+               Grid.Column="0"
+               Grid.Row="4"
+               Margin="3"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left" />
+        <ctrls:ButtonEditProgress  x:Name="userNameTextBox"
+                                   NullText="user name"
+                                   Grid.Row="4"
+                                   Grid.Column="1"
+                                   Width="180"
+                                   Margin="3,2"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   ComboBoxItemsSource="{Binding UsersList}"
+                                   ComboBoxEditValue="{Binding Connection.UserName}"
+                                   ProgressBarVisibility="{Binding IsGettingUsers}"
+                                   RefereshButtonCommand="{Binding GetOracleUsersCommand}" />
+
+        <Label Content="Password:"
+               Grid.Column="0"
+               Grid.Row="5"
+               Margin="3"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left" />
+        <dxe:PasswordBoxEdit x:Name="passwordTextBox"
+                             NullText="password"
+                             Width="180"
+                             VerticalAlignment="Center"
+                             Text="{Binding Connection.Password}"
+                             Grid.Row="5"
+                             Margin="3,2"
+                             Height="23"
+                             HorizontalAlignment="Left"
+                             Grid.Column="1" />
+    </Grid>
 </UserControl>

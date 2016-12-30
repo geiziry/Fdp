@@ -11,9 +11,7 @@ using System.Windows.Markup;
 [assembly: AssemblyTitle("Fdp.UI")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Schlumberger")]
 [assembly: AssemblyProduct("Fdp.UI")]
-[assembly: AssemblyCopyright("Copyright © Schlumberger 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -19,7 +19,7 @@ namespace Fdp.UI
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class Shell :DXWindow
+    public partial class Shell 
     {
         public Shell()
         {

@@ -1,0 +1,25 @@
+<ResourceDictionary xmlns:dxt="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
+                    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Fdp.UI">
+    <DataTemplate x:Key="{dxt:FloatingContainerThemeKey ResourceKey=FloatingContainerCaptionTemplate, IsThemeIndependent=true}">
+        <Grid x:Name="Root"
+              Height="Auto">
+            <dxc:FloatingContainerHeaderPanel>
+                <TextBlock x:Name="PART_Text"
+                           TextTrimming="CharacterEllipsis"
+                           FontWeight="DemiBold"
+                           Background="{x:Null}"
+                           Foreground="Black"
+                           Margin="6,3,6,3"
+                           VerticalAlignment="Center"
+                           IsHitTestVisible="False"
+                           HorizontalAlignment="Left"
+                           Text="{Binding Path=(dxc:FloatingContainer.FloatingContainer).Caption, RelativeSource={RelativeSource AncestorType=ContentPresenter}}" />
+            </dxc:FloatingContainerHeaderPanel>
+        </Grid>
+    </DataTemplate>
+
+
+</ResourceDictionary>

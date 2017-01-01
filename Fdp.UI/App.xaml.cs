@@ -33,12 +33,12 @@ namespace Fdp.UI
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            MessageBox.Show((e.ExceptionObject as Exception).Message);
+            MessageBox.Show((e.ExceptionObject as Exception).StackTrace);
         }
 
         private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show(e.Exception.Message);
+            MessageBox.Show(e.Exception.GetBaseException().ToString());
             e.Handled = true;
         }
         private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)

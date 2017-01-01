@@ -23,7 +23,7 @@ namespace Fdp.InfraStructure.Behaviors
 
         private void Loaded(object sender, RoutedEventArgs e)
         {
-            var ParentWnd = AssociatedWindow.Owner as Window;
+            var ParentWnd = AssociatedWindow.Owner as DXWindow;
 
             ContentPresenter adornedElement =
                 (ContentPresenter)LayoutHelper.FindElement(ParentWnd, (el) => { return el is ContentPresenter; });

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Fdp.InfraStructure")]
+[assembly: AssemblyTitle("Fdp.UITest")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("MElgeiziry")]
-[assembly: AssemblyProduct("Fdp.InfraStructure")]
-[assembly: AssemblyCopyright("Copyright © MElgeiziry 2016")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Fdp.UITest")]
+[assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("08154aff-238b-4ff3-bcac-6356b9fbec38")]
+[assembly: Guid("adfaf25e-2f2a-4754-8780-52a024db68c5")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -12,7 +12,8 @@
              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
              mc:Ignorable="d"
              d:DesignHeight="300"
-             d:DesignWidth="300">
+             d:DesignWidth="300"
+             x:Name="OracleConnection">
     <UserControl.Resources>
         <dx:NegationConverter x:Key="ChkNegateConverter" />
     </UserControl.Resources>
@@ -52,6 +53,7 @@
                 </ctrls:ButtonEditProgress.Buttons>
             </ctrls:ButtonEditProgress>
             <CheckBox x:Name="hasTns"
+                      AutomationProperties.AutomationId="hasTns"
                       Content="TNS"
                       VerticalAlignment="Center" />
         </StackPanel>

@@ -11,9 +11,9 @@ using System.Windows.Markup;
 [assembly: AssemblyTitle("Fdp.Controls")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Schlumberger")]
+[assembly: AssemblyCompany("MElgeiziry")]
 [assembly: AssemblyProduct("Fdp.Controls")]
-[assembly: AssemblyCopyright("Copyright © Schlumberger 2016")]
+[assembly: AssemblyCopyright("Copyright © MElgeiziry 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

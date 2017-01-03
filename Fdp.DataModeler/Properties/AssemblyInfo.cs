@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("Fdp.DataModeler")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Schlumberger")]
+[assembly: AssemblyCompany("MElgeiziry")]
 [assembly: AssemblyProduct("Fdp.DataModeler")]
-[assembly: AssemblyCopyright("Copyright © Schlumberger 2016")]
+[assembly: AssemblyCopyright("Copyright © MElgeiziry 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

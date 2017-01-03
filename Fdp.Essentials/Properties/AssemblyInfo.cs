@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("Fdp.Essentials")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Schlumberger")]
+[assembly: AssemblyCompany("MElgeiziry")]
 [assembly: AssemblyProduct("Fdp.Essentials")]
-[assembly: AssemblyCopyright("Copyright © Schlumberger 2016")]
+[assembly: AssemblyCopyright("Copyright © MElgeiziry 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

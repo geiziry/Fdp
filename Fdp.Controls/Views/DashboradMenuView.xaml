@@ -21,7 +21,8 @@
                 <DockPanel HorizontalAlignment="Stretch" />
             </ItemsPanelTemplate>
         </Menu.ItemsPanel>
-        <dx:SimpleButton HorizontalAlignment="Left"
+        <dx:SimpleButton x:Name="Databtn"
+            HorizontalAlignment="Left"
                          Content="Data"
                          Command="{Binding LoadDataModelCommand}"
                          Glyph="{dx:DXImage Image=EditDataSource_16x16.png}" />

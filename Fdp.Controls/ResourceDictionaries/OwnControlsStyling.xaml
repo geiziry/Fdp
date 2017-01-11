@@ -159,7 +159,6 @@
         </Grid>
     </ControlTemplate>
 
-
     <Style x:Key="EditLockChkStyle"
            TargetType="{x:Type CheckBox}">
         <Setter Property="FocusVisualStyle"
@@ -364,11 +363,6 @@
         <Grid x:Name="Grid"
               SnapsToDevicePixels="True">
             <CheckBox Style="{StaticResource EditLockChkStyle}" />
-
         </Grid>
-        <ControlTemplate.Triggers>
-        </ControlTemplate.Triggers>
     </ControlTemplate>
-
-
 </ResourceDictionary>

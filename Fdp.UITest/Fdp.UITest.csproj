@@ -60,6 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShellWindow.cs" />
     <Compile Include="SmokeTests.cs" />
+    <Compile Include="TestsBase.cs" />
     <Compile Include="WindowObject.cs" />
     <Compile Include="Windows.cs" />
   </ItemGroup>

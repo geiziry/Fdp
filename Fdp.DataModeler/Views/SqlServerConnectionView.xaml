@@ -44,6 +44,7 @@
                                   HorizontalAlignment="Left"
                                   ComboBoxItemsSource="{Binding DataSources}"
                                   ComboBoxSelectedItem="{Binding Connection.DataSource}"
+                                  ComboBoxEditValue="{Binding Connection.DataSource}"
                                   ProgressBarVisibility="{Binding IsGettingSqlServers}"
                                   RefereshButtonCommand="{Binding GetNetworkServersCommand}">
         </ctrls:ButtonEditProgress>

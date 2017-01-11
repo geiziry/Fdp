@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Fdp.InfraStructure.Interfaces
 {
-    public interface IDataSourceConnectionException
+    public interface IFdpSettings
     {
-        string ConnectionException { get; set; }
+        string ConnectionString { get; set; }
     }
 }

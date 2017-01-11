@@ -23,7 +23,7 @@ namespace Fdp.UITest
 
         internal void CheckHasTns()
         {
-           var tns= window.Get( SearchCriteria.ByAutomationId("hasTns"));
+           var tns= window.Get(SearchCriteria.ByAutomationId("hasTns"));
 
             if (tns != null)
             {

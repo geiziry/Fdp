@@ -1,4 +1,5 @@
 ﻿using Fdp.Controls.Views;
+using Fdp.Essentials.Services;
 using Fdp.Essentials.ViewModels;
 using Fdp.InfraStructure;
 using Fdp.InfraStructure.Interfaces;
@@ -12,7 +13,6 @@ namespace Fdp.Essentials
     {
         IUnityContainer container;
         IRegionManager _regionManager;
-
         public Module(IUnityContainer _container, IRegionManager _regionManager)
         {
             this.container = _container;

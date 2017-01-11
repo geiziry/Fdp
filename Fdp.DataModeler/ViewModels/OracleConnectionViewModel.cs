@@ -1,48 +1,65 @@
-﻿using DevExpress.Mvvm;
+﻿using Akka.Actor;
+using DevExpress.Mvvm;
 using Fdp.DataAccess.DatabaseSchema;
-using Fdp.DataAccess.DBConnection;
-using Microsoft.Win32;
-using Oracle.ManagedDataAccess.Client;
+using Fdp.DataModeller.ActorModel.Actors;
+using Fdp.DataModeller.ActorModel.Actors.OracleActors.UI;
+using Fdp.InfraStructure.Interfaces.DataModellerInterfaces;
+using Microsoft.Practices.Unity;
 using System.Collections.ObjectModel;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Fdp.DataModeller.ViewModels
 {
     public class OracleConnectionViewModel : ConnectionBaseViewModel
     {
-        private FdpOracleConnection _Connection;
+        private FdpOracleConnection _Connection = new FdpOracleConnection();
         private Visibility _IsGettingUsers = Visibility.Collapsed;
         private string _Tns;
         private ObservableCollection<string> _TnsNames;
         private ObservableCollection<string> _usersList;
-        private TNSNamesReader TnsNamesReader;
+        private readonly IActorRef _oracleCoordinatorActor;
+        private readonly IActorRef _progressBarActor;
 
-        public OracleConnectionViewModel()
+        //private TNSNamesReader TnsNamesReader;
+        [Dependency]
+        public IOracleConnectionBuildingService _oracleConnectionBuildingService { get; set; }
+
+        public OracleConnectionViewModel(IActorRefFactory ActorSystem)
         {
-            TnsNamesReader = new TNSNamesReader();
-            Connection = new FdpOracleConnection();
-            GetTnsNamesCommand = new DelegateCommand(() =>
-            {
-                var Tns = TnsNamesReader.GetOracleHomes();
-                TnsNamesReader.SetTnsFileText(Tns.FirstOrDefault(), true);
-                TnsNames = new ObservableCollection<string>(TnsNamesReader.LoadTnsNames());
-            });
+            _progressBarActor =
+                ActorSystem.ActorOf(
+                    Props.Create(() => new ProgressBarActor(this)));
+            _oracleCoordinatorActor =
+                ActorSystem.ActorOf(
+                    Props.Create(() => new OracleCoordinatorActor(_progressBarActor)));
 
-            GetTnsFileCommand = new DelegateCommand(() =>
-            {
-                FileDialog dialog = new OpenFileDialog();
+            //GetOracleUsersCommand = new DelegateCommand(() =>
+            //)
 
-                if (dialog.ShowDialog() == true)
-                {
-                    TnsNamesReader.SetTnsFileText(dialog.FileName);
-                    TnsNames = new ObservableCollection<string>(TnsNamesReader.LoadTnsNames());
-                }
-            });
+            #region commented
 
-            GetOracleUsersCommand = new DelegateCommand(() => ManageProgress(async o => await GetOracleUsers(), nameof(IsGettingUsers)));
+            //TnsNamesReader = new TNSNamesReader();
+            //GetTnsNamesCommand = new DelegateCommand(() =>
+            //{
+            //    var Tns = TnsNamesReader.GetOracleHomes();
+            //    TnsNamesReader.SetTnsFileText(Tns.FirstOrDefault(), true);
+            //    TnsNames = new ObservableCollection<string>(TnsNamesReader.LoadTnsNames());
+            //});
+
+            //GetTnsFileCommand = new DelegateCommand(() =>
+            //{
+            //    FileDialog dialog = new OpenFileDialog();
+
+            //    if (dialog.ShowDialog() == true)
+            //    {
+            //        TnsNamesReader.SetTnsFileText(dialog.FileName);
+            //        TnsNames = new ObservableCollection<string>(TnsNamesReader.LoadTnsNames());
+            //    }
+            //});
+
+            //GetOracleUsersCommand = new DelegateCommand(() => ManageProgress(async o => await GetOracleUsers(), nameof(IsGettingUsers)));
+
+            #endregion commented
         }
 
         public FdpOracleConnection Connection
@@ -79,7 +96,7 @@ namespace Fdp.DataModeller.ViewModels
                 _Tns = value;
                 if (!string.IsNullOrWhiteSpace(_Tns))
                 {
-                    Connection.DataSource = TnsNamesReader.GetDataSource(_Tns);
+                    Connection.DataSource = _oracleConnectionBuildingService.GetDataSource(_Tns);
                     ParentViewModel.ConnectionException = Connection.DataSource;
                 }
             }
@@ -105,23 +122,23 @@ namespace Fdp.DataModeller.ViewModels
             }
         }
 
-        private async Task GetOracleUsers()
-        {
-            UsersList = new ObservableCollection<string>();
-            using (var conn = Connection.Conn)
-            { await Task.Run(() =>
-             {
-                conn.OpenAsync().ConfigureAwait(false);
-                 System.Threading.Thread.Sleep(5000);
-             });
-                var Cmd = new OracleCommand { Connection = conn, CommandType = CommandType.Text,
-                    CommandText = "select Username from all_users" };
-                using (var dataReader = await Cmd.ExecuteReaderAsync().ConfigureAwait(false))
-                {
-                    while (dataReader.Read())
-                        UsersList.Add(dataReader.GetString(0));
-                }
-            }
-        }
+        //private async Task GetOracleUsers()
+        //{
+        //    UsersList = new ObservableCollection<string>();
+        //    using (var conn = Connection.Conn)
+        //    { await Task.Run(() =>
+        //     {
+        //        conn.OpenAsync().ConfigureAwait(false);
+        //         System.Threading.Thread.Sleep(5000);
+        //     });
+        //        var Cmd = new OracleCommand { Connection = conn, CommandType = CommandType.Text,
+        //            CommandText = "select Username from all_users" };
+        //        using (var dataReader = await Cmd.ExecuteReaderAsync().ConfigureAwait(false))
+        //        {
+        //            while (dataReader.Read())
+        //                UsersList.Add(dataReader.GetString(0));
+        //        }
+        //    }
+        //}
     }
 }

@@ -1,4 +1,7 @@
-﻿using Fdp.InfraStructure;
+﻿using Akka.Actor;
+using Akka.DI.Core;
+using Akka.DI.Unity;
+using Fdp.InfraStructure;
 using Fdp.InfraStructure.Prism;
 using Microsoft.Practices.Unity;
 using Prism.Modularity;
@@ -9,22 +12,23 @@ using System.Windows;
 
 namespace Fdp.UI
 {
-    class BootStrapper : UnityBootstrapper
+    internal class BootStrapper : UnityBootstrapper
     {
-
-        protected override DependencyObject CreateShell()
+        protected override void ConfigureContainer()
         {
-            return Container.TryResolve<Shell>();
-             
+            base.ConfigureContainer();
+            Container.RegisterType<IRegionNavigationContentLoader,
+                ScopedRegionNavigationContentLoader>(new ContainerControlledLifetimeManager());
+            IDependencyResolver resolver = new UnityDependencyResolver(Container, App.FdpActorSystem);
+            Container.RegisterInstance<IActorRefFactory>(App.FdpActorSystem,
+                new ContainerControlledLifetimeManager());
         }
 
-        protected override void InitializeShell()
+        protected override IRegionBehaviorFactory ConfigureDefaultRegionBehaviors()
         {
-            base.InitializeShell();
-            App.Current.MainWindow = (Window)Shell;
-            var regionManager = RegionManager.GetRegionManager(Shell);
-            RegionManagerAware.SetRegionManagerAware(Shell, regionManager);
-            App.Current.MainWindow.Show();
+            IRegionBehaviorFactory behaviors = base.ConfigureDefaultRegionBehaviors();
+            behaviors.AddIfMissing(RegionManagerAwareBehavior.BehaviorKey, typeof(RegionManagerAwareBehavior));
+            return behaviors;
         }
 
         protected override void ConfigureModuleCatalog()
@@ -55,22 +59,20 @@ namespace Fdp.UI
                     ModuleType = moduleDataModeller.AssemblyQualifiedName,
                     InitializationMode = InitializationMode.WhenAvailable
                 });
-
         }
 
-        protected override IRegionBehaviorFactory ConfigureDefaultRegionBehaviors()
+        protected override DependencyObject CreateShell()
         {
-            IRegionBehaviorFactory behaviors= base.ConfigureDefaultRegionBehaviors();
-            behaviors.AddIfMissing(RegionManagerAwareBehavior.BehaviorKey, typeof(RegionManagerAwareBehavior));
-            return behaviors;
+            return Container.TryResolve<Shell>();
         }
 
-        protected override void ConfigureContainer()
+        protected override void InitializeShell()
         {
-            base.ConfigureContainer();
-            Container.RegisterType<IRegionNavigationContentLoader,
-                ScopedRegionNavigationContentLoader>(new ContainerControlledLifetimeManager());
-
+            base.InitializeShell();
+            App.Current.MainWindow = (Window)Shell;
+            var regionManager = RegionManager.GetRegionManager(Shell);
+            RegionManagerAware.SetRegionManagerAware(Shell, regionManager);
+            App.Current.MainWindow.Show();
         }
     }
 }

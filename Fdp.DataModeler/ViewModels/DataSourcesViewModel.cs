@@ -1,6 +1,7 @@
 ﻿using DevExpress.Mvvm;
 using Fdp.InfraStructure;
 using Fdp.InfraStructure.Interfaces;
+using Fdp.InfraStructure.Interfaces.DataModellerInterfaces;
 using Fdp.InfraStructure.Prism;
 using Prism.Regions;
 using System.Linq;

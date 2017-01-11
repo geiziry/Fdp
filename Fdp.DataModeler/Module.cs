@@ -1,4 +1,6 @@
-﻿using Fdp.DataModeller.Views;
+﻿using Fdp.DataModeller.Services;
+using Fdp.DataModeller.Views;
+using Fdp.InfraStructure.Interfaces.DataModellerInterfaces;
 using Microsoft.Practices.Unity;
 using Prism.Modularity;
 using Prism.Regions;
@@ -18,6 +20,7 @@ namespace Fdp.DataModeller
 
         public void Initialize()
         {
+            container.RegisterType<IOracleConnectionBuildingService, OracleConnectionBuildingService>();
             container.RegisterType<object, DataModellingView>("DataModellingView");
             container.RegisterType<object, OracleConnectionView>("OracleConnectionView");
             container.RegisterType<object, SqlServerConnectionView>("SqlServerConnectionView");

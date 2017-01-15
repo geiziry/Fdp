@@ -13,26 +13,27 @@ namespace Fdp.DataModeller.ActorModel.Actors.OracleActors.UI
         public ProgressBarActor(OracleConnectionViewModel viewModel)
         {
             _viewModel = viewModel;
-
-            Receive<SetVisibilityPropertyMessage>(message => 
-                    SetVisibilityProperty(message.VisibilityProperty));
-        }
-
-        private void SetVisibilityProperty(string visibilityProperty)
-        {
-            _visibilityProperty = _viewModel.GetType().GetProperty(visibilityProperty);
+            Show();
         }
 
         private void Hide()
         {
-            _viewModel.UpdateProgressBarVisibility(_visibilityProperty, false);
-            Become(Show);
+            Receive<SetVisibilityPropertyMessage>(message =>
+            {
+                _visibilityProperty = _viewModel.GetType().GetProperty(message.VisibilityProperty);
+                _viewModel.UpdateProgressBarVisibility(_visibilityProperty, false);
+                Become(Show);
+            });
         }
 
         private void Show()
         {
-            _viewModel.UpdateProgressBarVisibility(_visibilityProperty, true);
-            Become(Hide);
+            Receive<SetVisibilityPropertyMessage>(message =>
+            {
+                _visibilityProperty = _viewModel.GetType().GetProperty(message.VisibilityProperty);
+                _viewModel.UpdateProgressBarVisibility(_visibilityProperty, true);
+                Become(Hide);
+            });
         }
     }
 }

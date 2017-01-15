@@ -19,13 +19,13 @@ namespace Fdp.DataModeller.ViewModels
 
         public SqlServerConnectionViewModel()
         {
-            GetNetworkServersCommand = new DelegateCommand(() => ManageProgress(async o => DataSources =
-                                            new ObservableCollection<string>(await Connection.GetLocalNetworkServersAsync()
-                                            .ConfigureAwait(false)), nameof(IsGettingSqlServers)));
+            //GetNetworkServersCommand = new DelegateCommand(() => ManageProgress(async o => DataSources =
+            //                                new ObservableCollection<string>(await Connection.GetLocalNetworkServersAsync()
+            //                                .ConfigureAwait(false)), nameof(IsGettingSqlServers)));
 
-            GetCatalogsCommand = new DelegateCommand(() => ManageProgress(async o => Catalogs =
-                                          new ObservableCollection<string>(await Connection.GetDatabaseListAsync()
-                                        .ConfigureAwait(false)), nameof(IsGettingCatalogs)));
+            //GetCatalogsCommand = new DelegateCommand(() => ManageProgress(async o => Catalogs =
+            //                              new ObservableCollection<string>(await Connection.GetDatabaseListAsync()
+            //                            .ConfigureAwait(false)), nameof(IsGettingCatalogs)));
         }
 
         public ObservableCollection<string> Catalogs

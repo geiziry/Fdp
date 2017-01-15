@@ -1,14 +1,15 @@
-﻿using Oracle.ManagedDataAccess.Client;
+﻿using Fdp.DataAccess.DatabaseSchema;
+using Oracle.ManagedDataAccess.Client;
 
 namespace Fdp.DataModeller.ActorModel.Messages
 {
     public class GetOracleUsersMessage
     {
-        public GetOracleUsersMessage(OracleConnection connection)
+        public GetOracleUsersMessage(FdpOracleConnection connection)
         {
             Connection = connection;
         }
 
-        public OracleConnection Connection { get; private set; }
+        public FdpOracleConnection Connection { get; private set; }
     }
 }

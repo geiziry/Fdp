@@ -9,5 +9,6 @@ namespace Fdp.InfraStructure.Interfaces.DataModellerInterfaces
     public interface IDataSourceConnectionException
     {
         string ConnectionException { get; set; }
+        string TextToAppend { get; set; }
     }
 }

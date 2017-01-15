@@ -3,6 +3,7 @@ using DevExpress.Mvvm;
 using Fdp.DataAccess.DatabaseSchema;
 using Fdp.DataModeller.ActorModel.Actors;
 using Fdp.DataModeller.ActorModel.Actors.OracleActors.UI;
+using Fdp.DataModeller.ActorModel.Messages;
 using Fdp.InfraStructure.Interfaces.DataModellerInterfaces;
 using Microsoft.Practices.Unity;
 using System.Collections.ObjectModel;
@@ -31,10 +32,10 @@ namespace Fdp.DataModeller.ViewModels
                     Props.Create(() => new ProgressBarActor(this)));
             _oracleCoordinatorActor =
                 ActorSystem.ActorOf(
-                    Props.Create(() => new OracleCoordinatorActor(_progressBarActor)));
+                    Props.Create(() => new OracleCoordinatorActor(this,_progressBarActor)));
 
-            //GetOracleUsersCommand = new DelegateCommand(() =>
-            //)
+            GetOracleUsersCommand = new DelegateCommand(() =>
+            _oracleCoordinatorActor.Tell(new GetOracleUsersMessage(Connection)));
 
             #region commented
 
@@ -122,23 +123,5 @@ namespace Fdp.DataModeller.ViewModels
             }
         }
 
-        //private async Task GetOracleUsers()
-        //{
-        //    UsersList = new ObservableCollection<string>();
-        //    using (var conn = Connection.Conn)
-        //    { await Task.Run(() =>
-        //     {
-        //        conn.OpenAsync().ConfigureAwait(false);
-        //         System.Threading.Thread.Sleep(5000);
-        //     });
-        //        var Cmd = new OracleCommand { Connection = conn, CommandType = CommandType.Text,
-        //            CommandText = "select Username from all_users" };
-        //        using (var dataReader = await Cmd.ExecuteReaderAsync().ConfigureAwait(false))
-        //        {
-        //            while (dataReader.Read())
-        //                UsersList.Add(dataReader.GetString(0));
-        //        }
-        //    }
-        //}
     }
 }

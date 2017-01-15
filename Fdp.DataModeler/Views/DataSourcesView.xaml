@@ -4,6 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Fdp.DataModeller.Views"
              xmlns:Strings="clr-namespace:Fdp.InfraStructure;assembly=Fdp.InfraStructure"
+             xmlns:behaviors="clr-namespace:Fdp.InfraStructure.Behaviors;assembly=Fdp.InfraStructure"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
@@ -13,7 +14,7 @@
              x:Class="Fdp.DataModeller.Views.DataSourcesView"
              mc:Ignorable="d"
              d:DesignHeight="300"
-             d:DesignWidth="300">
+             d:DesignWidth="500">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -187,7 +188,7 @@
                   DockPanel.Dock="Top"
                   Height="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="350"/>
+                    <ColumnDefinition Width="400" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -209,13 +210,35 @@
                 <ContentControl prism:RegionManager.RegionName="{x:Static Strings:Strings.DataSourceConnectionRegion}"
                                 prism:RegionManager.RegionContext="{Binding}"
                                 Grid.Row="1"
-                                VerticalContentAlignment="Stretch"
-                                Grid.ColumnSpan="2"
+                                Grid.RowSpan="2"
                                 Margin="0,0,0,30"
-                                Grid.RowSpan="2" />
-                <TextBlock Grid.Row="1" Grid.Column="1"
-                           Text="{Binding ConnectionException}"
-                           Grid.ColumnSpan="2" TextWrapping="Wrap"/>
+                                VerticalContentAlignment="Stretch">
+                </ContentControl>
+                <Grid Grid.Row="1"
+                      Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal"
+                                FlowDirection="RightToLeft">
+                        <dx:SimpleButton Glyph="{dx:DXImage Image=Delete_16x16.png}"
+                                         Visibility="{Binding ConnectionExceptionNotNull,Converter={StaticResource VisibilityConverter}}"
+                                         Command="{Binding EmptyErrorListCommand}" 
+                                         />
+                    </StackPanel>
+                    <TextBox x:Name="ErrorList"
+                             Margin="0,5"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             Grid.Row="1"
+                             IsReadOnly="True"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto"
+                             Text="{Binding ConnectionException}"
+                             TextWrapping="Wrap" 
+                             behaviors:TextBoxAppendBehavior.TextToAppend="{Binding TextToAppend}"/>
+
+                </Grid>
             </Grid>
             <ListBox VerticalAlignment="Stretch" />
         </DockPanel>

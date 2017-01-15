@@ -69,6 +69,7 @@
     <Compile Include="ApplicationCommands.cs" />
     <Compile Include="Behaviors\ButtonClickBehavior.cs" />
     <Compile Include="Behaviors\DimmParentWindowBehavior.cs" />
+    <Compile Include="Behaviors\TextBoxAppendBehavior.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Interfaces\DataModellerInterfaces\IDataSourceConnectionException.cs" />
     <Compile Include="Interfaces\DataModellerInterfaces\IOracleConnectionBuildingService.cs" />

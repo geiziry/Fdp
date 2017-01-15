@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Akka.Actor;
 using Fdp.DataModeller.ActorModel.Messages;
 using Fdp.InfraStructure.Interfaces.DataModellerInterfaces;
+using System.Collections.ObjectModel;
 
 namespace Fdp.DataModeller.ActorModel.Actors.OracleActors
 {
@@ -19,8 +20,16 @@ namespace Fdp.DataModeller.ActorModel.Actors.OracleActors
 
         private async Task GetOracleUsers(GetOracleUsersMessage message)
         {
-            var OracleUsers = await _oracleConnectionBuildingService.GetOracleUsers(message.Connection);
-            Sender.Tell(OracleUsers);
+                var OracleUsers=new ObservableCollection<string>();
+            try
+            {
+                OracleUsers = await _oracleConnectionBuildingService.GetOracleUsers(message.Connection.Conn);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            Sender.Tell(new SetOracleUsersMessage (OracleUsers));
         }
     }
 }

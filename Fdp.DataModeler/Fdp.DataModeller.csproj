@@ -133,6 +133,7 @@
     <Compile Include="ActorModel\Actors\OracleCoordinatorActor.cs" />
     <Compile Include="ActorModel\Actors\SqlServerCoordinatorActor.cs" />
     <Compile Include="ActorModel\Messages\GetOracleUsersMessage.cs" />
+    <Compile Include="ActorModel\Messages\SetOracleUsersMessage.cs" />
     <Compile Include="ActorModel\Messages\SetVisibilityPropertyMessage.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

@@ -10,12 +10,18 @@ namespace Fdp.DataModeller.ViewModels
 {
     public class DataSourcesViewModel : BindableBase, IRegionManagerAware, IDataSourceConnectionException
     {
+        public DataSourcesViewModel()
+        {
+            EmptyErrorListCommand = new DelegateCommand(() => ConnectionException = null);
+        }
         private bool _IsAddDataSource;
         public bool IsAddDataSource
         {
             get { return _IsAddDataSource; }
-            set { _IsAddDataSource = value;
-                if(_IsAddDataSource &&!_RegionManager.Regions[Strings.DataSourceConnectionRegion].ActiveViews.Any())
+            set
+            {
+                _IsAddDataSource = value;
+                if (_IsAddDataSource && !_RegionManager.Regions[Strings.DataSourceConnectionRegion].ActiveViews.Any())
                     _RegionManager.RequestNavigate(Strings.DataSourceConnectionRegion, "OracleConnectionView");
 
                 RaisePropertyChanged();
@@ -43,11 +49,28 @@ namespace Fdp.DataModeller.ViewModels
         public string ConnectionException
         {
             get { return _ConnectionException; }
-            set { _ConnectionException = value;
+            set
+            {
+                _ConnectionException = value;
+                RaisePropertiesChanged(new string[]{"ConnectionException",
+                    "ConnectionExceptionNotNull" });
+            }
+        }
+
+        public bool ConnectionExceptionNotNull => !string.IsNullOrEmpty(ConnectionException);
+
+        public DelegateCommand EmptyErrorListCommand { get; set; }
+        public IRegionManager _RegionManager { get; set; }
+
+        private string _textToAppend;
+
+        public string TextToAppend
+        {
+            get { return _textToAppend; }
+            set { _textToAppend = value;
                 RaisePropertyChanged();
             }
         }
 
-        public IRegionManager _RegionManager { get; set; }
     }
 }

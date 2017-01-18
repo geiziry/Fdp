@@ -13,7 +13,8 @@ namespace Fdp.DataModeller.ActorModel.Actors.OracleActors.UI
         public ProgressBarActor(OracleConnectionViewModel viewModel)
         {
             _viewModel = viewModel;
-            Show();
+            Receive<object>(m => { });
+            //Show();
         }
 
         private void Hide()
@@ -34,6 +35,13 @@ namespace Fdp.DataModeller.ActorModel.Actors.OracleActors.UI
                 _viewModel.UpdateProgressBarVisibility(_visibilityProperty, true);
                 Become(Hide);
             });
+        }
+
+        
+        
+        protected override void PostStop()
+        {
+            base.PostStop();
         }
     }
 }

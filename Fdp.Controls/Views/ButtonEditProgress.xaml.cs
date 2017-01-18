@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace Fdp.Controls.Views
 {
@@ -32,6 +33,10 @@ namespace Fdp.Controls.Views
         public static readonly new DependencyProperty NullTextProperty =
             DependencyProperty.Register("NullText", typeof(string), typeof(ButtonEditProgress), new PropertyMetadata(null));
 
+        // Using a DependencyProperty as the backing store for PopupOpeningCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PopupOpeningCommandProperty =
+            DependencyProperty.Register("PopupOpeningCommand", typeof(ICommand), typeof(ButtonEditProgress), new PropertyMetadata(null));
+
         // Using a DependencyProperty as the backing store for ProgressBarVisibility.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ProgressBarVisibilityProperty =
             DependencyProperty.Register("ProgressBarVisibility", typeof(Visibility), typeof(ButtonEditProgress), new PropertyMetadata(Visibility.Collapsed));
@@ -56,11 +61,13 @@ namespace Fdp.Controls.Views
             get { return (ObservableCollection<string>)GetValue(ComboBoxItemsSourceProperty); }
             set { SetValue(ComboBoxItemsSourceProperty, value); }
         }
+
         public string ComboBoxSelectedItem
         {
             get { return (string)GetValue(ComboBoxSelectedItemProperty); }
             set { SetValue(ComboBoxSelectedItemProperty, value); }
         }
+
         public new bool IsTextEditable
         {
             get { return (bool)GetValue(IsTextEditableProperty); }
@@ -73,11 +80,17 @@ namespace Fdp.Controls.Views
             set { SetValue(NullTextProperty, value); }
         }
 
+        public ICommand PopupOpeningCommand
+        {
+            get { return (ICommand)GetValue(PopupOpeningCommandProperty); }
+            set { SetValue(PopupOpeningCommandProperty, value); }
+        }
         public Visibility ProgressBarVisibility
         {
             get { return (Visibility)GetValue(ProgressBarVisibilityProperty); }
             set { SetValue(ProgressBarVisibilityProperty, value); }
         }
+
         public DelegateCommand<object> RefereshButtonCommand
         {
             get { return (DelegateCommand<object>)GetValue(RefereshButtonCommandProperty); }

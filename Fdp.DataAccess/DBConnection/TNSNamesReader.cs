@@ -17,7 +17,7 @@ namespace Fdp.DataAccess.DBConnection
             {
                 foreach (string subkey in rgkAllHome.GetSubKeyNames())
                 {
-                    if (subkey.StartsWith("KEY_"))
+                    if (subkey.StartsWith("KEY_", StringComparison.CurrentCulture))
                         oracleHomes.Add(subkey);
                 }
             }

@@ -20,7 +20,6 @@ namespace Fdp.UI
         protected override void OnStartup(StartupEventArgs e)
         {
             _fdpActorSystem = ActorSystem.Create("FdpActorSystem");
-
             this.DispatcherUnhandledException += App_DispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
@@ -31,6 +30,12 @@ namespace Fdp.UI
             bootstrapper.Run();
         }
 
+        protected override void OnExit(ExitEventArgs e)
+        {
+            _fdpActorSystem.Shutdown();
+            _fdpActorSystem.AwaitTermination();
+            base.OnExit(e);
+        }
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             MessageBox.Show((e.ExceptionObject as Exception).StackTrace);

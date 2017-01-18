@@ -1,5 +1,8 @@
 ﻿using Akka.Actor;
+using Fdp.DataModeller.ActorModel.Messages;
 using Fdp.InfraStructure.Interfaces.DataModellerInterfaces;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Fdp.DataModeller.ActorModel.Actors.OracleActors
 {
@@ -17,13 +20,13 @@ namespace Fdp.DataModeller.ActorModel.Actors.OracleActors
         private void GetTnsNames(object obj)
         {
             var TnsNames = _oracleConnectionBuildingService.GetTnsNames();
-            Sender.Tell(TnsNames);
+            Sender.Tell(new SetTnsNamesMessage(new ObservableCollection<string>(TnsNames.OrderBy(x => x).Distinct().ToList())));
         }
 
         private void GetTnsNamesFromFile(object obj)
         {
             var TnsNames = _oracleConnectionBuildingService.GetTnsNamesFromFile();
-            Sender.Tell(TnsNames);
+            Sender.Tell(new SetTnsNamesMessage(new ObservableCollection<string>(TnsNames?.OrderBy(x => x).Distinct().ToList())));
         }
 
     }

@@ -66,10 +66,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AkkaHelpers\ActorMetaData.cs" />
+    <Compile Include="AkkaHelpers\ActorPaths.cs" />
     <Compile Include="ApplicationCommands.cs" />
     <Compile Include="Behaviors\ButtonClickBehavior.cs" />
+    <Compile Include="Behaviors\ComboBoxBehaviors.cs" />
     <Compile Include="Behaviors\DimmParentWindowBehavior.cs" />
     <Compile Include="Behaviors\TextBoxAppendBehavior.cs" />
+    <Compile Include="Behaviors\TextBoxInputBehavior.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Interfaces\DataModellerInterfaces\IDataSourceConnectionException.cs" />
     <Compile Include="Interfaces\DataModellerInterfaces\IOracleConnectionBuildingService.cs" />

@@ -3,7 +3,7 @@ using Akka.DI.Core;
 using Fdp.DataModeller.ActorModel.Actors.OracleActors;
 using Fdp.DataModeller.ActorModel.Messages;
 using Fdp.DataModeller.ViewModels;
-using System.Windows.Controls;
+using System.Windows;
 
 namespace Fdp.DataModeller.ActorModel.Actors
 {
@@ -20,24 +20,25 @@ namespace Fdp.DataModeller.ActorModel.Actors
             _getOracleUsersActor = Context.ActorOf(
                 Context.DI().Props<GetOracleUsersActor>());
 
-            _tnsNamesActor = Context.ActorOf(
-                Context.DI().Props<GetTnsNamesActor>());
+            Context.ActorOf(Context.DI().Props<GetTnsNamesActor>(), "TnsNames");
 
             Receive<GetOracleUsersMessage>(message => GetOracleUsers(message));
             Receive<SetOracleUsersMessage>(message => SetOracleUsers(message));
+
+            Receive<SetTnsNamesMessage>(message => SetTnsNames(message));
             _viewModel = viewModel;
         }
 
         public IActorRef _getOracleUsersActor { get; private set; }
-        public IActorRef _tnsNamesActor { get; private set; }
 
         protected override SupervisorStrategy SupervisorStrategy() =>
             new OneForOneStrategy(exception =>
                 {
-                    var Append = string.IsNullOrEmpty(_viewModel.ParentViewModel.ConnectionException)?
-                    $"oracle: {exception.Message}": $"\noracle: {exception.Message}";
+                    var Append = string.IsNullOrEmpty(_viewModel.ParentViewModel.ConnectionException) ?
+                    $"oracle: {exception.Message}" : $"\noracle: {exception.Message}";
                     _viewModel.ParentViewModel.TextToAppend = Append;
-                    _progressBarActor.Tell(new SetVisibilityPropertyMessage("IsGettingUsers"));
+                    if (_viewModel.IsGettingUsers == Visibility.Visible)
+                        _progressBarActor.Tell(new SetVisibilityPropertyMessage("IsGettingUsers"));
                     return Directive.Restart;
                 });
 
@@ -51,6 +52,17 @@ namespace Fdp.DataModeller.ActorModel.Actors
         {
             _progressBarActor.Tell(new SetVisibilityPropertyMessage("IsGettingUsers"));
             _viewModel.UsersList = message.OracleUsers;
+        }
+
+        private void SetTnsNames(SetTnsNamesMessage message)
+        {
+            _viewModel.TnsNames = message.TnsNames;
+        }
+
+        protected override void PostStop()
+        {
+            base.PostStop();
+            _viewModel.IsCoordinatorActorAlive = false;
         }
     }
 }

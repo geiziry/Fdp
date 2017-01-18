@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Fdp.DataModeller.Views"
+             xmlns:behaviors="clr-namespace:Fdp.InfraStructure.Behaviors;assembly=Fdp.InfraStructure"
              xmlns:ctrls="clr-namespace:Fdp.Controls.Views;assembly=Fdp.Controls"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              x:Class="Fdp.DataModeller.Views.OracleConnectionView"
@@ -44,6 +45,7 @@
                                       ComboBoxItemsSource="{Binding TnsNames}"
                                       ComboBoxSelectedItem="{Binding Tns}"
                                       RefereshButtonCommand="{Binding GetTnsNamesCommand}"
+                                      PopupOpeningCommand="{Binding GetTnsNamesCommand}"
                                       IsTextEditable="False"
                                       IsEnabled="{Binding ElementName=hasTns,Path=IsChecked}">
                 <ctrls:ButtonEditProgress.Buttons>
@@ -119,7 +121,17 @@
                            Height="23"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
-                           Text="{Binding Connection.Port}" />
+                           Text="{Binding Connection.Port}"
+                           Mask="\d{0,9}(\d{0,2})?"
+                           MaskType="RegEx"
+                           MaskUseAsDisplayFormat="True">
+                <dxe:TextEdit.ErrorToolTipContentTemplate>
+                <DataTemplate>
+                    <TextBlock Text="Custom error text"/>
+                </DataTemplate>
+            </dxe:TextEdit.ErrorToolTipContentTemplate>
+            </dxe:TextEdit>
+
         </Grid>
 
         <Label Content="User Name:"
@@ -139,6 +151,7 @@
                                    ComboBoxItemsSource="{Binding UsersList}"
                                    ComboBoxEditValue="{Binding Connection.UserName}"
                                    ProgressBarVisibility="{Binding IsGettingUsers}"
+                                   PopupOpeningCommand="{Binding GetOracleUsersCommand}"
                                    RefereshButtonCommand="{Binding GetOracleUsersCommand}" />
 
         <Label Content="Password:"

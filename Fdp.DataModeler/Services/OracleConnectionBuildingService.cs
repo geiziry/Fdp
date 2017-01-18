@@ -2,6 +2,7 @@
 using Fdp.InfraStructure.Interfaces.DataModellerInterfaces;
 using Microsoft.Win32;
 using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
@@ -44,6 +45,8 @@ namespace Fdp.DataModeller.Services
         public ObservableCollection<string> GetTnsNames()
         {
             var Tns = TnsNamesReader.GetOracleHomes();
+            if(!Tns.Any())
+                throw new ArgumentException("No Oracle Client Installed");
             TnsNamesReader.SetTnsFileText(Tns.FirstOrDefault(), true);
             return new ObservableCollection<string>(TnsNamesReader.LoadTnsNames());
         }

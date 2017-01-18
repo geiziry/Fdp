@@ -2,11 +2,15 @@
 using DevExpress.Mvvm;
 using Fdp.DataAccess.DatabaseSchema;
 using Fdp.DataModeller.ActorModel.Actors;
+using Fdp.DataModeller.ActorModel.Actors.OracleActors;
 using Fdp.DataModeller.ActorModel.Actors.OracleActors.UI;
 using Fdp.DataModeller.ActorModel.Messages;
+using Fdp.InfraStructure.AkkaHelpers;
 using Fdp.InfraStructure.Interfaces.DataModellerInterfaces;
 using Microsoft.Practices.Unity;
+using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Fdp.DataModeller.ViewModels
@@ -18,50 +22,32 @@ namespace Fdp.DataModeller.ViewModels
         private string _Tns;
         private ObservableCollection<string> _TnsNames;
         private ObservableCollection<string> _usersList;
-        private readonly IActorRef _oracleCoordinatorActor;
-        private readonly IActorRef _progressBarActor;
-
-        //private TNSNamesReader TnsNamesReader;
-        [Dependency]
-        public IOracleConnectionBuildingService _oracleConnectionBuildingService { get; set; }
 
         public OracleConnectionViewModel(IActorRefFactory ActorSystem)
         {
-            _progressBarActor =
-                ActorSystem.ActorOf(
-                    Props.Create(() => new ProgressBarActor(this)));
-            _oracleCoordinatorActor =
-                ActorSystem.ActorOf(
-                    Props.Create(() => new OracleCoordinatorActor(this,_progressBarActor)));
+            InitializeActors(ActorSystem);
+            GetOracleUsersCommand = new DelegateCommand<object>((o) =>
+            {
+                if (o == null)
+                    OracleCoordinatorActor.Tell(new GetOracleUsersMessage(Connection));
+            });
 
-            GetOracleUsersCommand = new DelegateCommand(() =>
-            _oracleCoordinatorActor.Tell(new GetOracleUsersMessage(Connection)));
+            GetTnsNamesCommand = new DelegateCommand<object>((o) =>
+              {
+                  if (o == null)
+                      ActorSystem.ActorSelection(ActorPaths.GetTnsNamesActor.Path)
+                      .Tell(new TnsNamesTextMessage(), OracleCoordinatorActor);
+              });
 
-            #region commented
-
-            //TnsNamesReader = new TNSNamesReader();
-            //GetTnsNamesCommand = new DelegateCommand(() =>
-            //{
-            //    var Tns = TnsNamesReader.GetOracleHomes();
-            //    TnsNamesReader.SetTnsFileText(Tns.FirstOrDefault(), true);
-            //    TnsNames = new ObservableCollection<string>(TnsNamesReader.LoadTnsNames());
-            //});
-
-            //GetTnsFileCommand = new DelegateCommand(() =>
-            //{
-            //    FileDialog dialog = new OpenFileDialog();
-
-            //    if (dialog.ShowDialog() == true)
-            //    {
-            //        TnsNamesReader.SetTnsFileText(dialog.FileName);
-            //        TnsNames = new ObservableCollection<string>(TnsNamesReader.LoadTnsNames());
-            //    }
-            //});
-
-            //GetOracleUsersCommand = new DelegateCommand(() => ManageProgress(async o => await GetOracleUsers(), nameof(IsGettingUsers)));
-
-            #endregion commented
+            GetTnsFileCommand = new DelegateCommand(() =>
+                         ActorSystem.ActorSelection(ActorPaths.GetTnsNamesActor.Path)
+                        .Tell(new TnsNamesFileMessage(), OracleCoordinatorActor));
         }
+
+        [Dependency]
+        public IOracleConnectionBuildingService _oracleConnectionBuildingService { get; set; }
+
+        public IActorRef ProgressBarActor { get; private set; }
 
         public FdpOracleConnection Connection
         {
@@ -73,11 +59,11 @@ namespace Fdp.DataModeller.ViewModels
             }
         }
 
-        public DelegateCommand GetOracleUsersCommand { get; set; }
+        public DelegateCommand<object> GetOracleUsersCommand { get; set; }
 
         public DelegateCommand GetTnsFileCommand { get; set; }
 
-        public DelegateCommand GetTnsNamesCommand { get; set; }
+        public DelegateCommand<object> GetTnsNamesCommand { get; set; }
 
         public Visibility IsGettingUsers
         {
@@ -89,6 +75,8 @@ namespace Fdp.DataModeller.ViewModels
             }
         }
 
+        public IActorRef OracleCoordinatorActor { get; private set; }
+
         public string Tns
         {
             get { return _Tns; }
@@ -98,7 +86,7 @@ namespace Fdp.DataModeller.ViewModels
                 if (!string.IsNullOrWhiteSpace(_Tns))
                 {
                     Connection.DataSource = _oracleConnectionBuildingService.GetDataSource(_Tns);
-                    ParentViewModel.ConnectionException = Connection.DataSource;
+                    ParentViewModel.TextToAppend = Connection.DataSource;
                 }
             }
         }
@@ -123,5 +111,21 @@ namespace Fdp.DataModeller.ViewModels
             }
         }
 
+        public bool IsCoordinatorActorAlive { get; set; }
+        private void InitializeActors(IActorRefFactory actorSystem)
+        {
+            var f=actorSystem.ActorSelection(ActorPaths.OracleCoordinatorActor.Path);
+
+            if (!IsCoordinatorActorAlive)
+            {
+                ProgressBarActor =
+                    actorSystem.ActorOf(
+                        Props.Create(() => new ProgressBarActor(this)),"ProgressBar");
+                OracleCoordinatorActor =
+                    actorSystem.ActorOf(
+                        Props.Create(() => new OracleCoordinatorActor(this, ProgressBarActor)), "OracleCoordinator");
+                IsCoordinatorActorAlive = true;
+            }
+        }
     }
 }

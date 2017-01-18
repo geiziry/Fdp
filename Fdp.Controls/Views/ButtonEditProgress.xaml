@@ -1,10 +1,12 @@
-﻿<dxe:ButtonEdit x:Class="Fdp.Controls.Views.ButtonEditProgress"
-                xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+﻿<dxe:ButtonEdit xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                 xmlns:local="clr-namespace:Fdp.Controls.Views"
+                xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                x:Class="Fdp.Controls.Views.ButtonEditProgress"
+                x:Name="buttonEditProgress"
                 mc:Ignorable="d"
                 d:DesignHeight="300"
                 d:DesignWidth="300"
@@ -12,12 +14,21 @@
     <dxe:ButtonEdit.EditTemplate>
         <ControlTemplate>
             <StackPanel>
-                <dxe:ComboBoxEdit NullText="{Binding NullText}"
-                                  ItemsSource="{Binding ComboBoxItemsSource, RelativeSource={RelativeSource AncestorType={x:Type dxe:ButtonEdit}}}"
-                                  SelectedItem="{Binding ComboBoxSelectedItem, RelativeSource={RelativeSource AncestorType={x:Type dxe:ButtonEdit}}}"
-                                  EditValue="{Binding ComboBoxEditValue, RelativeSource={RelativeSource AncestorType={x:Type dxe:ButtonEdit}}}"
-                                  EditValuePostMode="Immediate"
-                                  IsTextEditable="{Binding IsTextEditable}" />
+                <dxe:ComboBoxEdit  x:Name="combobox"
+                                   NullText="{Binding NullText}"
+                                   ItemsSource="{Binding ComboBoxItemsSource, RelativeSource={RelativeSource AncestorType={x:Type dxe:ButtonEdit}}}"
+                                   SelectedItem="{Binding ComboBoxSelectedItem, RelativeSource={RelativeSource AncestorType={x:Type dxe:ButtonEdit}}}"
+                                   EditValue="{Binding ComboBoxEditValue, RelativeSource={RelativeSource AncestorType={x:Type dxe:ButtonEdit}}}"
+                                   EditValuePostMode="Immediate"
+                                   IsTextEditable="{Binding IsTextEditable}"
+                                   >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PopupOpening">
+                            <i:InvokeCommandAction Command="{Binding  ElementName=buttonEditProgress,Path=PopupOpeningCommand }"
+                                                   CommandParameter="{Binding ElementName=combobox,Path=ItemsSource}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </dxe:ComboBoxEdit>
                 <dxe:ProgressBarEdit Margin="0,-2.5,0,0"
                                      Height="5"
                                      Visibility="{Binding ProgressBarVisibility, RelativeSource={RelativeSource AncestorType={x:Type dxe:ButtonEdit}}}">

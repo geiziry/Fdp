@@ -46,6 +46,18 @@ namespace Fdp.InfraStructure.Prism
                 foreach (var item in e.OldItems)
                 {
                     InvokeRegionManagerAwareElement(item, x => x._RegionManager = null);
+
+                    var view = item as FrameworkElement;
+
+                    if (view != null)
+                    {
+                        var viewModel = view.DataContext as IDisposable;
+
+                        if (viewModel != null)
+                        {
+                            viewModel.Dispose();
+                        }
+                    }
                 }
             }
         }

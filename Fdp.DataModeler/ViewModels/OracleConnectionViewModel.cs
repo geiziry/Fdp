@@ -10,12 +10,11 @@ using Fdp.InfraStructure.Interfaces.DataModellerInterfaces;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Fdp.DataModeller.ViewModels
 {
-    public class OracleConnectionViewModel : ConnectionBaseViewModel
+    public class OracleConnectionViewModel : ConnectionBaseViewModel,IDisposable
     {
         private FdpOracleConnection _Connection = new FdpOracleConnection();
         private Visibility _IsGettingUsers = Visibility.Collapsed;
@@ -112,20 +111,25 @@ namespace Fdp.DataModeller.ViewModels
         }
 
         public bool IsCoordinatorActorAlive { get; set; }
+
         private void InitializeActors(IActorRefFactory actorSystem)
         {
-            var f=actorSystem.ActorSelection(ActorPaths.OracleCoordinatorActor.Path);
-
             if (!IsCoordinatorActorAlive)
             {
                 ProgressBarActor =
                     actorSystem.ActorOf(
-                        Props.Create(() => new ProgressBarActor(this)),"ProgressBar");
+                        Props.Create(() => new ProgressBarActor(this)), "ProgressBar");
                 OracleCoordinatorActor =
                     actorSystem.ActorOf(
                         Props.Create(() => new OracleCoordinatorActor(this, ProgressBarActor)), "OracleCoordinator");
                 IsCoordinatorActorAlive = true;
             }
+        }
+
+        public void Dispose()
+        {
+            OracleCoordinatorActor.Tell(PoisonPill.Instance);
+            ProgressBarActor.Tell(PoisonPill.Instance);
         }
     }
 }

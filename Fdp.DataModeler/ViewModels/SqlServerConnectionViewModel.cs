@@ -1,11 +1,17 @@
-﻿using DevExpress.Mvvm;
+﻿using Akka.Actor;
+using DevExpress.Mvvm;
 using Fdp.DataAccess.DatabaseSchema;
+using Fdp.DataModeller.ActorModel.Actors;
+using Fdp.DataModeller.ActorModel.Actors.SqlServerActors;
+using Fdp.DataModeller.ActorModel.Messages;
+using Fdp.InfraStructure.AkkaHelpers;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace Fdp.DataModeller.ViewModels
 {
-    public class SqlServerConnectionViewModel : ConnectionBaseViewModel
+    public class SqlServerConnectionViewModel : ConnectionBaseViewModel, IDisposable
     {
         private ObservableCollection<string> _Catalogs;
 
@@ -17,15 +23,14 @@ namespace Fdp.DataModeller.ViewModels
 
         private Visibility _IsGettingSqlServers = Visibility.Collapsed;
 
-        public SqlServerConnectionViewModel()
+        public SqlServerConnectionViewModel(IActorRefFactory ActorSystem)
         {
-            //GetNetworkServersCommand = new DelegateCommand(() => ManageProgress(async o => DataSources =
-            //                                new ObservableCollection<string>(await Connection.GetLocalNetworkServersAsync()
-            //                                .ConfigureAwait(false)), nameof(IsGettingSqlServers)));
+            InitializeActors(ActorSystem);
+            GetNetworkServersCommand = new DelegateCommand(() =>
+                SqlServerCoordinatorActor.Tell(new GetLocalNetworkServersMessage()));
 
-            //GetCatalogsCommand = new DelegateCommand(() => ManageProgress(async o => Catalogs =
-            //                              new ObservableCollection<string>(await Connection.GetDatabaseListAsync()
-            //                            .ConfigureAwait(false)), nameof(IsGettingCatalogs)));
+            GetCatalogsCommand = new DelegateCommand(() =>
+                SqlServerCoordinatorActor.Tell(new GetDatabaseListMessage(Connection)));
         }
 
         public ObservableCollection<string> Catalogs
@@ -60,6 +65,7 @@ namespace Fdp.DataModeller.ViewModels
         }
 
         public DelegateCommand GetCatalogsCommand { get; }
+
         public DelegateCommand GetNetworkServersCommand { get; }
 
         public Visibility IsGettingCatalogs
@@ -80,6 +86,20 @@ namespace Fdp.DataModeller.ViewModels
                 _IsGettingSqlServers = value;
                 RaisePropertyChanged();
             }
+        }
+
+        public IActorRef SqlServerCoordinatorActor { get; private set; }
+
+        public void Dispose()
+        {
+            SqlServerCoordinatorActor.Tell(PoisonPill.Instance);
+        }
+
+        private void InitializeActors(IActorRefFactory actorSystem)
+        {
+            SqlServerCoordinatorActor =
+                actorSystem.ActorOf(
+                    Props.Create(() => new SqlServerCoordinatorActor(this)), ActorPaths.SqlServerCoordinatorActor.Name);
         }
     }
 }

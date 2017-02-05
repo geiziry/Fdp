@@ -11,6 +11,11 @@ namespace Fdp.InfraStructure.AkkaHelpers
         public static readonly ActorMetaData OracleCoordinatorActor = new ActorMetaData("OracleCoordinator");
         public static readonly ActorMetaData GetOracleUsersActor = new ActorMetaData("OracleUsers", OracleCoordinatorActor);
         public static readonly ActorMetaData GetTnsNamesActor = new ActorMetaData("TnsNames", OracleCoordinatorActor);
-        public static readonly ActorMetaData ProgressBarActor = new ActorMetaData("ProgressBar", OracleCoordinatorActor);
+        public static readonly ActorMetaData OracleConnProgressBarActor = new ActorMetaData("ProgressBar", OracleCoordinatorActor);
+
+        public static readonly ActorMetaData SqlServerCoordinatorActor = new ActorMetaData("SqlServerCoordinator");
+        public static readonly ActorMetaData SqlServerConnProgressBarActor = new ActorMetaData("SqlServerProgressBar", SqlServerCoordinatorActor);
+
+
     }
 }

@@ -45,7 +45,6 @@ namespace Fdp.InfraStructure.Prism
             {
                 foreach (var item in e.OldItems)
                 {
-                    InvokeRegionManagerAwareElement(item, x => x._RegionManager = null);
 
                     var view = item as FrameworkElement;
 
@@ -58,6 +57,7 @@ namespace Fdp.InfraStructure.Prism
                             viewModel.Dispose();
                         }
                     }
+                    InvokeRegionManagerAwareElement(item, x => x._RegionManager = null);
                 }
             }
         }

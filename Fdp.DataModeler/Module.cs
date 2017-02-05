@@ -23,6 +23,8 @@ namespace Fdp.DataModeller
             var _oracleConnectionBuildingService = new OracleConnectionBuildingService();
             container.RegisterInstance<IOracleConnectionBuildingService>(_oracleConnectionBuildingService,
                                                     new ContainerControlledLifetimeManager());
+
+            container.RegisterType<ISqlServerConnectionBuildingService, SqlServerConnectionBuildingService>();
             container.RegisterType<object, DataModellingView>("DataModellingView");
             container.RegisterType<object, OracleConnectionView>("OracleConnectionView");
             container.RegisterType<object, SqlServerConnectionView>("SqlServerConnectionView");

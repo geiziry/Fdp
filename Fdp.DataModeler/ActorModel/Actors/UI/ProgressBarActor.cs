@@ -3,16 +3,17 @@ using Fdp.DataModeller.ActorModel.Messages;
 using Fdp.DataModeller.ViewModels;
 using System.Reflection;
 
-namespace Fdp.DataModeller.ActorModel.Actors.OracleActors.UI
+namespace Fdp.DataModeller.ActorModel.Actors.UI
 {
     public class ProgressBarActor : ReceiveActor
     {
-        private readonly OracleConnectionViewModel _viewModel;
+        private readonly ConnectionBaseViewModel _viewModel;
         private PropertyInfo _visibilityProperty;
 
-        public ProgressBarActor(OracleConnectionViewModel viewModel)
+        public ProgressBarActor(ConnectionBaseViewModel viewModel)
         {
             _viewModel = viewModel;
+            Show();
         }
 
         private void Hide()
@@ -33,13 +34,6 @@ namespace Fdp.DataModeller.ActorModel.Actors.OracleActors.UI
                 _viewModel.UpdateProgressBarVisibility(_visibilityProperty, true);
                 Become(Hide);
             });
-        }
-
-        
-        
-        protected override void PostStop()
-        {
-            base.PostStop();
         }
     }
 }

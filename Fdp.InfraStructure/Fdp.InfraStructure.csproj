@@ -77,6 +77,7 @@
     <Compile Include="Helpers.cs" />
     <Compile Include="Interfaces\DataModellerInterfaces\IDataSourceConnectionException.cs" />
     <Compile Include="Interfaces\DataModellerInterfaces\IOracleConnectionBuildingService.cs" />
+    <Compile Include="Interfaces\DataModellerInterfaces\ISqlServerConnectionBuildingService.cs" />
     <Compile Include="Interfaces\IFdpDialogService.cs" />
     <Compile Include="Interfaces\IFdpSettings.cs" />
     <Compile Include="Prism\ICreateRegionManagerScope.cs" />

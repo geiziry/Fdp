@@ -32,12 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Akka, Version=1.1.2.29, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Akka.1.1.2\lib\net45\Akka.dll</HintPath>
+    <Reference Include="Akka, Version=1.1.3.31, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Akka.1.1.3\lib\net45\Akka.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Akka.DI.Core, Version=1.1.2.29, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Akka.DI.Core.1.1.2\lib\net45\Akka.DI.Core.dll</HintPath>
+    <Reference Include="Akka.DI.Core, Version=1.1.3.31, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Akka.DI.Core.1.1.3\lib\net45\Akka.DI.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Akka.DI.Unity, Version=1.1.0.2, Culture=neutral, processorArchitecture=MSIL">
@@ -129,7 +129,9 @@
   <ItemGroup>
     <Compile Include="ActorModel\Actors\OracleActors\GetOracleUsersActor.cs" />
     <Compile Include="ActorModel\Actors\OracleActors\GetTnsNamesActor.cs" />
-    <Compile Include="ActorModel\Actors\OracleActors\UI\ProgressBarActor.cs" />
+    <Compile Include="ActorModel\Actors\SqlServerActors\GetDatabaseListActor.cs" />
+    <Compile Include="ActorModel\Actors\SqlServerActors\GetLocalNetworkServersActor.cs" />
+    <Compile Include="ActorModel\Actors\UI\ProgressBarActor.cs" />
     <Compile Include="ActorModel\Actors\OracleCoordinatorActor.cs" />
     <Compile Include="ActorModel\Actors\SqlServerCoordinatorActor.cs" />
     <Compile Include="ActorModel\Messages\GetOracleUsersMessage.cs" />
@@ -151,10 +153,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Services\OracleConnectionBuildingService.cs" />
+    <Compile Include="Services\SqlServerConnectionBuildingService.cs" />
     <Compile Include="testDbContext.cs" />
     <Compile Include="ViewModels\ConnectionBaseViewModel.cs" />
     <Compile Include="ViewModels\DataModellingViewModel.cs" />
     <Compile Include="ViewModels\DataSourcesViewModel.cs" />
+    <Compile Include="ActorModel\Messages\GetDatabaseListMessage.cs" />
     <Compile Include="ViewModels\OracleConnectionViewModel.cs" />
     <Compile Include="ViewModels\SqlServerConnectionViewModel.cs" />
     <Compile Include="Views\AddVariablesView.xaml.cs">

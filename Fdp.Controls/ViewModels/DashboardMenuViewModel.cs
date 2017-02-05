@@ -54,8 +54,6 @@ namespace Fdp.Controls.ViewModels
                             ViewType: "Fdp.DataModeller.dll"
                             .GetTypeFromAssembly(@"Fdp.DataModeller.Views.DataModellingView")
                             );
-                        ActorSystem.ActorSelection(ActorPaths.OracleCoordinatorActor.Path).Tell(PoisonPill.Instance);
-                        ActorSystem.ActorSelection(ActorPaths.ProgressBarActor.Path).Tell(PoisonPill.Instance);
                     }));
             }
         }

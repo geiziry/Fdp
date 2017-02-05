@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Interop;
+using System.Linq;
 
 namespace Fdp.Essentials.ViewModels
 {
@@ -37,7 +38,12 @@ namespace Fdp.Essentials.ViewModels
             RegionManager.SetRegionManager(dxDialogWindow, scopedRegion);
 
             scopedRegion.RequestNavigate(Strings.DataModellingRegion, "DataModellingView");
-            return dxDialogWindow.ShowDialogWindow();
+            var result = dxDialogWindow.ShowDialogWindow();
+
+            var view = scopedRegion.Regions[Strings.DataModellingRegion].Views
+                        .FirstOrDefault<object>(x=>x.GetType().Name=="DataModellingView");
+            scopedRegion.Regions[Strings.DataModellingRegion].Remove(view);
+            return result;
         }
     }
 }

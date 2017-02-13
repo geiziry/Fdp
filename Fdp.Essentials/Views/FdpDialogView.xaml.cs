@@ -23,6 +23,7 @@ namespace Fdp.Essentials.Views
         public FdpDialogView()
         {
             InitializeComponent();
+            Owner = Application.Current.MainWindow;
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Fdp.InfraStructure.Prism
             Region.ActiveViews.CollectionChanged += ActiveViews_CollectionChanged;
         }
 
+        
         private void ActiveViews_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action==NotifyCollectionChangedAction.Add)
@@ -52,7 +53,7 @@ namespace Fdp.InfraStructure.Prism
                     {
                         var viewModel = view.DataContext as IDisposable;
 
-                        if (viewModel != null)
+                        if (viewModel != null && viewModel is IRegionManagerAware)
                         {
                             viewModel.Dispose();
                         }

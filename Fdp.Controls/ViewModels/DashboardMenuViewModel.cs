@@ -51,8 +51,7 @@ namespace Fdp.Controls.ViewModels
                         UICommand result = dialogService.ShowDialog(
                             dialogCommands: Commandslist,
                             Title: "Data Sources",
-                            ViewType: "Fdp.DataModeller.dll"
-                            .GetTypeFromAssembly(@"Fdp.DataModeller.Views.DataModellingView")
+                            ViewType: "DataModellingView"
                             );
                     }));
             }

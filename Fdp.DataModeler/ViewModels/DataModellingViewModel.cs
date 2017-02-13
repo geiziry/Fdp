@@ -37,6 +37,7 @@ namespace Fdp.DataModeller.ViewModels
                         (childview.DataContext as IDisposable).Dispose();
                     }
                 }
+                viewModel._RegionManager = null;
             }
         }
 

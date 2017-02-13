@@ -21,7 +21,8 @@ namespace Fdp.Essentials
 
         public void Initialize()
         {
-            container.RegisterType<IFdpDialogService, FdpDialogViewModel>(new ContainerControlledLifetimeManager());
+            var fdpDialogService = container.Resolve<FdpDialogViewModel>();
+            container.RegisterInstance<IFdpDialogService>(fdpDialogService,new ContainerControlledLifetimeManager());
             _regionManager.RegisterViewWithRegion(Strings.MenuRegion, typeof(DashboardMenuView));
             _regionManager.RegisterViewWithRegion(Strings.MainRegion, typeof(DashboardView));
         }

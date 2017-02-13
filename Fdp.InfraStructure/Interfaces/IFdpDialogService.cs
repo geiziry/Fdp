@@ -9,6 +9,6 @@ namespace Fdp.InfraStructure.Interfaces
 {
     public interface IFdpDialogService
     {
-        UICommand ShowDialog(string Title, Type ViewType, IEnumerable<UICommand> dialogCommands);
+        UICommand ShowDialog(string Title, string ViewType, IEnumerable<UICommand> dialogCommands);
     }
 }

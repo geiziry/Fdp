@@ -18,14 +18,14 @@ namespace Fdp.Essentials.ViewModels
     {
         private readonly IUnityContainer container;
         private readonly IRegionManager _regionManager;
-
+        private IRegionManager scopedRegion;
         public FdpDialogViewModel(IUnityContainer container, IRegionManager _regionManager)
         {
             this.container = container;
             this._regionManager = _regionManager;
         }
 
-        public UICommand ShowDialog(string Title,Type ViewType,
+        public UICommand ShowDialog(string Title,string ViewType,
             IEnumerable<UICommand>dialogCommands)
         {
             var dxDialogWindow = new FdpDialogView
@@ -33,16 +33,17 @@ namespace Fdp.Essentials.ViewModels
                 Title=Title,
                 CommandsSource=dialogCommands,
             };
-            dxDialogWindow.Owner = Application.Current.MainWindow;
-            IRegionManager scopedRegion = _regionManager.CreateRegionManager();
+            
+            scopedRegion = _regionManager.CreateRegionManager();
             RegionManager.SetRegionManager(dxDialogWindow, scopedRegion);
 
-            scopedRegion.RequestNavigate(Strings.DataModellingRegion, "DataModellingView");
+            scopedRegion.RequestNavigate(Strings.DataModellingRegion, ViewType);
             var result = dxDialogWindow.ShowDialogWindow();
 
             var view = scopedRegion.Regions[Strings.DataModellingRegion].Views
-                        .FirstOrDefault<object>(x=>x.GetType().Name=="DataModellingView");
+                        .FirstOrDefault<object>(x => x.GetType().Name == ViewType);
             scopedRegion.Regions[Strings.DataModellingRegion].Remove(view);
+            RegionManager.SetRegionManager(dxDialogWindow, null);
             return result;
         }
     }
